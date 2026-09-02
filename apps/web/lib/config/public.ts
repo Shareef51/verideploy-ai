@@ -1,0 +1,2 @@
+export type PublicRuntimeConfig={gatewayUrl:string;websocketUrl:string;otelExporterUrl?:string};
+export function loadPublicRuntimeConfig(env:Record<string,string|undefined>={NEXT_PUBLIC_GATEWAY_URL:process.env.NEXT_PUBLIC_GATEWAY_URL,NEXT_PUBLIC_WS_URL:process.env.NEXT_PUBLIC_WS_URL,NEXT_PUBLIC_OTEL_EXPORTER_URL:process.env.NEXT_PUBLIC_OTEL_EXPORTER_URL}):PublicRuntimeConfig{return Object.freeze({gatewayUrl:env.NEXT_PUBLIC_GATEWAY_URL??"http://localhost:4000",websocketUrl:env.NEXT_PUBLIC_WS_URL??"ws://localhost:4000",otelExporterUrl:env.NEXT_PUBLIC_OTEL_EXPORTER_URL});}

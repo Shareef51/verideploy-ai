@@ -1,0 +1,11 @@
+{
+  "APP_DEBUG": "false",
+  "LOG_LEVEL": "INFO",
+  "AI_CONTROL_BACKEND": "redis",
+  "CACHE_BACKEND": "redis",
+  "INTERNAL_SERVICE_AUTH_REQUIRED": "true",
+  "DEMO_MODE": "false",
+  "APP_ENV": "staging",
+  "OTEL_ENABLED": "true",
+  "LANGSMITH_ENABLED": "true"
+}

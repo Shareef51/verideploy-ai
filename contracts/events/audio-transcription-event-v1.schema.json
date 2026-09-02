@@ -1,0 +1,13 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verideploy.local/contracts/audio-transcription-event-v1.schema.json",
+  "title": "AudioTranscriptionEvent",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["event_type", "schema_version", "payload"],
+  "properties": {
+    "event_type": {"type": "string", "minLength": 3, "maxLength": 120},
+    "schema_version": {"const": "1.0"},
+    "payload": {"type": "object"}
+  }
+}

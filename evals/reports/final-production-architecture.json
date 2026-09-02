@@ -1,0 +1,14 @@
+{
+  "release": "0.86.0",
+  "status": "PASS",
+  "node_count": 15,
+  "flow_count": 19,
+  "findings": [],
+  "production_workloads": [
+    "web",
+    "gateway",
+    "ai-service",
+    "worker"
+  ],
+  "security_invariants": 6
+}

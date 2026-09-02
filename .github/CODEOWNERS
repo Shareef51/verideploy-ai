@@ -1,0 +1,12 @@
+# Production Monorepo Hardening ownership boundaries. Replace aliases with real GitHub teams in deployed organizations.
+* @verideploy/platform
+/apps/web/ @verideploy/frontend
+/apps/gateway/ @verideploy/platform
+/src/verideploy/ @verideploy/ai-platform
+/services/ @verideploy/ai-platform
+/workers/ @verideploy/ai-platform
+/contracts/ @verideploy/platform @verideploy/ai-platform
+/infrastructure/ @verideploy/platform @verideploy/security
+/.github/ @verideploy/platform @verideploy/security
+/config/security/ @verideploy/security
+/docs/decisions/ @verideploy/platform

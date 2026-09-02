@@ -1,0 +1,54 @@
+{
+  "case_count": 500,
+  "checks": {
+    "aggregate_score": true,
+    "citation_completeness": true,
+    "citation_correctness": true,
+    "context_precision": true,
+    "context_recall": true,
+    "faithfulness": true,
+    "judge_calibration": true,
+    "relevance": true
+  },
+  "dataset": "evals/datasets/verideploy-500/v1.jsonl",
+  "deterministic_rule_based": true,
+  "judge_calibration": {
+    "bias": -0.004000000000000009,
+    "examples": 5,
+    "judge": {
+      "judge_name": "verideploy-rag-quality",
+      "model_role": "evaluation",
+      "prompt_id": "rag-quality-judge",
+      "prompt_sha256": "c8c47f37709c0d73915d794ba68e02ce722fa2ada46599a9ed7b629cfb72c28f",
+      "prompt_version": "1.0.0"
+    },
+    "mae": 0.016000000000000007,
+    "passed": true,
+    "pearson_correlation": 0.9993017380392712,
+    "thresholds": {
+      "max_mae": 0.1,
+      "min_correlation": 0.9
+    }
+  },
+  "model_judge_default_enabled": false,
+  "passed": true,
+  "summary": {
+    "aggregate_score": 0.9802918192918192,
+    "case_observations": 500,
+    "citation_completeness": 0.984,
+    "citation_correctness": 0.985,
+    "context_precision": 0.9236666666666666,
+    "context_recall": 0.997,
+    "faithfulness": 0.993,
+    "relevance": 0.9990842490842491
+  },
+  "thresholds": {
+    "aggregate_score": 0.95,
+    "citation_completeness": 0.98,
+    "citation_correctness": 0.98,
+    "context_precision": 0.82,
+    "context_recall": 0.98,
+    "faithfulness": 0.98,
+    "relevance": 0.95
+  }
+}

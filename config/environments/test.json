@@ -1,0 +1,10 @@
+{
+  "APP_DEBUG": "false",
+  "LOG_LEVEL": "INFO",
+  "AI_CONTROL_BACKEND": "redis",
+  "CACHE_BACKEND": "redis",
+  "INTERNAL_SERVICE_AUTH_REQUIRED": "false",
+  "DEMO_MODE": "true",
+  "APP_ENV": "test",
+  "AI_PROVIDER": "test"
+}

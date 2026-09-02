@@ -1,0 +1,16 @@
+{
+  "applied_count": 100,
+  "applied_in_order": true,
+  "case": "duplicate-and-out-of-order-convergence",
+  "deliveries": 200,
+  "high_watermark": 100,
+  "passed": true,
+  "stable_partition": 6,
+  "statuses": {
+    "applied": 50,
+    "buffered": 50,
+    "duplicate": 100
+  },
+  "terminal_failures_route_to_dlq": true,
+  "unique_events": 100
+}

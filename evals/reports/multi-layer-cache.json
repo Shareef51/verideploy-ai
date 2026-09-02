@@ -1,0 +1,16 @@
+{
+  "gate": "PASS",
+  "concurrent_callers": 40,
+  "origin_loader_calls": 1,
+  "stampede_coalesced": true,
+  "tenant_isolation": true,
+  "tag_invalidation_count": 1,
+  "sensitive_layer_encrypted": true,
+  "layers": [
+    "integration",
+    "retrieval",
+    "model_output",
+    "permission",
+    "session"
+  ]
+}

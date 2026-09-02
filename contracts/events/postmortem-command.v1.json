@@ -1,0 +1,237 @@
+{
+  "$defs": {
+    "Citation": {
+      "additionalProperties": false,
+      "properties": {
+        "claim": {
+          "maxLength": 1500,
+          "minLength": 3,
+          "title": "Claim",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        }
+      },
+      "required": [
+        "claim",
+        "evidence_ids"
+      ],
+      "title": "Citation",
+      "type": "object"
+    },
+    "ReviewedEvidenceBundle": {
+      "additionalProperties": false,
+      "properties": {
+        "citations": {
+          "items": {
+            "$ref": "#/$defs/Citation"
+          },
+          "maxItems": 500,
+          "minItems": 1,
+          "title": "Citations",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1,
+          "minimum": 0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "contributing_factors": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Contributing Factors",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 500,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "impact": {
+          "maxLength": 5000,
+          "minLength": 3,
+          "title": "Impact",
+          "type": "string"
+        },
+        "limitations": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "title": "Limitations",
+          "type": "array"
+        },
+        "prevention_actions": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "title": "Prevention Actions",
+          "type": "array"
+        },
+        "remediation_actions": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 100,
+          "minItems": 1,
+          "title": "Remediation Actions",
+          "type": "array"
+        },
+        "reviewed_at": {
+          "format": "date-time",
+          "title": "Reviewed At",
+          "type": "string"
+        },
+        "reviewed_by": {
+          "format": "uuid",
+          "title": "Reviewed By",
+          "type": "string"
+        },
+        "root_cause": {
+          "maxLength": 5000,
+          "minLength": 10,
+          "title": "Root Cause",
+          "type": "string"
+        },
+        "root_cause_category": {
+          "maxLength": 120,
+          "minLength": 2,
+          "title": "Root Cause Category",
+          "type": "string"
+        },
+        "timeline": {
+          "items": {
+            "$ref": "#/$defs/TimelineEntry"
+          },
+          "maxItems": 500,
+          "minItems": 1,
+          "title": "Timeline",
+          "type": "array"
+        }
+      },
+      "required": [
+        "reviewed_by",
+        "reviewed_at",
+        "evidence_ids",
+        "timeline",
+        "root_cause",
+        "root_cause_category",
+        "confidence",
+        "impact",
+        "remediation_actions",
+        "prevention_actions",
+        "citations"
+      ],
+      "title": "ReviewedEvidenceBundle",
+      "type": "object"
+    },
+    "TimelineEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 50,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 1000,
+          "minLength": 3,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "occurred_at",
+        "summary",
+        "evidence_ids"
+      ],
+      "title": "TimelineEntry",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "idempotency_key": {
+      "maxLength": 128,
+      "minLength": 8,
+      "pattern": "^[A-Za-z0-9._:-]+$",
+      "title": "Idempotency Key",
+      "type": "string"
+    },
+    "investigation_id": {
+      "format": "uuid",
+      "title": "Investigation Id",
+      "type": "string"
+    },
+    "postmortem_id": {
+      "format": "uuid",
+      "title": "Postmortem Id",
+      "type": "string"
+    },
+    "requested_at": {
+      "format": "date-time",
+      "title": "Requested At",
+      "type": "string"
+    },
+    "requested_by": {
+      "format": "uuid",
+      "title": "Requested By",
+      "type": "string"
+    },
+    "reviewed_evidence": {
+      "$ref": "#/$defs/ReviewedEvidenceBundle"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 250,
+      "minLength": 5,
+      "title": "Title",
+      "type": "string"
+    }
+  },
+  "required": [
+    "postmortem_id",
+    "tenant_id",
+    "investigation_id",
+    "requested_by",
+    "idempotency_key",
+    "title",
+    "reviewed_evidence"
+  ],
+  "title": "CreatePostmortemCommand",
+  "type": "object"
+}

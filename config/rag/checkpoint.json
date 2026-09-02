@@ -1,0 +1,19 @@
+{
+  "schema_version": 1,
+  "release_version": "0.76.0",
+  "clean_index_required": true,
+  "chunking": {"target_tokens": 220, "overlap_tokens": 40, "max_tokens": 320},
+  "retrieval": {"candidate_k": 20, "top_k": 5, "rrf_k": 60, "max_per_source": 2},
+  "protected_targets": {
+    "keyword_recall_at_5": 1.0,
+    "dense_recall_at_5": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "hybrid_mrr": 0.95,
+    "visual_ndcg_at_4": 1.0,
+    "metadata_filter_correctness": 1.0,
+    "citation_completeness": 1.0,
+    "tenant_isolation": 1.0
+  },
+  "latency_budget_ms": {"cold_p95": 75.0, "warm_p95": 10.0},
+  "cache": {"minimum_hit_ratio_after_warmup": 0.5}
+}

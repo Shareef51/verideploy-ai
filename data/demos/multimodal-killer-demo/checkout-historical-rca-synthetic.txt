@@ -1,0 +1,5 @@
+SYNTHETIC DATA ONLY
+Historical RCA: INC-SYNTHETIC-CHECKOUT-61
+Summary: A previous checkout release doubled application-side DB concurrency while database capacity remained unchanged. Pool wait rose before CPU saturation and rollback restored latency.
+Evidence pattern: deployment change + pool-wait telemetry + unchanged downstream latency.
+Lesson: treat concurrency increases as high-risk when DB capacity evidence is absent; require human review before rollback in production.

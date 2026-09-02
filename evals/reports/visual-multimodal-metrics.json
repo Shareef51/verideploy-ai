@@ -1,0 +1,90 @@
+{
+  "checks": {
+    "aggregate_score": true,
+    "image_grounding_accuracy": true,
+    "modality:audio:aggregate_score": true,
+    "modality:diagram:aggregate_score": true,
+    "modality:image:aggregate_score": true,
+    "modality:screenshot:aggregate_score": true,
+    "modality:video:aggregate_score": true,
+    "multimodal_citation_correctness": true,
+    "ocr_free_visual_reasoning": true,
+    "temporal_alignment_score": true,
+    "temporal_mae_ms": true,
+    "visual_understanding_accuracy": true
+  },
+  "dataset": "evals/datasets/verideploy-500/v1.jsonl",
+  "dataset_case_count": 500,
+  "deterministic_rule_based": true,
+  "metrics": {
+    "aggregate_score": 0.9717184444444444,
+    "case_count": 500,
+    "image_grounding_accuracy": 0.9888888888888889,
+    "modalities": {
+      "audio": {
+        "aggregate_score": 0.9672408347433727,
+        "case_count": 197,
+        "citation_correctness": 0.9796954314720813,
+        "temporal_alignment_score": 0.9547862380146644,
+        "temporal_mae_ms": 67.82064297800338
+      },
+      "diagram": {
+        "aggregate_score": 1.0,
+        "case_count": 17,
+        "citation_correctness": 1.0,
+        "temporal_alignment_score": null,
+        "temporal_mae_ms": null
+      },
+      "image": {
+        "aggregate_score": 0.9891304347826086,
+        "case_count": 23,
+        "citation_correctness": 1.0,
+        "temporal_alignment_score": null,
+        "temporal_mae_ms": null
+      },
+      "screenshot": {
+        "aggregate_score": 1.0,
+        "case_count": 20,
+        "citation_correctness": 1.0,
+        "temporal_alignment_score": null,
+        "temporal_mae_ms": null
+      },
+      "video": {
+        "aggregate_score": 0.9693941472336534,
+        "case_count": 243,
+        "citation_correctness": 0.9876543209876543,
+        "temporal_alignment_score": 0.9511339734796526,
+        "temporal_mae_ms": 73.29903978052127
+      }
+    },
+    "multimodal_citation_correctness": 0.986,
+    "ocr_free_visual_reasoning": 1.0,
+    "temporal_alignment_score": 0.952769191919192,
+    "temporal_mae_ms": 70.84621212121212,
+    "visual_understanding_accuracy": 0.9944444444444444
+  },
+  "modality_counts": {
+    "audio": 197,
+    "diagram": 17,
+    "image": 23,
+    "screenshot": 20,
+    "video": 243
+  },
+  "ocr_free_reasoning": true,
+  "passed": true,
+  "synthetic_multimodal_profile": true,
+  "thresholds": {
+    "aggregate_score": 0.97,
+    "image_grounding_accuracy": 0.97,
+    "modality:audio:aggregate_score": 0.96,
+    "modality:diagram:aggregate_score": 0.96,
+    "modality:image:aggregate_score": 0.96,
+    "modality:screenshot:aggregate_score": 0.96,
+    "modality:video:aggregate_score": 0.96,
+    "multimodal_citation_correctness": 0.97,
+    "ocr_free_visual_reasoning": 0.97,
+    "temporal_alignment_score": 0.94,
+    "temporal_mae_ms": 180.0,
+    "visual_understanding_accuracy": 0.97
+  }
+}

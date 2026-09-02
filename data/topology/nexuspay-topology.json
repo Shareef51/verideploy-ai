@@ -1,0 +1,895 @@
+{
+  "company": {
+    "company_id": "3923b20b-e126-553d-b601-8d1f72659be1",
+    "name": "NexusPay",
+    "slug": "nexuspay",
+    "tenant_id": "11111111-1111-4111-8111-111111111111"
+  },
+  "dependencies": [
+    {
+      "criticality": "critical",
+      "dependency_id": "6c911350-78ac-55a1-950e-f9a1b1958277",
+      "description": "Authenticate customer and service requests.",
+      "kind": "sync_http",
+      "source_service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "target_service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "critical",
+      "dependency_id": "a16de67c-b18d-59aa-9c79-55abe9e0920f",
+      "description": "Route checkout traffic.",
+      "kind": "sync_http",
+      "source_service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "target_service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "high",
+      "dependency_id": "d3f96ab8-7d20-532d-8418-99fafce34b10",
+      "description": "Resolve authoritative checkout pricing.",
+      "kind": "sync_http",
+      "source_service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "target_service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "high",
+      "dependency_id": "5e736df3-e980-5ba4-8562-481fbc984de3",
+      "description": "Reserve purchasable inventory.",
+      "kind": "sync_http",
+      "source_service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "target_service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "critical",
+      "dependency_id": "f3a67a8d-9d03-5115-8204-7b2f37b6e59f",
+      "description": "Authorize payment before order completion.",
+      "kind": "sync_http",
+      "source_service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "target_service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "critical",
+      "dependency_id": "87928b8e-0d56-5ceb-af60-e2c79af82f85",
+      "description": "Request transaction risk decision.",
+      "kind": "sync_http",
+      "source_service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "target_service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "high",
+      "dependency_id": "22c82cfd-9d4c-526c-bcea-372153d57870",
+      "description": "Re-check risk for payment retry/provider context.",
+      "kind": "sync_http",
+      "source_service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "target_service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "critical",
+      "dependency_id": "5cc09c36-edf9-5a74-ba6d-9ada8e506d81",
+      "description": "Publish authorized payment events for posting.",
+      "kind": "async_event",
+      "source_service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "target_service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "medium",
+      "dependency_id": "8b5e8d94-b3f4-50cc-ac2b-b5dad05fa5c7",
+      "description": "Emit settlement/customer notification events.",
+      "kind": "async_event",
+      "source_service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "target_service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "medium",
+      "dependency_id": "be1ef6d1-baad-540d-a656-8e5852eda73a",
+      "description": "Export edge traces and metrics.",
+      "kind": "telemetry",
+      "source_service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "target_service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "medium",
+      "dependency_id": "bd518305-e470-55bf-a4a7-fa2348b88a6a",
+      "description": "Export checkout traces and metrics.",
+      "kind": "telemetry",
+      "source_service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "target_service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "medium",
+      "dependency_id": "ea16d46a-a778-5530-8627-852191c33c84",
+      "description": "Export payment traces and metrics.",
+      "kind": "telemetry",
+      "source_service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "target_service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    }
+  ],
+  "deployments": [
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "f4003db1e4a27015a2994b40ff7a66f86ee955f4",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "ff0d00a5-8dcd-59be-9bb5-b92cdcb9973f",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "api-gateway",
+      "replicas": 1,
+      "service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.01-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "ec81d5e93f9b7f2874cdb6802fe712874c8b1f3b",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "d89ccb98-58d8-535e-a202-9c73a538a0f5",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "api-gateway",
+      "replicas": 1,
+      "service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.01-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "d42e5c859438e62b85c2d3290c986e75d69c201d",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "811fcb9a-b6c5-59f5-bcd7-4df5036cef17",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "api-gateway",
+      "replicas": 6,
+      "service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.01-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "9454cd589dfc9d6989dc90386af86afb96cd83c0",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "3058e91e-4029-5c4e-bc2a-e78b099352c4",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "identity-service",
+      "replicas": 1,
+      "service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.02-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "e3bb66fa614e7a2c6d5a4dfce4f2ffef8d8a707b",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "b924c3b9-837e-56e0-8929-4889b53ec14b",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "identity-service",
+      "replicas": 1,
+      "service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.02-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "4b9ea3ef80c22daa4fe71896aaba7bbc554dc9dd",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "09d6b782-5596-5a9d-b06a-7b314b605060",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "identity-service",
+      "replicas": 6,
+      "service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.02-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "ac00ad98f51ea8d8eccd60ae6b5139b9e6323f1a",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "981a3951-91c1-5f2d-a70b-149279d3590d",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "checkout-api",
+      "replicas": 1,
+      "service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.03-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "1e55cb0f2b9ae45d1ab1530b1bd2329621977f0a",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "e5b0710e-48fb-5780-a3e1-2d2d09f63776",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "checkout-api",
+      "replicas": 1,
+      "service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.03-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "c479ea508fb217bf01d7baff4dc97fc376f0b749",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "439c8ba2-ef40-5926-970f-446b63d25619",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "checkout-api",
+      "replicas": 6,
+      "service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.03-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "60feea950e74d6a5d757dda097afc5d0a733704f",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "07d74b95-0db1-5c49-a9f5-a490b255876a",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "pricing-service",
+      "replicas": 1,
+      "service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.04-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "da32a54d3ee23ed97140d2672cab6fb40498e4aa",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "2f1bc8a0-b569-5e75-8676-ea9abe86a707",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "pricing-service",
+      "replicas": 1,
+      "service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.04-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "dfb141396393cab69ae9832487cf3e1ff875004c",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "2d22a7f7-d1af-5bbe-b56d-b3df3654b7b3",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "pricing-service",
+      "replicas": 3,
+      "service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.04-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "1231d7d96760af4890c021e0ec324562438a6f9d",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "8544dcc2-b811-595e-a064-3df62e6f3082",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "inventory-service",
+      "replicas": 1,
+      "service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.05-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "edaf0bda570d720ce3e81a30c50c8f6879737e51",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "40cb401f-3770-51d3-937e-ef19f53c63ad",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "inventory-service",
+      "replicas": 1,
+      "service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.05-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "68087c023818e18c276ce57b56d0e9aa19c5c99f",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "4fd089be-87ec-5869-8307-58000d5e8ad7",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "inventory-service",
+      "replicas": 3,
+      "service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.05-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "b9389e4ffa2c3a5825f4513f5ee50e395cc512d0",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "f3540d86-011d-5d7e-ba92-0afa72bb7ec1",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "payment-orchestrator",
+      "replicas": 1,
+      "service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.06-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "ae47fc5d44dd057a4347635246eb6034199ed42c",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "bb0a17b8-ba8d-5f44-bff5-c19c05b78a44",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "payment-orchestrator",
+      "replicas": 1,
+      "service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.06-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "bad44155bf183204e37e82fc63857ef5a224a463",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "a53e8408-48af-5ce3-bb6c-d86cf240ec34",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "payment-orchestrator",
+      "replicas": 6,
+      "service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.06-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "ee06c0ea2e2af7e5dfb07e2fd7bf224a7c4ad0c6",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "71546f2d-991b-5d62-b1f5-d137f0db6825",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "fraud-engine",
+      "replicas": 1,
+      "service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.07-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "652143a96cfadfd02330b079f4c917e800149cda",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "b1970f55-4376-5a8a-83fa-fa02cdc5ad8a",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "fraud-engine",
+      "replicas": 1,
+      "service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.07-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "dd17253dfeedd7e5a6dc8d3240940d031cfa9b1a",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "f2f73e73-b0a6-5feb-92d3-73b1e1ebddd4",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "fraud-engine",
+      "replicas": 6,
+      "service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.07-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "32ba001c87f1949e0ce58a78a6d58df3ec7299fa",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "359ca78c-1071-5ddc-aa21-8f0cdaeb93e2",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "ledger-service",
+      "replicas": 1,
+      "service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.08-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "025640cec98bc39b1edd9e2fe1881271523856a8",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "0dbe4b5e-74b3-5a18-a4f1-841790d7b332",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "ledger-service",
+      "replicas": 1,
+      "service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.08-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "a8317320bd51bd298ef9c458cfc570dd132a86f3",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "80a55c51-cc22-516a-a59c-bff6cdb5a164",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "ledger-service",
+      "replicas": 6,
+      "service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.08-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "bf6179b3bcb504506a6d3d82225b4c959a37b5dc",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "bf8b2537-3c2d-5306-b0c5-9f7ea16c6619",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "notification-service",
+      "replicas": 1,
+      "service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.09-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "15b854c88025bae6695ed1f899aa72c9e13c0f92",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "7ed841ea-7780-5fbd-ab2f-81b388058b7d",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "notification-service",
+      "replicas": 1,
+      "service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.09-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "e82f1017f304067e533187f846a39a6083dd5fc8",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "7e7969b8-2f92-5d24-bc37-3fa061972003",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "notification-service",
+      "replicas": 3,
+      "service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.09-prod"
+    },
+    {
+      "cluster": "nexuspay-development-eu1",
+      "commit_sha": "d0cc3a5e7077011a6d050e8a0d8b05ff7af9f4e7",
+      "deployed_at": "2026-08-15T09:00:00Z",
+      "deployment_id": "5ec09897-605a-5b77-b21a-6276be0803a3",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "namespace": "telemetry-gateway",
+      "replicas": 1,
+      "service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.10-deve"
+    },
+    {
+      "cluster": "nexuspay-staging-eu1",
+      "commit_sha": "19431e7dcba05bcd78bf2cf0ce8fa830acd7ae30",
+      "deployed_at": "2026-08-16T12:00:00Z",
+      "deployment_id": "403aaa80-63f9-5ec6-affa-4e7a857fd369",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "namespace": "telemetry-gateway",
+      "replicas": 1,
+      "service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.10-stag"
+    },
+    {
+      "cluster": "nexuspay-production-eu1",
+      "commit_sha": "d16b93ef1d05f6707850a06d506c728fbdeae67b",
+      "deployed_at": "2026-08-17T06:00:00Z",
+      "deployment_id": "da5ad944-6b3e-5cb0-84ae-2fca5ddf0bb8",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "namespace": "telemetry-gateway",
+      "replicas": 3,
+      "service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "version": "2026.08.10-prod"
+    }
+  ],
+  "environments": [
+    {
+      "criticality": "low",
+      "environment_id": "44bab0e4-9a78-5f5e-9bde-4a2ed3ae3b4d",
+      "name": "development",
+      "region": "eu-west-1",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "medium",
+      "environment_id": "6a9a5abe-28b5-5596-8a75-c1c2902dd6d4",
+      "name": "staging",
+      "region": "eu-west-1",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "criticality": "critical",
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "name": "production",
+      "region": "eu-west-1",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    }
+  ],
+  "generated_at": "2026-08-17T18:00:00Z",
+  "owners": [
+    {
+      "display_name": "Aisha Rahman",
+      "oncall_alias": "edge-platform-oncall",
+      "owner_id": "ec9f0b79-cac5-5e52-97e0-10941dbf881f",
+      "role": "Staff Platform Engineer",
+      "team_id": "c9464809-f721-5417-ad5d-5e8c7702d92d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "display_name": "Marcus Lee",
+      "oncall_alias": "commerce-oncall",
+      "owner_id": "af9457be-8837-5cfd-8281-9895dc1583f5",
+      "role": "Engineering Manager",
+      "team_id": "45f96bf5-347b-5760-832b-8c9da143cdf7",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "display_name": "Priya Nair",
+      "oncall_alias": "payments-risk-oncall",
+      "owner_id": "303923a6-cb45-50c4-bb9a-a0823ad2de13",
+      "role": "Staff Payments Engineer",
+      "team_id": "43f06bbd-5184-55b7-bbc1-00657def064d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "display_name": "Daniel Okafor",
+      "oncall_alias": "ledger-finance-oncall",
+      "owner_id": "ee1fedf8-c1b1-5754-82bc-71249f78747d",
+      "role": "Principal Engineer",
+      "team_id": "b85a4f38-dfaf-5865-9409-cbc43933d6a2",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "display_name": "Sofia Martinez",
+      "oncall_alias": "developer-platform-oncall",
+      "owner_id": "b6d0dd19-bdd7-5491-a679-d8a43f7fef62",
+      "role": "SRE Lead",
+      "team_id": "91f98470-6e07-5bf3-8925-7b07554a5b18",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    }
+  ],
+  "schema_version": "1.0",
+  "seed_sha256": "752445f6036fddab83c2028f6c7d82ae78af72a9f25019cc3211baa3cfe77f44",
+  "seed_version": "nexuspay-v1",
+  "services": [
+    {
+      "description": "Public ingress, request routing, authentication handoff, and correlation IDs.",
+      "domain": "edge",
+      "name": "API Gateway",
+      "repository": "nexuspay/api-gateway",
+      "runtime": "Node.js",
+      "service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "slug": "api-gateway",
+      "team_id": "c9464809-f721-5417-ad5d-5e8c7702d92d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_0"
+    },
+    {
+      "description": "Customer and service identity verification and token policy.",
+      "domain": "identity",
+      "name": "Identity Service",
+      "repository": "nexuspay/identity-service",
+      "runtime": "Java",
+      "service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "slug": "identity-service",
+      "team_id": "c9464809-f721-5417-ad5d-5e8c7702d92d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_0"
+    },
+    {
+      "description": "Checkout orchestration across price, inventory, payment, and fraud decisions.",
+      "domain": "checkout",
+      "name": "Checkout API",
+      "repository": "nexuspay/checkout-api",
+      "runtime": "Python",
+      "service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "slug": "checkout-api",
+      "team_id": "45f96bf5-347b-5760-832b-8c9da143cdf7",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_0"
+    },
+    {
+      "description": "Authoritative pricing, tax, discount, and quote calculations.",
+      "domain": "pricing",
+      "name": "Pricing Service",
+      "repository": "nexuspay/pricing-service",
+      "runtime": "Go",
+      "service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "slug": "pricing-service",
+      "team_id": "45f96bf5-347b-5760-832b-8c9da143cdf7",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_1"
+    },
+    {
+      "description": "Reservation and inventory availability for checkout.",
+      "domain": "inventory",
+      "name": "Inventory Service",
+      "repository": "nexuspay/inventory-service",
+      "runtime": "Java",
+      "service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "slug": "inventory-service",
+      "team_id": "45f96bf5-347b-5760-832b-8c9da143cdf7",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_1"
+    },
+    {
+      "description": "Payment authorization routing, retries, and provider abstraction.",
+      "domain": "payments",
+      "name": "Payment Orchestrator",
+      "repository": "nexuspay/payment-orchestrator",
+      "runtime": "Kotlin",
+      "service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "slug": "payment-orchestrator",
+      "team_id": "43f06bbd-5184-55b7-bbc1-00657def064d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_0"
+    },
+    {
+      "description": "Real-time transaction risk features and policy decisions.",
+      "domain": "risk",
+      "name": "Fraud Engine",
+      "repository": "nexuspay/fraud-engine",
+      "runtime": "Python",
+      "service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "slug": "fraud-engine",
+      "team_id": "43f06bbd-5184-55b7-bbc1-00657def064d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_0"
+    },
+    {
+      "description": "Double-entry ledger posting and financial consistency.",
+      "domain": "ledger",
+      "name": "Ledger Service",
+      "repository": "nexuspay/ledger-service",
+      "runtime": "Java",
+      "service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "slug": "ledger-service",
+      "team_id": "b85a4f38-dfaf-5865-9409-cbc43933d6a2",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_0"
+    },
+    {
+      "description": "Customer email and push event delivery.",
+      "domain": "communications",
+      "name": "Notification Service",
+      "repository": "nexuspay/notification-service",
+      "runtime": "Node.js",
+      "service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "slug": "notification-service",
+      "team_id": "45f96bf5-347b-5760-832b-8c9da143cdf7",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_2"
+    },
+    {
+      "description": "OpenTelemetry ingest, routing, sampling, and export.",
+      "domain": "observability",
+      "name": "Telemetry Gateway",
+      "repository": "nexuspay/telemetry-gateway",
+      "runtime": "Go",
+      "service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "slug": "telemetry-gateway",
+      "team_id": "91f98470-6e07-5bf3-8925-7b07554a5b18",
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "tier": "tier_1"
+    }
+  ],
+  "slos": [
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "slo_id": "0fdfc526-dbdf-5fc4-85af-f602552f3a47",
+      "target": 99.99,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "99eebeba-bcf4-5d1b-b6ee-ce4c74a8c8b5",
+      "slo_id": "869310d3-dd90-504b-9554-a8f7fddcdae3",
+      "target": 350.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "slo_id": "44df77b6-8e6d-5847-9036-59f8a4bd1511",
+      "target": 99.99,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "fe9eb2a5-fda3-52e0-bf84-6750a3bc589c",
+      "slo_id": "2d235e0b-6ef6-54ad-9214-9af041b2bcdc",
+      "target": 350.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "slo_id": "d6570109-ce40-5320-be1f-066ad48e4567",
+      "target": 99.99,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "19aedd31-0f7e-5d6d-8599-bab7d60dae1b",
+      "slo_id": "2f6d10c4-ba88-50e4-8323-ff15232b813a",
+      "target": 350.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "slo_id": "86997a0c-7a0b-5efd-802b-4c690114b9cf",
+      "target": 99.9,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "0873e872-5291-5589-8ec8-ba93906dbf8c",
+      "slo_id": "d1c4e66b-93f4-52b4-b025-bf8f4c900ec4",
+      "target": 600.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "slo_id": "192250fc-0fa8-552b-ae19-dfc1b148320e",
+      "target": 99.9,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "cc622c40-d8af-5973-8545-2b9ad706a847",
+      "slo_id": "7a9d6b58-58e2-5875-b10c-f094f02d7c20",
+      "target": 600.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "slo_id": "53dcf765-0594-59c0-a78f-ee9875f09bdf",
+      "target": 99.99,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "87776081-84d8-5b0c-a389-afb0abde4f59",
+      "slo_id": "96865739-d456-5325-9c80-919d10632e3a",
+      "target": 350.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "slo_id": "6cd84fea-414e-5517-907c-f4b66bb486ee",
+      "target": 99.99,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "5ba1fc59-efe7-51f5-9fb6-74285aca685c",
+      "slo_id": "fd550c7e-0027-5878-b662-6da10cf16dd6",
+      "target": 350.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "slo_id": "a67b59fe-04c9-5894-a4d5-a33485254618",
+      "target": 99.99,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "1f11501d-4191-5934-a502-9f227927daea",
+      "slo_id": "3a78e260-20e0-5a3c-9fc1-f918dcdc4488",
+      "target": 350.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "slo_id": "5fb5a371-2934-50a7-b049-468f3717d746",
+      "target": 99.5,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "593037c5-52f9-5ff8-b519-96bd30ca20a9",
+      "slo_id": "ab1a84da-02a5-50b8-8c6d-e041a11db061",
+      "target": 1200.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "availability",
+      "service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "slo_id": "08e41c87-3141-5678-9900-ba02194e3bbe",
+      "target": 99.9,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    },
+    {
+      "environment_id": "ac5da67b-c2b1-5cd9-a252-6e0e54435c05",
+      "metric": "latency_p95_ms",
+      "service_id": "19afa378-3a33-53e5-91ac-c1ea5ad7d48c",
+      "slo_id": "06e4d8bf-596a-5137-bb31-fee3bd9a2bd6",
+      "target": 600.0,
+      "tenant_id": "11111111-1111-4111-8111-111111111111",
+      "window_days": 30
+    }
+  ],
+  "teams": [
+    {
+      "company_id": "3923b20b-e126-553d-b601-8d1f72659be1",
+      "mission": "Own ingress, identity boundaries, and shared edge reliability.",
+      "name": "Edge Platform",
+      "slug": "edge-platform",
+      "team_id": "c9464809-f721-5417-ad5d-5e8c7702d92d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "company_id": "3923b20b-e126-553d-b601-8d1f72659be1",
+      "mission": "Own checkout, pricing, and inventory orchestration.",
+      "name": "Commerce",
+      "slug": "commerce",
+      "team_id": "45f96bf5-347b-5760-832b-8c9da143cdf7",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "company_id": "3923b20b-e126-553d-b601-8d1f72659be1",
+      "mission": "Own payment authorization, fraud controls, and money movement.",
+      "name": "Payments & Risk",
+      "slug": "payments-risk",
+      "team_id": "43f06bbd-5184-55b7-bbc1-00657def064d",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "company_id": "3923b20b-e126-553d-b601-8d1f72659be1",
+      "mission": "Own immutable ledger processing and financial consistency.",
+      "name": "Ledger & Finance",
+      "slug": "ledger-finance",
+      "team_id": "b85a4f38-dfaf-5865-9409-cbc43933d6a2",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    },
+    {
+      "company_id": "3923b20b-e126-553d-b601-8d1f72659be1",
+      "mission": "Own telemetry, delivery foundations, and operational tooling.",
+      "name": "Developer Platform",
+      "slug": "developer-platform",
+      "team_id": "91f98470-6e07-5bf3-8925-7b07554a5b18",
+      "tenant_id": "11111111-1111-4111-8111-111111111111"
+    }
+  ]
+}

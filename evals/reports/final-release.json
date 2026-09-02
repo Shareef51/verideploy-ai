@@ -1,0 +1,16 @@
+{
+  "findings": [],
+  "gate": "pass",
+  "production_promotion_requires_external_evidence": true,
+  "release": "0.86.0",
+  "required_artifacts": 20,
+  "terraform_files": 4,
+  "trusted_external_steps": [
+    "registry push",
+    "keyless cosign signing",
+    "terraform apply",
+    "kubernetes rollout",
+    "live restore drill"
+  ],
+  "versioned_images": 4
+}

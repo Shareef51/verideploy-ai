@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","$id":"urn:verideploy:events:release-risk:v1","title":"ReleaseRiskEvent","type":"object","required":["event_type","schema_version","payload"],"properties":{"event_type":{"enum":["release.risk.started","release.risk.completed","release.risk.command.rejected"]},"schema_version":{"const":"1.0"},"payload":{"type":"object"}}}

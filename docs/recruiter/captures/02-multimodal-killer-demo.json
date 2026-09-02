@@ -1,0 +1,10 @@
+{
+  "capture_kind": "source_derived_static_capture",
+  "live_runtime_screenshot": false,
+  "synthetic_or_documentary": true,
+  "derived_from": [
+    "apps/web/components/demos/multimodal-killer-demo.tsx",
+    "evals/reports/multimodal-killer-demo.json"
+  ],
+  "note": "Rendered from repository source/report evidence for recruiter documentation; not a live application runtime screenshot."
+}

@@ -1,0 +1,13 @@
+"use client";
+import { useState } from "react";
+import Link from "next/link";
+import { gatewayFetch } from "../../lib/api/gateway-client";
+import type { FrontendSession } from "../../lib/auth/types";
+const demos=[
+ {id:"release-risk",title:"Release Risk",subtitle:"Checkout API v2.19.0",href:"/release-risk"},
+ {id:"incident-rca",title:"Incident RCA",subtitle:"Checkout latency regression",href:"/incidents"},
+ {id:"screenshot",title:"Screenshot",subtitle:"Grafana latency anomaly",href:"/evidence"},
+ {id:"architecture",title:"Architecture",subtitle:"Checkout dependency change",href:"/topology"},
+ {id:"recording",title:"Recording",subtitle:"Incident screen recording",href:"/incidents"},
+] as const;
+export function ProductionDemos({session}:{session:FrontendSession}){const [running,setRunning]=useState<string|null>(null);const [result,setResult]=useState<Record<string,any>>({});async function run(id:string){setRunning(id);try{const r=await gatewayFetch<any>(`/api/v1/demos/${id}/run`,session,{method:"POST",headers:{"content-type":"application/json"},body:"{}"});setResult(v=>({...v,[id]:r}));}catch(e){setResult(v=>({...v,[id]:{error:e instanceof Error?e.message:"Demo launch failed"}}));}finally{setRunning(null);}}return <div className="page"><section className="workspace-hero"><p className="eyebrow">Synthetic production demos</p><h1>Five one-click, recruiter-ready workflows.</h1><p className="lede">Every scenario is visibly synthetic and uses the same gateway, Kafka, workers, persistence, evidence and live reconciliation boundaries as the production application.</p></section><div className="callout"><strong>SYNTHETIC DATA ONLY</strong> — no customer, patient, employee, or production telemetry is included.</div><section className="card"><p className="eyebrow">Recruiter flow</p><h2>Multimodal Killer Demo</h2><p>PR + architecture PDF + Grafana image + incident video + runbook + runtime signals + historical RCA + critic + human review gate.</p><Link href="/demos/multimodal-killer">Open multimodal killer demo →</Link></section><section className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-3">{demos.map(d=><article className="card" key={d.id}><p className="eyebrow">{d.title}</p><h2>{d.subtitle}</h2><p>Seed → public API → Kafka → worker → persistence → live UI.</p><button disabled={running!==null} onClick={()=>run(d.id)}>{running===d.id?"Launching…":"Run synthetic demo"}</button>{result[d.id]&&!result[d.id].error?<><p role="status">Queued • Run {String(result[d.id].run_id).slice(0,8)}</p><Link href={result[d.id].workspace_href??d.href}>Open live workspace →</Link></>:null}{result[d.id]?.error?<p role="alert">{result[d.id].error}</p>:null}</article>)}</section></div>}

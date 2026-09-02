@@ -1,0 +1,172 @@
+{
+  "release": "0.84.0",
+  "policy": {
+    "forbid_unmeasured_numeric_facts": true,
+    "require_metric_source": true,
+    "require_story_evidence": true,
+    "require_qualifiers_for_nonproduction_measurements": true
+  },
+  "metrics": [
+    {"id":"rc_regression_passed","source":"evals/reports/release-candidate-benchmarks.json","path":"regression.passed","format":"integer","qualifier":"measured in a local release-candidate run"},
+    {"id":"coverage_percent","source":"evals/reports/release-candidate-benchmarks.json","path":"coverage.measured_percent","format":"percent_2","qualifier":"Python statement coverage measured by the release-candidate gate"},
+    {"id":"mutation_killed","source":"evals/reports/release-candidate-benchmarks.json","path":"mutation_tests.killed","format":"integer","qualifier":"critical mutation probes killed"},
+    {"id":"mutation_total","source":"evals/reports/release-candidate-benchmarks.json","path":"mutation_tests.total","format":"integer","qualifier":"critical mutation probes executed"},
+    {"id":"rag_hybrid_recall","source":"evals/reports/release-candidate-benchmarks.json","path":"rag_checkpoint.metrics.hybrid_recall_at_5","format":"percent_0","qualifier":"deterministic clean-index checkpoint"},
+    {"id":"rag_hybrid_mrr","source":"evals/reports/release-candidate-benchmarks.json","path":"rag_checkpoint.metrics.hybrid_mrr","format":"decimal_2","qualifier":"deterministic clean-index checkpoint"},
+    {"id":"rag_cache_hit_ratio","source":"evals/reports/release-candidate-benchmarks.json","path":"rag_checkpoint.cache.hit_ratio","format":"percent_1","qualifier":"deterministic warmed retrieval cache checkpoint"},
+    {"id":"agent_score","source":"evals/reports/release-candidate-benchmarks.json","path":"agent_checkpoint.aggregate_score","format":"decimal_2","qualifier":"three deterministic orchestration scenarios"},
+    {"id":"agent_scenarios","source":"evals/reports/release-candidate-benchmarks.json","path":"agent_checkpoint.scenario_count","format":"integer","qualifier":"deterministic orchestration checkpoint scenarios"},
+    {"id":"multimodal_traceability","source":"evals/reports/release-candidate-benchmarks.json","path":"multimodal_checkpoint.clean_traceability","format":"percent_0","qualifier":"deterministic multimodal checkpoint"},
+    {"id":"security_critical_findings","source":"evals/reports/release-candidate-benchmarks.json","path":"security.critical_findings","format":"integer","qualifier":"aggregated security evidence"},
+    {"id":"operations_domains","source":"evals/reports/production-operations.json","path":"domains_checked","format":"integer","qualifier":"operational readiness domains"},
+    {"id":"operations_critical_gaps","source":"evals/reports/production-operations.json","path":"critical_gaps","format":"integer","qualifier":"operational readiness review"},
+    {"id":"architecture_nodes","source":"evals/reports/final-production-architecture.json","path":"node_count","format":"integer","qualifier":"validated production topology model"},
+    {"id":"architecture_flows","source":"evals/reports/final-production-architecture.json","path":"flow_count","format":"integer","qualifier":"validated production data-flow edges"},
+    {"id":"skill_claims","source":"evals/reports/ai-engineering-jd-mapping.json","path":"skill_claims","format":"integer","qualifier":"evidence-backed AI-engineering skill claims"},
+    {"id":"contract_schemas","source":"evals/reports/final-response-event-schemas.json","path":"schema_count","format":"integer","qualifier":"final backward-compatible schema families"},
+    {"id":"demo_evidence_count","source":"evals/reports/multimodal-killer-demo.json","path":"evidence_count","format":"integer","qualifier":"synthetic recruiter demo evidence sources"},
+    {"id":"demo_latency_budget_ms","source":"evals/reports/multimodal-killer-demo.json","path":"latency_budget_ms","format":"integer","qualifier":"configured synthetic recruiter-demo budget, not measured production latency"},
+    {"id":"demo_estimated_cost_usd","source":"evals/reports/multimodal-killer-demo.json","path":"estimated_cost_usd","format":"usd_3","qualifier":"estimated synthetic recruiter-demo LLM cost, not an incurred production charge"},
+    {"id":"rag_cold_p95_ms","source":"evals/reports/release-candidate-benchmarks.json","path":"rag_checkpoint.latency_ms.cold_p95","format":"ms_5","qualifier":"deterministic in-process clean-index checkpoint, not production network latency"}
+  ],
+  "resume_bullets": [
+    {
+      "id":"platform_depth",
+      "template":"Built VeriDeploy AI as an evidence-driven release assurance and incident intelligence platform with {architecture_nodes} validated production architecture nodes and {architecture_flows} validated data-flow edges across Next.js, NestJS, Kafka, Python AI services, persistence, security, and observability.",
+      "metrics":["architecture_nodes","architecture_flows"],
+      "evidence":["evals/reports/final-production-architecture.json"]
+    },
+    {
+      "id":"rag_quality",
+      "template":"Engineered hybrid RAG with keyword, dense, visual, reranking, metadata filters, citations, and caching; the deterministic clean-index checkpoint achieved {rag_hybrid_recall} Hybrid Recall@5, {rag_hybrid_mrr} Hybrid MRR, and an {rag_cache_hit_ratio} warmed-cache hit ratio.",
+      "metrics":["rag_hybrid_recall","rag_hybrid_mrr","rag_cache_hit_ratio"],
+      "evidence":["evals/reports/rag-performance.json","evals/reports/release-candidate-benchmarks.json"]
+    },
+    {
+      "id":"agentic_orchestration",
+      "template":"Implemented supervisor/planner/specialist-agent orchestration with fan-out/fan-in, retries, critic correction, durable recovery, and human approval; {agent_scenarios} deterministic scenarios achieved an aggregate path score of {agent_score}.",
+      "metrics":["agent_scenarios","agent_score"],
+      "evidence":["evals/reports/agentic-orchestration.json"]
+    },
+    {
+      "id":"quality_security",
+      "template":"Established release-candidate quality gates with {rc_regression_passed} passing regression tests, {coverage_percent} Python coverage, {mutation_killed}/{mutation_total} critical mutation probes killed, and {security_critical_findings} critical security findings in the aggregated release-candidate evidence.",
+      "metrics":["rc_regression_passed","coverage_percent","mutation_killed","mutation_total","security_critical_findings"],
+      "evidence":["evals/reports/release-candidate-benchmarks.json"]
+    },
+    {
+      "id":"multimodal_operations",
+      "template":"Hardened multimodal evidence processing and production operations with {multimodal_traceability} clean-path traceability, {operations_domains} readiness domains reviewed, and {operations_critical_gaps} critical operational gaps in the production-operations review.",
+      "metrics":["multimodal_traceability","operations_domains","operations_critical_gaps"],
+      "evidence":["evals/reports/multimodal-integration.json","evals/reports/production-operations.json"]
+    },
+    {
+      "id":"evidence_backed_skills",
+      "template":"Mapped {skill_claims} AI-engineering skill claims to code plus verification evidence, including Python, TypeScript, OpenAI, RAG, LangGraph, MCP, multimodal AI, real-time systems, evaluation, LLMOps, security, and cloud-native engineering.",
+      "metrics":["skill_claims"],
+      "evidence":["evals/reports/ai-engineering-jd-mapping.json"]
+    }
+  ],
+  "star_stories": [
+    {
+      "id":"release_candidate_truthfulness",
+      "title":"Fail-closed release-candidate evidence",
+      "situation":"The release-candidate checkpoint needed to distinguish locally executed evidence from browser tests that could only run in CI in the build environment.",
+      "task":"Prevent a recruiter-facing or release-facing report from presenting an unexecuted browser test as a factual pass.",
+      "action":"Implemented an explicit RC_READY_FOR_CI state and retained the browser gate as mandatory CI enforcement instead of fabricating local Playwright execution.",
+      "result_template":"The local release-candidate evidence still recorded {rc_regression_passed} passing regression tests and {coverage_percent} Python coverage while preserving the browser execution limitation explicitly.",
+      "metrics":["rc_regression_passed","coverage_percent"],
+      "evidence":["evals/reports/release-candidate.json","evals/reports/release-candidate-benchmarks.json","docs/architecture/evaluation-release-candidate-checkpoint.md"]
+    },
+    {
+      "id":"production_scope_hardening",
+      "title":"Removed demo identity from production approval path",
+      "situation":"Architecture-integrity review found an earlier demo-era reviewer fallback inside the production approval boundary.",
+      "task":"Ensure consequential approval reads and decisions use authenticated production identity and role context.",
+      "action":"Removed demo reviewer fallbacks and required gateway user/role context, while retaining dry-run and human-approval safety controls.",
+      "result_template":"The architecture-integrity report completed with no recorded findings after the production boundary was hardened.",
+      "metrics":[],
+      "evidence":["docs/architecture/scope-control-architecture-integrity.md","evals/reports/scope-architecture-integrity.json","apps/gateway/src/approvals/approvals.controller.ts"]
+    },
+    {
+      "id":"multimodal_partial_failure",
+      "title":"Designed bounded multimodal degradation",
+      "situation":"Large multimodal investigations must remain traceable when an extractor fails instead of silently dropping evidence or exhausting resources.",
+      "task":"Keep image, PDF, audio, and video processing bounded while preserving evidence lineage through partial failures.",
+      "action":"Added hard work-unit limits, redaction-before-persistence, stable trace IDs, explicit DEGRADED evidence states, and a minimum surviving-evidence threshold.",
+      "result_template":"The clean checkpoint retained {multimodal_traceability} traceability and the partial-failure fixture preserved degraded evidence lineage rather than hiding failed modalities.",
+      "metrics":["multimodal_traceability"],
+      "evidence":["evals/reports/multimodal-integration.json","docs/architecture/multimodal-integration-checkpoint.md"]
+    },
+    {
+      "id":"architecture_drift_control",
+      "title":"Converted architecture documentation into an executable contract",
+      "situation":"A large multi-service portfolio can drift when diagrams, release metadata, Helm images, and actual service boundaries are maintained independently.",
+      "task":"Make the documented architecture verifiably match deployed topology and data flows.",
+      "action":"Created one machine-readable topology model and generated/validated diagrams, workload versions, Compose services, security boundaries, and runtime paths from it.",
+      "result_template":"The final topology validates {architecture_nodes} nodes and {architecture_flows} data-flow edges with no findings in the production architecture report.",
+      "metrics":["architecture_nodes","architecture_flows"],
+      "evidence":["config/architecture/production-topology.json","evals/reports/final-production-architecture.json","docs/architecture/final-production-technology-architecture.md"]
+    }
+  ],
+  "tradeoffs": [
+    {
+      "id":"nest_gateway_boundary",
+      "decision":"Keep NestJS as the sole public application API while Python AI services remain private.",
+      "tradeoff":"This adds an internal service boundary and contract maintenance cost, but isolates AI execution, centralizes authentication/tenant policy, and keeps browser clients away from private model/tool endpoints.",
+      "evidence":["docs/architecture/final-production-technology-architecture.md","evals/reports/final-production-architecture.json"]
+    },
+    {
+      "id":"approval_over_autonomy",
+      "decision":"Require dry-run plus human approval for consequential remediation rather than autonomous writes.",
+      "tradeoff":"This sacrifices maximum automation speed for auditability, blast-radius control, and safer production operation.",
+      "evidence":["docs/architecture/scope-control-architecture-integrity.md","evals/reports/production-operations.json"]
+    },
+    {
+      "id":"bounded_multimodal",
+      "decision":"Bound multimodal work units and allow explicit PARTIAL results when enough evidence survives.",
+      "tradeoff":"This may omit expensive evidence beyond configured limits, but prevents unbounded work and preserves degraded-source traceability.",
+      "evidence":["evals/reports/multimodal-integration.json"]
+    }
+  ],
+  "cost_latency_decisions": [
+    {
+      "id":"rag_latency",
+      "statement_template":"Use the clean-index checkpoint to catch algorithmic retrieval regressions early; its cold p95 was {rag_cold_p95_ms}, explicitly treated as an in-process benchmark rather than production network latency.",
+      "metrics":["rag_cold_p95_ms"],
+      "evidence":["evals/reports/release-candidate-benchmarks.json"]
+    },
+    {
+      "id":"demo_budget",
+      "statement_template":"The synthetic multimodal recruiter flow carries a configured latency budget of {demo_latency_budget_ms} ms and an estimated LLM cost of {demo_estimated_cost_usd}; both are labelled budget/estimate values rather than measured production performance or billing.",
+      "metrics":["demo_latency_budget_ms","demo_estimated_cost_usd"],
+      "evidence":["evals/reports/multimodal-killer-demo.json"]
+    }
+  ],
+  "failure_lessons": [
+    {
+      "lesson":"Do not equate CI wiring with local execution. Record environment limitations explicitly and fail closed on missing evidence.",
+      "evidence":["docs/architecture/evaluation-release-candidate-checkpoint.md"]
+    },
+    {
+      "lesson":"Demo conveniences must not survive inside production authorization paths; periodic scope-control reviews should scan production entrypoints for mock identities and bypasses.",
+      "evidence":["docs/architecture/scope-control-architecture-integrity.md"]
+    },
+    {
+      "lesson":"Versioned deployment artifacts can drift independently; compare release metadata, Helm image tags, canary tags, diagrams, and runtime topology in one executable architecture gate.",
+      "evidence":["docs/architecture/final-production-technology-architecture.md"]
+    }
+  ],
+  "recruiter_questions": [
+    "What real problem does VeriDeploy AI solve beyond being an LLM wrapper?",
+    "How does your RAG pipeline prevent unsupported claims and preserve citations?",
+    "Why did you use NestJS plus Python instead of exposing the Python AI service directly?",
+    "How does LangGraph checkpointing and restart recovery work in your design?",
+    "How are MCP tool calls governed and audited?",
+    "What happens when PDF or video extraction fails during an incident investigation?",
+    "Which numbers on your resume are actually measured, and what environment produced them?",
+    "How do you keep consequential AI actions from executing autonomously?",
+    "How do Kafka ordering, retries, idempotency, and DLQ handling work?",
+    "What would you need to validate before calling the system production-ready in a real company environment?"
+  ]
+}

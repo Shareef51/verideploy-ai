@@ -1,0 +1,27 @@
+{
+  "version": "1.0.0",
+  "defaults": {
+    "partitions": 12,
+    "replication_factor": 3,
+    "retention_ms": 604800000,
+    "compatibility": "BACKWARD"
+  },
+  "topics": [
+    {"name":"verideploy.commands.release-risk.v1","kind":"command","schema_family":"release-risk-command"},
+    {"name":"verideploy.events.release-risk.v1","kind":"event","schema_family":"release-risk-event"},
+    {"name":"verideploy.commands.investigation.v1","kind":"command","schema_family":"investigation-command"},
+    {"name":"verideploy.commands.investigation-cancel.v1","kind":"command","schema_family":"investigation-cancel-command"},
+    {"name":"verideploy.events.investigation.v1","kind":"event","schema_family":"investigation-event"},
+    {"name":"verideploy.commands.ingestion.v1","kind":"command","schema_family":"ingestion-command"},
+    {"name":"verideploy.events.ingestion.v1","kind":"event","schema_family":"ingestion-event"},
+    {"name":"verideploy.commands.postmortem.v1","kind":"command","schema_family":"postmortem-command"},
+    {"name":"verideploy.events.postmortem.v1","kind":"event","schema_family":"postmortem-event"},
+    {"name":"verideploy.commands.audio-transcription.v1","kind":"command","schema_family":"audio-transcription-command"},
+    {"name":"verideploy.events.audio-transcription.v1","kind":"event","schema_family":"audio-transcription-event"},
+    {"name":"verideploy.commands.video-evidence.v1","kind":"command","schema_family":"video-evidence-command"},
+    {"name":"verideploy.events.video-evidence.v1","kind":"event","schema_family":"video-evidence-event"},
+    {"name":"verideploy.retry.platform.v1","kind":"retry","partitions":12,"retention_ms":86400000,"schema_family":"platform-retry"},
+    {"name":"verideploy.dlq.platform.v1","kind":"dlq","partitions":12,"retention_ms":2592000000,"schema_family":"platform-dlq"},
+    {"name":"verideploy.events.replay.v1","kind":"event","partitions":6,"retention_ms":259200000,"schema_family":"replay-control"}
+  ]
+}

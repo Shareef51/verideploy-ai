@@ -1,0 +1,88 @@
+{
+  "version": "1.0.0",
+  "environments": [
+    "development",
+    "test",
+    "staging",
+    "production"
+  ],
+  "publicVariables": [
+    "NEXT_PUBLIC_GATEWAY_URL",
+    "NEXT_PUBLIC_WS_URL",
+    "NEXT_PUBLIC_OTEL_EXPORTER_URL"
+  ],
+  "secretVariables": [
+    "APP_SECRET_KEY",
+    "FRONTEND_SESSION_SECRET",
+    "OIDC_CLIENT_SECRET",
+    "INTERNAL_SERVICE_AUTH_SECRET",
+    "OPENAI_API_KEY",
+    "S3_ACCESS_KEY",
+    "S3_SECRET_KEY",
+    "GITHUB_API_TOKEN",
+    "JIRA_API_TOKEN",
+    "RUNTIME_OBSERVABILITY_TOKEN",
+    "LANGSMITH_API_KEY",
+    "CACHE_ENCRYPTION_SECRET",
+    "APPROVAL_SIGNING_SECRET"
+  ],
+  "externalSecretSchemes": [
+    "aws-sm",
+    "azure-kv",
+    "gcp-sm",
+    "vault",
+    "k8s-secret"
+  ],
+  "required": {
+    "development": [
+      "APP_ENV"
+    ],
+    "test": [
+      "APP_ENV"
+    ],
+    "staging": [
+      "APP_ENV",
+      "WEB_BASE_URL",
+      "GATEWAY_BASE_URL",
+      "AI_SERVICE_BASE_URL",
+      "DATABASE_URL",
+      "REDIS_URL",
+      "KAFKA_BROKERS",
+      "OIDC_ISSUER_URL",
+      "OIDC_CLIENT_ID"
+    ],
+    "production": [
+      "APP_ENV",
+      "WEB_BASE_URL",
+      "GATEWAY_BASE_URL",
+      "AI_SERVICE_BASE_URL",
+      "DATABASE_URL",
+      "REDIS_URL",
+      "KAFKA_BROKERS",
+      "OIDC_ISSUER_URL",
+      "OIDC_CLIENT_ID",
+      "EXTERNAL_SECRET_PROVIDER",
+      "CONFIG_KMS_KEY_REF"
+    ]
+  },
+  "rotation": {
+    "maxAgeDays": 90,
+    "gracePeriodHours": 24,
+    "dualReadSupported": true,
+    "auditRequired": true
+  },
+  "logging": {
+    "redactKeys": [
+      "authorization",
+      "cookie",
+      "set-cookie",
+      "api_key",
+      "apikey",
+      "token",
+      "secret",
+      "password",
+      "client_secret"
+    ],
+    "redaction": "[REDACTED]"
+  }
+}

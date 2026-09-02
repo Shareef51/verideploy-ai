@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "event_type": {
+      "enum": [
+        "postmortem.generated",
+        "postmortem.replayed",
+        "postmortem.command.rejected"
+      ],
+      "type": "string"
+    },
+    "payload": {
+      "type": "object"
+    },
+    "schema_version": {
+      "const": "1.0"
+    }
+  },
+  "required": [
+    "event_type",
+    "schema_version",
+    "payload"
+  ],
+  "type": "object"
+}

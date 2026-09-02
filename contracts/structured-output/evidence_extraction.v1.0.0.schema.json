@@ -1,0 +1,131 @@
+{
+  "$defs": {
+    "NumericEvidenceFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "kind": {
+          "const": "numeric",
+          "title": "Kind",
+          "type": "string"
+        },
+        "metric": {
+          "maxLength": 256,
+          "minLength": 1,
+          "title": "Metric",
+          "type": "string"
+        },
+        "unit": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Unit"
+        },
+        "value": {
+          "title": "Value",
+          "type": "number"
+        }
+      },
+      "required": [
+        "kind",
+        "metric",
+        "value",
+        "unit",
+        "evidence_ids"
+      ],
+      "title": "NumericEvidenceFinding",
+      "type": "object"
+    },
+    "TextEvidenceFinding": {
+      "additionalProperties": false,
+      "properties": {
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "kind": {
+          "const": "text",
+          "title": "Kind",
+          "type": "string"
+        },
+        "statement": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Statement",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "statement",
+        "evidence_ids"
+      ],
+      "title": "TextEvidenceFinding",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "findings": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "numeric": "#/$defs/NumericEvidenceFinding",
+            "text": "#/$defs/TextEvidenceFinding"
+          },
+          "propertyName": "kind"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/TextEvidenceFinding"
+          },
+          {
+            "$ref": "#/$defs/NumericEvidenceFinding"
+          }
+        ]
+      },
+      "maxItems": 128,
+      "title": "Findings",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "maxItems": 64,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "summary": {
+      "maxLength": 8000,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "summary",
+    "findings",
+    "limitations"
+  ],
+  "title": "EvidenceExtractionOutput",
+  "type": "object"
+}

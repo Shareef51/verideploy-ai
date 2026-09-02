@@ -1,0 +1,81 @@
+name: release
+on:
+  push:
+    tags: ['v*']
+permissions:
+  contents: read
+  packages: write
+  id-token: write
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with: {version: 10.16.0}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      - uses: astral-sh/setup-uv@v6
+        with: {python-version: '3.12'}
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - uses: sigstore/cosign-installer@v3
+      - uses: hashicorp/setup-terraform@v3
+        with: {terraform_version: '1.8.5'}
+      - uses: azure/setup-helm@v4
+        with: {version: v3.16.4}
+      - name: Prepare trusted dependency and base-image material
+        run: ./scripts/release/prepare_trusted_builder.sh
+      - name: Validate final release contract
+        run: PYTHONPATH=src python scripts/validate_release.py
+      - name: Build and push versioned images with provenance and SBOM
+        shell: bash
+        run: |
+          set -euo pipefail
+          VERSION=0.86.0
+          for spec in \
+            'web infrastructure/docker/web.Dockerfile' \
+            'gateway infrastructure/docker/gateway.Dockerfile' \
+            'ai infrastructure/docker/ai.Dockerfile' \
+            'worker infrastructure/docker/worker.Dockerfile'; do
+            set -- $spec; name=$1; dockerfile=$2
+            image="ghcr.io/verideploy/verideploy-${name}:${VERSION}"
+            base_ref="$(python scripts/release/resolve_base_image_digests.py --ref-for-dockerfile "$dockerfile")"
+            docker buildx build --file "$dockerfile" --build-arg "BASE_IMAGE=$base_ref" --tag "$image" --push --provenance=true --sbom=true .
+            digest="$(docker buildx imagetools inspect "$image" --format '{{json .Manifest.Digest}}' | tr -d '"')"
+            printf '%s %s\n' "$image" "$digest" | tee -a image-digests.txt
+            cosign sign --yes "${image%@*}@${digest}"
+            cosign verify "${image%@*}@${digest}" --certificate-identity-regexp='https://github.com/.+' --certificate-oidc-issuer='https://token.actions.githubusercontent.com'
+          done
+      - name: Package Helm release
+        run: |
+          helm lint infrastructure/helm/verideploy -f infrastructure/helm/verideploy/values-production.yaml
+          helm package infrastructure/helm/verideploy --version 0.86.0 --app-version 0.86.0 --destination artifacts/release
+      - name: Terraform validate and plan
+        working-directory: infrastructure/terraform
+        env:
+          TF_VAR_kubernetes_host: ${{ secrets.KUBERNETES_HOST }}
+          TF_VAR_kubernetes_token: ${{ secrets.KUBERNETES_TOKEN }}
+          TF_VAR_kubernetes_ca_certificate_b64: ${{ secrets.KUBERNETES_CA_CERTIFICATE_B64 }}
+        run: |
+          terraform fmt -check -recursive
+          terraform init -backend=false
+          terraform validate
+          terraform plan -refresh=false -input=false -out=/tmp/verideploy-0.86.0.tfplan
+          printf 'Terraform plan completed successfully for VeriDeploy 0.86.0\n' > ../../artifacts/release/terraform-plan-summary.txt
+      - name: Build release checksum manifest
+        run: |
+          sha256sum artifacts/release/* image-digests.txt > artifacts/release/SHA256SUMS
+      - name: Sign release blobs keylessly
+        run: |
+          cosign sign-blob --yes --output-signature artifacts/release/SHA256SUMS.sig --output-certificate artifacts/release/SHA256SUMS.pem artifacts/release/SHA256SUMS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: verideploy-0.86.0-release
+          path: |
+            artifacts/release/
+            image-digests.txt

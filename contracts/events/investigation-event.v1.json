@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://verideploy.local/contracts/investigation-event.v1.json",
+  "title":"InvestigationEventV1",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["event_id","event_type","schema_version","tenant_id","correlation_id","investigation_id","sequence_number","occurred_at","producer","trace_context","payload"],
+  "properties":{
+    "event_id":{"type":"string","format":"uuid"},
+    "event_type":{"type":"string","minLength":3,"maxLength":120},
+    "schema_version":{"const":"1.0"},
+    "tenant_id":{"type":"string","format":"uuid"},
+    "correlation_id":{"type":"string","format":"uuid"},
+    "investigation_id":{"type":"string","format":"uuid"},
+    "sequence_number":{"type":"integer","minimum":1},
+    "occurred_at":{"type":"string","format":"date-time"},
+    "producer":{"type":"string","minLength":2,"maxLength":100},
+    "trace_context":{"type":"object","additionalProperties":{"type":"string"}},
+    "payload":{"type":"object"}
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "$id": "https://schemas.verideploy.ai/final/citation-reference.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "citation_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Citation Id",
+      "type": "string"
+    },
+    "claim_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Claim Ids",
+      "type": "array"
+    },
+    "evidence_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "locator": {
+      "maxLength": 500,
+      "minLength": 1,
+      "title": "Locator",
+      "type": "string"
+    },
+    "source_type": {
+      "enum": [
+        "document",
+        "log",
+        "metric",
+        "trace",
+        "image",
+        "audio",
+        "video",
+        "code",
+        "release"
+      ],
+      "title": "Source Type",
+      "type": "string"
+    }
+  },
+  "required": [
+    "citation_id",
+    "evidence_id",
+    "source_type",
+    "locator"
+  ],
+  "title": "CitationReference",
+  "type": "object"
+}

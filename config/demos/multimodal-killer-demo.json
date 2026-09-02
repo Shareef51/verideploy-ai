@@ -1,0 +1,88 @@
+{
+  "version": "1.0",
+  "id": "multimodal-killer",
+  "title": "Multimodal Killer Demo \u2014 Checkout Release + Incident Intelligence",
+  "synthetic": true,
+  "one_click": true,
+  "workspace_href": "/demos/multimodal-killer",
+  "incident_id": "INC-SYNTHETIC-CHECKOUT-74",
+  "release_id": "checkout-v2.19.0",
+  "evidence": [
+    {
+      "evidence_id": "ev-pr",
+      "citation_id": "cit-pr",
+      "label": "Synthetic pull request",
+      "asset": "data/demos/multimodal-killer-demo/checkout-pr-synthetic.txt",
+      "modality": "document"
+    },
+    {
+      "evidence_id": "ev-architecture",
+      "citation_id": "cit-architecture",
+      "label": "Synthetic architecture PDF",
+      "asset": "data/demos/checkout-architecture-synthetic.pdf",
+      "modality": "document"
+    },
+    {
+      "evidence_id": "ev-grafana",
+      "citation_id": "cit-grafana",
+      "label": "Synthetic Grafana screenshot",
+      "asset": "data/demos/checkout-grafana-synthetic.png",
+      "modality": "image"
+    },
+    {
+      "evidence_id": "ev-video",
+      "citation_id": "cit-video",
+      "label": "Synthetic incident recording",
+      "asset": "data/demos/checkout-incident-recording-synthetic.mp4",
+      "modality": "video"
+    },
+    {
+      "evidence_id": "ev-runbook",
+      "citation_id": "cit-runbook",
+      "label": "Synthetic incident runbook",
+      "asset": "data/demos/multimodal-killer-demo/checkout-runbook-synthetic.txt",
+      "modality": "document"
+    },
+    {
+      "evidence_id": "ev-runtime",
+      "citation_id": "cit-runtime",
+      "label": "Synthetic runtime signals",
+      "asset": "data/demos/multimodal-killer-demo/checkout-runtime-signals-synthetic.txt",
+      "modality": "document"
+    },
+    {
+      "evidence_id": "ev-history",
+      "citation_id": "cit-history",
+      "label": "Synthetic historical RCA",
+      "asset": "data/demos/multimodal-killer-demo/checkout-historical-rca-synthetic.txt",
+      "modality": "document"
+    }
+  ],
+  "graph": [
+    "evidence_ingestion",
+    "multimodal_extraction",
+    "retrieval_and_correlation",
+    "incident_rca",
+    "rca_critic",
+    "decision_policy",
+    "human_review_gate"
+  ],
+  "expected": {
+    "root_cause": "Checkout database pool contention introduced by release checkout-v2.19.0",
+    "confidence": 0.93,
+    "critic_status": "SUPPORTED_WITH_ALTERNATIVE_CHECK",
+    "decision": "ROLLBACK_REQUIRES_HUMAN_APPROVAL",
+    "review_status": "pending",
+    "latency_budget_ms": 2500,
+    "estimated_cost_usd": 0.084,
+    "required_citations": [
+      "cit-pr",
+      "cit-architecture",
+      "cit-grafana",
+      "cit-video",
+      "cit-runbook",
+      "cit-runtime",
+      "cit-history"
+    ]
+  }
+}

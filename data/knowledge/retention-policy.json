@@ -1,0 +1,24 @@
+{
+  "schema_version": "1.0",
+  "policy_version": "1.0.0",
+  "rules": [
+    {
+      "retention_class": "operating",
+      "minimum_days": 365,
+      "immutable": false,
+      "rationale": "Operational guides remain current for at least one year and may be superseded by a newer validated revision."
+    },
+    {
+      "retention_class": "audit",
+      "minimum_days": 2555,
+      "immutable": true,
+      "rationale": "Synthetic incident and deployment records remain immutable for long-horizon audit and reproducibility demonstrations."
+    },
+    {
+      "retention_class": "historical",
+      "minimum_days": 1095,
+      "immutable": true,
+      "rationale": "Architecture, service, and security knowledge is retained for historical comparison and retrieval regression tests."
+    }
+  ]
+}

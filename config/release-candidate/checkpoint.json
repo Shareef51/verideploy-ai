@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "release": "0.80.0",
+  "required_gates": ["evaluation","security","load","chaos","accessibility","browser","contract","regression"],
+  "browser_ci_required": true,
+  "critical_failure_budget": 0,
+  "sources": {
+    "evaluation": ["evals/reports/retrieval-metrics.json","evals/reports/rag-metrics.json","evals/reports/agent-metrics.json","evals/reports/llm-quality-metrics.json","evals/reports/safety-hallucination-metrics.json","evals/reports/visual-multimodal-metrics.json","evals/reports/regression-gates.json"],
+    "security": ["evals/reports/guardrails.json","evals/reports/security.json","evals/reports/production-operations.json"],
+    "load": ["tests/load/test_load.py","evals/reports/multimodal-integration.json"],
+    "chaos": ["tests/chaos/test_chaos.py","evals/reports/platform-integration-reliability.json"],
+    "accessibility": ["apps/web/tests/e2e/shell.spec.ts"],
+    "browser": ["apps/web/playwright.config.ts","apps/web/tests/e2e/shell.spec.ts"],
+    "contract": ["evals/reports/final-response-event-schemas.json","contracts/final/manifest.json"],
+    "regression": ["artifacts/release-candidate/pytest-summary.json"]
+  }
+}

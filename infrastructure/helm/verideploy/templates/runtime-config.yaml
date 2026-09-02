@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: verideploy-runtime-config
+  labels:
+    app.kubernetes.io/name: verideploy
+data:
+{{- range $key, $value := .Values.environmentConfig }}
+  {{ $key }}: {{ $value | quote }}
+{{- end }}

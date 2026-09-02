@@ -1,0 +1,61 @@
+{
+  "schema_version": 1,
+  "release": "0.86.0",
+  "images": [
+    {
+      "component": "web",
+      "ref": "ghcr.io/verideploy/verideploy-web:0.86.0",
+      "dockerfile": "infrastructure/docker/web.Dockerfile"
+    },
+    {
+      "component": "gateway",
+      "ref": "ghcr.io/verideploy/verideploy-gateway:0.86.0",
+      "dockerfile": "infrastructure/docker/gateway.Dockerfile"
+    },
+    {
+      "component": "ai",
+      "ref": "ghcr.io/verideploy/verideploy-ai:0.86.0",
+      "dockerfile": "infrastructure/docker/ai.Dockerfile"
+    },
+    {
+      "component": "worker",
+      "ref": "ghcr.io/verideploy/verideploy-worker:0.86.0",
+      "dockerfile": "infrastructure/docker/worker.Dockerfile"
+    }
+  ],
+  "required_artifacts": [
+    "infrastructure/terraform/main.tf",
+    "infrastructure/terraform/variables.tf",
+    "infrastructure/terraform/versions.tf",
+    "infrastructure/terraform/outputs.tf",
+    "infrastructure/terraform/terraform.tfvars.example",
+    "docs/release/release-notes.md",
+    "docs/release/production-deployment.md",
+    "docs/release/migration-and-rollback.md",
+    "docs/release/backup-restore-proof.md",
+    "docs/release/final-technical-handoff.md",
+    "scripts/release/plan.sh",
+    "scripts/release/deploy.sh",
+    "scripts/release/rollback.sh",
+    "scripts/release/verify.sh",
+    "scripts/release/seed_demo.sh",
+    ".github/workflows/release.yml",
+    "scripts/release/prepare_trusted_builder.sh",
+    "scripts/release/resolve_base_image_digests.py",
+    "artifacts/release/source-manifest.json",
+    "artifacts/release/local-validation.json"
+  ],
+  "safety": {
+    "external_writes_default": false,
+    "deployment_requires_explicit_apply": true,
+    "rollback_requires_confirmation": true,
+    "production_secrets_in_repo": false
+  },
+  "execution_truth": {
+    "local_registry_push": false,
+    "local_cosign_signature": false,
+    "live_terraform_apply": false,
+    "live_restore_drill": false,
+    "trusted_ci_release_workflow_required": true
+  }
+}

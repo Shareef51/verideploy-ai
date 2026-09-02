@@ -1,0 +1,29 @@
+global:
+  environment: production
+  runtimeSecretName: verideploy-runtime-production
+images:
+  web: {repository: ghcr.io/verideploy/verideploy-web, tag: "0.86.0"}
+  gateway: {repository: ghcr.io/verideploy/verideploy-gateway, tag: "0.86.0"}
+  ai: {repository: ghcr.io/verideploy/verideploy-ai, tag: "0.86.0"}
+  worker: {repository: ghcr.io/verideploy/verideploy-worker, tag: "0.86.0"}
+canary:
+  enabled: false
+  gateway:
+    replicas: 1
+    imageTag: "0.86.0"
+    maxTrafficPercent: 10
+
+externalSecrets:
+  enabled: true
+  refreshInterval: 1h
+  secretStoreRef: verideploy-production
+  secretStoreKind: ClusterSecretStore
+  remoteKey: verideploy/production/runtime
+
+environmentConfig:
+  APP_ENV: production
+  CONFIGURATION_MANAGEMENT_ENFORCED: "true"
+  AI_CONTROL_BACKEND: redis
+  CACHE_BACKEND: redis
+  INTERNAL_SERVICE_AUTH_REQUIRED: "true"
+  DEMO_MODE: "false"

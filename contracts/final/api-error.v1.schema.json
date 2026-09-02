@@ -1,0 +1,101 @@
+{
+  "$defs": {
+    "ApiErrorItem": {
+      "additionalProperties": false,
+      "properties": {
+        "code": {
+          "title": "Code",
+          "type": "string"
+        },
+        "field": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Field"
+        },
+        "message": {
+          "title": "Message",
+          "type": "string"
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ],
+      "title": "ApiErrorItem",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.verideploy.ai/final/api-error.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "code": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Code",
+      "type": "string"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "details": {
+      "default": [],
+      "items": {
+        "$ref": "#/$defs/ApiErrorItem"
+      },
+      "title": "Details",
+      "type": "array"
+    },
+    "error_id": {
+      "format": "uuid",
+      "title": "Error Id",
+      "type": "string"
+    },
+    "message": {
+      "maxLength": 1000,
+      "minLength": 1,
+      "title": "Message",
+      "type": "string"
+    },
+    "retry_after_seconds": {
+      "anyOf": [
+        {
+          "maximum": 86400,
+          "minimum": 0,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Retry After Seconds"
+    },
+    "retryable": {
+      "default": false,
+      "title": "Retryable",
+      "type": "boolean"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "code",
+    "message",
+    "correlation_id"
+  ],
+  "title": "ApiErrorResponse",
+  "type": "object"
+}

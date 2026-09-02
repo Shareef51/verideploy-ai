@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "synthetic": true,
+  "tenant_safe": true,
+  "scenarios": [
+    {
+      "id": "release-risk",
+      "title": "Release Risk \u2014 Checkout API v2.19.0",
+      "kind": "release-risk",
+      "description": "High-confidence release assurance run with migration and rollback evidence.",
+      "workspace_href": "/release-risk",
+      "asset": null
+    },
+    {
+      "id": "incident-rca",
+      "title": "Incident RCA \u2014 Checkout latency regression",
+      "kind": "incident-rca",
+      "description": "Durable RCA investigation with evidence, citations, critic, audit and live reconciliation.",
+      "workspace_href": "/incidents",
+      "asset": null
+    },
+    {
+      "id": "screenshot",
+      "title": "Screenshot \u2014 Grafana latency anomaly",
+      "kind": "screenshot",
+      "description": "Synthetic Grafana screenshot enters the real image-ingestion path before investigation.",
+      "workspace_href": "/evidence",
+      "asset": "data/demos/checkout-grafana-synthetic.png",
+      "modality": "image"
+    },
+    {
+      "id": "architecture",
+      "title": "Architecture \u2014 Checkout dependency change",
+      "kind": "architecture",
+      "description": "Synthetic architecture PDF enters document ingestion and launches topology-aware investigation.",
+      "workspace_href": "/topology",
+      "asset": "data/demos/checkout-architecture-synthetic.pdf",
+      "modality": "document"
+    },
+    {
+      "id": "recording",
+      "title": "Recording \u2014 Incident screen recording",
+      "kind": "recording",
+      "description": "Synthetic MP4 recording enters video ingestion and launches incident investigation.",
+      "workspace_href": "/incidents",
+      "asset": "data/demos/checkout-incident-recording-synthetic.mp4",
+      "modality": "video"
+    }
+  ]
+}

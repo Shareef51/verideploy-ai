@@ -1,0 +1,34 @@
+{
+  "canary_enabled_by_default": false,
+  "chart_version": "0.66.0",
+  "findings": [],
+  "helm_cli_available_locally": false,
+  "kubectl_available_locally": false,
+  "passed": true,
+  "production_images_pinned": true,
+  "single_pod_failure": {
+    "passed": true,
+    "workloads": {
+      "ai-service": true,
+      "gateway": true,
+      "web": true,
+      "worker": true
+    }
+  },
+  "single_zone_failure": {
+    "passed": true,
+    "workloads": {
+      "ai-service": true,
+      "gateway": true,
+      "web": true,
+      "worker": true
+    }
+  },
+  "validation_mode": "offline-static-and-failure-simulation",
+  "workloads": [
+    "ai-service",
+    "gateway",
+    "web",
+    "worker"
+  ]
+}

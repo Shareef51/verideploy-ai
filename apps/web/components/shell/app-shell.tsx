@@ -1,0 +1,6 @@
+import Link from "next/link";
+import type { FrontendSession } from "../../lib/auth/types";
+const nav=[
+ ["Overview","/"],["Release Risk","/release-risk"],["Incidents","/incidents"],["Agent Execution","/agent-execution"],["Evidence","/evidence"],["Postmortems","/postmortems"],["Approvals","/approvals"],["Topology","/topology"],["Evidence Graph","/evidence-graph"],["Evaluations","/evaluations"],["Audit","/audit"]
+] as const;
+export function AppShell({ session, children }: { session: FrontendSession; children: React.ReactNode }) { return <div className="app-frame"><a className="skip-link" href="#main-content">Skip to content</a><aside className="app-sidebar" aria-label="Primary navigation"><Link href="/" className="brand">VeriDeploy <span>AI</span></Link><nav>{nav.map(([label,href])=><Link key={href} href={href}>{label}</Link>)}</nav><div className="session-card"><strong>{session.displayName}</strong><span>{session.roles.join(" · ")}</span></div></aside><div className="app-main"><header className="app-topbar"><span>Production assurance workspace</span><span className="tenant-chip">Tenant {session.tenantId.slice(0,8)}</span></header><main id="main-content" tabIndex={-1}>{children}</main></div></div>; }

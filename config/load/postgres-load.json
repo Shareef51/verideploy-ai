@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "seed": 33033,
+  "tenants": 4,
+  "incidents_per_tenant": 2500,
+  "investigations_per_tenant": 1800,
+  "jobs_per_tenant": 5000,
+  "outbox_events_per_tenant": 8000,
+  "query_workers": 16,
+  "iterations_per_worker": 40,
+  "thresholds": {
+    "p95_ms": 150.0,
+    "error_rate": 0.01,
+    "explain_max_execution_ms": 100.0,
+    "explain_max_total_cost": 25000.0,
+    "forbid_seq_scan_above_rows": 10000
+  }
+}

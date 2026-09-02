@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verideploy.local/contracts/audio-transcription-command-v1.schema.json",
+  "title": "AudioTranscriptionJobCommand",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["tenant_id", "ingestion_job_id", "correlation_id", "original_filename", "declared_mime_type", "bucket", "object_key", "model"],
+  "properties": {
+    "tenant_id": {"type": "string", "format": "uuid"},
+    "ingestion_job_id": {"type": "string", "format": "uuid"},
+    "correlation_id": {"type": "string", "format": "uuid"},
+    "original_filename": {"type": "string", "minLength": 1, "maxLength": 255},
+    "declared_mime_type": {"type": "string", "minLength": 3, "maxLength": 120},
+    "bucket": {"type": "string", "minLength": 3, "maxLength": 63},
+    "object_key": {"type": "string", "minLength": 3, "maxLength": 1024},
+    "object_version": {"type": ["string", "null"], "maxLength": 256},
+    "model": {"type": "string", "minLength": 1, "maxLength": 200},
+    "language": {"type": ["string", "null"], "minLength": 2, "maxLength": 20}
+  }
+}

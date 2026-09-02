@@ -1,0 +1,23 @@
+{
+  "name": "verideploy-ai",
+  "private": true,
+  "version": "0.86.0",
+  "packageManager": "pnpm@10.16.0",
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "typecheck": "turbo typecheck",
+    "test": "turbo test",
+    "format:check": "prettier --check .",
+    "monorepo:validate": "python scripts/validate_monorepo.py",
+    "ci:affected": "python scripts/ci/affected.py",
+    "supply-chain:validate": "python scripts/validate_supply_chain.py",
+    "supply-chain:release": "python scripts/validate_supply_chain.py --release"
+  },
+  "devDependencies": {
+    "prettier": "3.6.2",
+    "turbo": "2.5.6",
+    "typescript": "5.9.2"
+  }
+}

@@ -1,0 +1,82 @@
+{
+  "accessibility": {
+    "browser_keyboard_assertions_in_ci": true,
+    "static_semantic_gate": true
+  },
+  "agent_checkpoint": {
+    "aggregate_score": 1.0,
+    "gate": "pass",
+    "scenario_count": 3
+  },
+  "browser": {
+    "ci_enforced": true,
+    "executed_locally": false,
+    "reason": "Playwright/node_modules unavailable in local execution container"
+  },
+  "coverage": {
+    "measured_percent": 87.32457834427707,
+    "passed": true,
+    "required_percent": 85.0
+  },
+  "evaluation": {
+    "agent_gate": true,
+    "llm_quality_gate": true,
+    "multimodal_gate": true,
+    "rag_gate": true,
+    "regression_gate": true,
+    "retrieval_gate": true,
+    "safety_gate": true
+  },
+  "evidence_kind": "actual_local_execution_plus_ci_enforced_browser",
+  "local_critical_gates_passed": true,
+  "multimodal_checkpoint": {
+    "clean_traceability": 1.0,
+    "partial_traceability": 1.0,
+    "passed": true
+  },
+  "mutation_tests": {
+    "killed": 4,
+    "total": 4
+  },
+  "operations": {
+    "critical_gaps": 0,
+    "high_gaps": 0,
+    "passed": true
+  },
+  "rag_checkpoint": {
+    "cache": {
+      "hit_ratio": 0.875,
+      "hits": 42.0,
+      "misses": 6.0
+    },
+    "gate": "pass",
+    "latency_ms": {
+      "cold_p95": 0.02019,
+      "warm_p95": 0.00023
+    },
+    "metrics": {
+      "citation_completeness": 1.0,
+      "dense_recall_at_5": 1.0,
+      "hybrid_mrr": 1.0,
+      "hybrid_recall_at_5": 1.0,
+      "ingestion_chunk_integrity": 1.0,
+      "keyword_recall_at_5": 1.0,
+      "metadata_filter_correctness": 1.0,
+      "tenant_isolation": 1.0,
+      "visual_ndcg_at_4": 1.0
+    }
+  },
+  "regression": {
+    "duration_seconds": 14.33,
+    "executed_locally": true,
+    "failed": 0,
+    "passed": 700,
+    "skipped": 20,
+    "status": "pass"
+  },
+  "release": "0.80.0",
+  "security": {
+    "critical_findings": 0,
+    "gate": "pass"
+  }
+}

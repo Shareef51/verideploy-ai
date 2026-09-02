@@ -1,0 +1,198 @@
+{
+  "gate": "pass",
+  "metrics": {
+    "by_category": {
+      "critic_loop": {
+        "aggregate_score": 1.0,
+        "case_observations": 1,
+        "escalation_accuracy": 1.0,
+        "failure_trace_linkage": 1.0,
+        "mean_retry_count": 0.0,
+        "path_correctness": 1.0,
+        "planning_quality": 1.0,
+        "retry_efficiency": 1.0,
+        "routing_accuracy": 1.0,
+        "task_completion": 1.0,
+        "tool_selection_correctness": 1.0,
+        "tool_success": 1.0
+      },
+      "incident_rca": {
+        "aggregate_score": 1.0,
+        "case_observations": 1,
+        "escalation_accuracy": 1.0,
+        "failure_trace_linkage": 1.0,
+        "mean_retry_count": 1.0,
+        "path_correctness": 1.0,
+        "planning_quality": 1.0,
+        "retry_efficiency": 1.0,
+        "routing_accuracy": 1.0,
+        "task_completion": 1.0,
+        "tool_selection_correctness": 1.0,
+        "tool_success": 1.0
+      },
+      "release_risk": {
+        "aggregate_score": 1.0,
+        "case_observations": 1,
+        "escalation_accuracy": 1.0,
+        "failure_trace_linkage": 1.0,
+        "mean_retry_count": 0.0,
+        "path_correctness": 1.0,
+        "planning_quality": 1.0,
+        "retry_efficiency": 1.0,
+        "routing_accuracy": 1.0,
+        "task_completion": 1.0,
+        "tool_selection_correctness": 1.0,
+        "tool_success": 1.0
+      }
+    },
+    "cases": [
+      {
+        "case_id": "release-risk-parallel",
+        "category": "release_risk",
+        "escalation_accuracy": 1.0,
+        "failure_trace_linkage": 1.0,
+        "path_correctness": 1.0,
+        "planning_quality": 1.0,
+        "repeat": 0,
+        "retry_count": 0,
+        "retry_efficiency": 1.0,
+        "routing_accuracy": 1.0,
+        "task_completion": 1.0,
+        "tool_selection_correctness": 1.0,
+        "tool_success": 1.0
+      },
+      {
+        "case_id": "incident-rca-retry-recovery",
+        "category": "incident_rca",
+        "escalation_accuracy": 1.0,
+        "failure_trace_linkage": 1.0,
+        "path_correctness": 1.0,
+        "planning_quality": 1.0,
+        "repeat": 0,
+        "retry_count": 1,
+        "retry_efficiency": 1.0,
+        "routing_accuracy": 1.0,
+        "task_completion": 1.0,
+        "tool_selection_correctness": 1.0,
+        "tool_success": 1.0
+      },
+      {
+        "case_id": "critic-correction",
+        "category": "critic_loop",
+        "escalation_accuracy": 1.0,
+        "failure_trace_linkage": 1.0,
+        "path_correctness": 1.0,
+        "planning_quality": 1.0,
+        "repeat": 0,
+        "retry_count": 0,
+        "retry_efficiency": 1.0,
+        "routing_accuracy": 1.0,
+        "task_completion": 1.0,
+        "tool_selection_correctness": 1.0,
+        "tool_success": 1.0
+      }
+    ],
+    "failure_trace_records": [
+      {
+        "case_id": "incident-rca-retry-recovery",
+        "category": "incident_rca",
+        "component": "runtime.read",
+        "correlation_id": "corr-incident-rca-retry-recovery",
+        "failure_id": "failure-incident-rca-retry-recovery",
+        "linked": true,
+        "span_id": "span-incident-rca-retry-recovery",
+        "trace_id": "trace-incident-rca-retry-recovery"
+      }
+    ],
+    "summary": {
+      "aggregate_score": 1.0,
+      "case_observations": 3,
+      "escalation_accuracy": 1.0,
+      "failure_trace_linkage": 1.0,
+      "mean_retry_count": 0.3333333333333333,
+      "path_correctness": 1.0,
+      "planning_quality": 1.0,
+      "retry_efficiency": 1.0,
+      "routing_accuracy": 1.0,
+      "task_completion": 1.0,
+      "tool_selection_correctness": 1.0,
+      "tool_success": 1.0
+    },
+    "unlinked_failure_count": 0
+  },
+  "release_version": "0.77.0",
+  "retry_budget": 2,
+  "scenario_count": 3,
+  "scenarios": [
+    {
+      "approval_blocked": false,
+      "case_id": "release-risk-parallel",
+      "completed": true,
+      "critic_corrected": true,
+      "fan_in_complete": true,
+      "path": [
+        "supervisor",
+        "planner",
+        "fan_out",
+        "github",
+        "rag",
+        "runtime",
+        "visual",
+        "fan_in",
+        "critic",
+        "decision"
+      ],
+      "recovered_after_restart": true,
+      "retry_count": 0
+    },
+    {
+      "approval_blocked": true,
+      "case_id": "incident-rca-retry-recovery",
+      "completed": true,
+      "critic_corrected": true,
+      "fan_in_complete": true,
+      "path": [
+        "supervisor",
+        "planner",
+        "fan_out",
+        "runtime",
+        "rag",
+        "visual",
+        "fan_in",
+        "rca",
+        "critic",
+        "approval"
+      ],
+      "recovered_after_restart": true,
+      "retry_count": 1
+    },
+    {
+      "approval_blocked": true,
+      "case_id": "critic-correction",
+      "completed": true,
+      "critic_corrected": true,
+      "fan_in_complete": true,
+      "path": [
+        "supervisor",
+        "planner",
+        "rag",
+        "rca",
+        "critic",
+        "rag_followup",
+        "critic",
+        "approval"
+      ],
+      "recovered_after_restart": true,
+      "retry_count": 0
+    }
+  ],
+  "thresholds": {
+    "escalation_accuracy": 1.0,
+    "failure_trace_linkage": 1.0,
+    "path_correctness": 1.0,
+    "planning_quality": 1.0,
+    "routing_accuracy": 1.0,
+    "task_completion": 1.0,
+    "tool_selection_correctness": 1.0
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "release": "0.85.0",
+  "title": "Recruiter-grade README and explanation package",
+  "required_readme_sections": [
+    "What VeriDeploy AI Does",
+    "Why This Is More Than an LLM Wrapper",
+    "Production Architecture",
+    "Live End-to-End Flows",
+    "Recruiter Demo Path",
+    "Measured Engineering Evidence",
+    "Security and Safety",
+    "Evaluation Strategy",
+    "Run Locally",
+    "Known Limitations",
+    "Interview Walkthrough",
+    "Repository Guide"
+  ],
+  "required_documents": [
+    "README.md",
+    "docs/recruiter/product-narrative.md",
+    "docs/recruiter/demo-video-script.md",
+    "docs/recruiter/interview-walkthrough.md",
+    "docs/recruiter/benchmark-evidence.md",
+    "docs/recruiter/security-evaluation.md",
+    "docs/recruiter/limitations.md",
+    "docs/recruiter/setup-and-demo.md",
+    "docs/architecture/topology.mmd",
+    "docs/architecture/data-flow.mmd"
+  ],
+  "screenshots": [
+    {
+      "path": "docs/recruiter/captures/01-product-overview.png",
+      "metadata": "docs/recruiter/captures/01-product-overview.json"
+    },
+    {
+      "path": "docs/recruiter/captures/02-multimodal-killer-demo.png",
+      "metadata": "docs/recruiter/captures/02-multimodal-killer-demo.json"
+    },
+    {
+      "path": "docs/recruiter/captures/03-release-evidence.png",
+      "metadata": "docs/recruiter/captures/03-release-evidence.json"
+    }
+  ],
+  "truthfulness": {
+    "require_source_derived_capture_label": true,
+    "forbid_live_runtime_claim_for_static_capture": true,
+    "numeric_claim_source": "measured metric registry"
+  },
+  "gate": "recruiter understands value; senior engineer can inspect depth"
+}

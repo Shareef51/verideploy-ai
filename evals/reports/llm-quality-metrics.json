@@ -1,0 +1,98 @@
+{
+  "all_observations_summary": {
+    "aggregate_score": 0.9898748099689186,
+    "answer_quality": 0.9944990498445933,
+    "case_observations": 1000,
+    "instruction_adherence": 0.998875,
+    "reasoning_result_consistency": 0.978,
+    "refusal_abstention_correctness": 0.987,
+    "structured_output_validity": 0.991
+  },
+  "benchmark_profiles_are_synthetic": true,
+  "candidate_summary": {
+    "aggregate_score": 0.9956523809523811,
+    "answer_quality": 0.9987619047619049,
+    "case_observations": 500,
+    "instruction_adherence": 0.9995,
+    "reasoning_result_consistency": 0.99,
+    "refusal_abstention_correctness": 0.994,
+    "structured_output_validity": 0.996
+  },
+  "case_observations": 1000,
+  "checks": {
+    "aggregate_score": true,
+    "answer_quality": true,
+    "candidate_not_worse_than_baseline": true,
+    "instruction_adherence": true,
+    "judge_calibration": true,
+    "reasoning_result_consistency": true,
+    "refusal_abstention_correctness": true,
+    "structured_output_validity": true
+  },
+  "comparison": {
+    "baseline_variant": "synthetic-quality-baseline|verideploy-quality|1.0.0",
+    "ranking": [
+      {
+        "aggregate_score": 0.9956523809523811,
+        "delta_vs_baseline": 0.011555141966924753,
+        "variant": "synthetic-quality-candidate|verideploy-quality|2.0.0"
+      },
+      {
+        "aggregate_score": 0.9840972389854563,
+        "delta_vs_baseline": 0.0,
+        "variant": "synthetic-quality-baseline|verideploy-quality|1.0.0"
+      }
+    ],
+    "variants": {
+      "synthetic-quality-baseline|verideploy-quality|1.0.0": {
+        "aggregate_score": 0.9840972389854563,
+        "answer_quality": 0.9902361949272819,
+        "case_observations": 500,
+        "instruction_adherence": 0.99825,
+        "reasoning_result_consistency": 0.966,
+        "refusal_abstention_correctness": 0.98,
+        "structured_output_validity": 0.986
+      },
+      "synthetic-quality-candidate|verideploy-quality|2.0.0": {
+        "aggregate_score": 0.9956523809523811,
+        "answer_quality": 0.9987619047619049,
+        "case_observations": 500,
+        "instruction_adherence": 0.9995,
+        "reasoning_result_consistency": 0.99,
+        "refusal_abstention_correctness": 0.994,
+        "structured_output_validity": 0.996
+      }
+    }
+  },
+  "dataset": "evals/datasets/verideploy-500/v1.jsonl",
+  "dataset_case_count": 500,
+  "deterministic_rule_based": true,
+  "judge_calibration": {
+    "bias": -0.0019999999999999905,
+    "examples": 5,
+    "judge": {
+      "judge_name": "verideploy-llm-quality",
+      "model_id": "evaluation-model-role",
+      "prompt_id": "llm-quality-judge",
+      "prompt_sha256": "31aadd96ca97ee1f3bcb2932fd308572f06bddba4433713003eb7ef7d161d458",
+      "prompt_version": "1.0.0"
+    },
+    "mae": 0.013999999999999957,
+    "passed": true,
+    "pearson_correlation": 0.9990448392620082,
+    "thresholds": {
+      "max_mae": 0.08,
+      "min_correlation": 0.92
+    }
+  },
+  "model_judge_default_enabled": false,
+  "passed": true,
+  "thresholds": {
+    "aggregate_score": 0.97,
+    "answer_quality": 0.95,
+    "instruction_adherence": 0.98,
+    "reasoning_result_consistency": 0.98,
+    "refusal_abstention_correctness": 0.98,
+    "structured_output_validity": 0.98
+  }
+}

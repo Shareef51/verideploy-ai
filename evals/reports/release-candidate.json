@@ -1,0 +1,84 @@
+{
+  "release": "0.80.0",
+  "status": "FAIL",
+  "critical_failures": 1,
+  "ci_browser_required": true,
+  "gates": [
+    {
+      "name": "evaluation",
+      "status": "PASS",
+      "evidence": [
+        "evals/reports/retrieval-metrics.json",
+        "evals/reports/rag-metrics.json",
+        "evals/reports/agent-metrics.json",
+        "evals/reports/llm-quality-metrics.json",
+        "evals/reports/safety-hallucination-metrics.json",
+        "evals/reports/visual-multimodal-metrics.json",
+        "evals/reports/regression-gates.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "security",
+      "status": "PASS",
+      "evidence": [
+        "evals/reports/guardrails.json",
+        "evals/reports/security.json",
+        "evals/reports/production-operations.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "load",
+      "status": "PASS",
+      "evidence": [
+        "tests/load/test_load.py",
+        "evals/reports/multimodal-integration.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "chaos",
+      "status": "PASS",
+      "evidence": [
+        "tests/chaos/test_chaos.py",
+        "evals/reports/platform-integration-reliability.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "accessibility",
+      "status": "PASS",
+      "evidence": [
+        "apps/web/tests/e2e/shell.spec.ts"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "browser",
+      "status": "CI_ENFORCED",
+      "evidence": [
+        "apps/web/playwright.config.ts",
+        "apps/web/tests/e2e/shell.spec.ts"
+      ],
+      "detail": "Playwright Chromium install and browser suite are mandatory in CI"
+    },
+    {
+      "name": "contract",
+      "status": "PASS",
+      "evidence": [
+        "evals/reports/final-response-event-schemas.json",
+        "contracts/final/manifest.json"
+      ],
+      "detail": "required evidence present"
+    },
+    {
+      "name": "regression",
+      "status": "FAIL",
+      "evidence": [
+        "artifacts/release-candidate/pytest-summary.json"
+      ],
+      "detail": "required evidence missing"
+    }
+  ]
+}

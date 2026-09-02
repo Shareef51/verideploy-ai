@@ -1,0 +1,25 @@
+flowchart LR
+  U[Operator Browser] -->|OIDC PKCE| IDP[OIDC Identity]
+  U -->|HTTPS| WEB[Next.js]
+  WEB -->|HTTPS| GW[NestJS Gateway]
+  GW -->|Private HTTPS + service identity| AI[Python AI Service]
+  GW -->|Commands| K[Kafka]
+  K --> W[Python Workers]
+  W -->|Events| K
+  AI --> LG[LangGraph]
+  LG --> OAI[OpenAI]
+  LG --> MCP[MCP Gateway]
+  AI --> PG[(PostgreSQL + pgvector)]
+  W --> PG
+  AI --> R[(Redis)]
+  K --> R
+  R --> GW
+  W --> OBJ[(Object Storage)]
+  GW --> OT[OpenTelemetry]
+  AI --> OT
+  W --> OT
+  OT --> OBS[Prometheus / Grafana / Tempo / Loki]
+  K8S[Kubernetes + Helm] -. deploys .-> WEB
+  K8S -. deploys .-> GW
+  K8S -. deploys .-> AI
+  K8S -. deploys .-> W

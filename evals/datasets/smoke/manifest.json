@@ -1,0 +1,8 @@
+{
+  "dataset_id": "smoke",
+  "version": "1.0.0",
+  "schema_version": "1.0",
+  "description": "Deterministic, synthetic, paid-call-free smoke dataset for evaluation plumbing.",
+  "source": "v1.jsonl",
+  "categories": ["release_risk", "incident_rca"]
+}

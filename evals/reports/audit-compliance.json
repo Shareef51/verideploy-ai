@@ -1,0 +1,16 @@
+{
+  "gate": "PASS",
+  "events": 5,
+  "chain_verified": true,
+  "redaction_verified": true,
+  "export_sha256": "8c272eded1664464377d7275a18b126635f60bdecd6569ac53f493ce11b7478a",
+  "reconstructable_fields": [
+    "actor",
+    "resource",
+    "action",
+    "result",
+    "correlation_id",
+    "trace_id",
+    "event_hash"
+  ]
+}

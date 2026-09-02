@@ -1,0 +1,58 @@
+{
+  "generated_contracts": {
+    "contracts/asyncapi/events.yaml": "fc92fe88af4506f4e96143e26a3fa41a93af5798f407abf5d59b1680b18f2a89",
+    "contracts/compatibility/final-response-event-schemas-baseline.json": "d9093dd5e31e5cf4582c39f62301600d9ae4c8480a931e5caf2f3319aeb5d433",
+    "contracts/events/audio-transcription-command-v1.schema.json": "8132b0dc555a5fe515214575cd743915a8556280bbe29619a3bd1f6ef1d5e019",
+    "contracts/events/audio-transcription-event-v1.schema.json": "3b65b56d301e6c358da61f2bc04780459d4063e93aa5ee541d4853b4dc6e2ca7",
+    "contracts/events/ingestion-command.v1.json": "920dca1df6585c5dc78eb4c57c1fb29d44e9c8a017041484ba14c47cb3b57a14",
+    "contracts/events/ingestion-event.v1.json": "f4201f4ff3910ade897b1dd608683a071c70feb3d1f994cc859e7a7a1691535a",
+    "contracts/events/investigation-cancel-command.v1.json": "e81cbab9a2a29ed5b232602e541f1b90fae2a0797b1610eb9616464bc97c0fb7",
+    "contracts/events/investigation-command.v1.json": "2bae40550772f34b2141cfb3ccf29a4251e4fe89913d8bc86beb457164ece645",
+    "contracts/events/investigation-event.v1.json": "cde876ba6eaf74b1ddc15272954246d7d62a2011901ea3b83689e75267623224",
+    "contracts/events/platform-dlq-v1.schema.json": "5b29b98e93d4e3e55bdfb7e5da5d883f75e6e44bbbc890dce40401837543f9bc",
+    "contracts/events/platform-retry-v1.schema.json": "1ff9349b489b4d4297520b90d986aa5b1683a7c43936afb77a0afc0c27411a04",
+    "contracts/events/postmortem-command.v1.json": "9087e8386af097fa0fbed513c8f43e3a411735f6dab4aa882933c34d5bf5d073",
+    "contracts/events/postmortem-event.v1.json": "c56a05db5401fc28889c0afeb118d61f00c41899db7e16bdc28eae865e888bd2",
+    "contracts/events/release-risk-command.v1.json": "43d3a200b9ea8d68f43fdb12469528f7463feb0adb403e309fcc9c690ee754f9",
+    "contracts/events/release-risk-event.v1.json": "4c9ea70d7f6d8d8580b9214d6915f44ced8e46c2ff33a55890849d3e2c726e7b",
+    "contracts/events/replay-control-v1.schema.json": "fa908ff4dcc5510b604173f449a3666aec29d1e1a615bacc0cb7cb5e95bbb098",
+    "contracts/events/video-evidence-command-v1.schema.json": "806ac0fb2a9a919e2a7e4856879c0545081d860275103a539d8a1d36e802f69c",
+    "contracts/events/video-evidence-event-v1.schema.json": "958b01059f9a002e52738470dd36f43c529068a6f3e292391f86d17bddaf8797",
+    "contracts/final/api-error.v1.schema.json": "6724a9dcf4489b3b94b7c92bf6338ca9482eff681329eae26021715c8efc17fa",
+    "contracts/final/citation-reference.v1.schema.json": "738f0854f0bd15f89620bba219cd726d8b46e288c03648781824b8c045ef033b",
+    "contracts/final/evidence-reference.v1.schema.json": "f2e6560250c7d612c26f7804f8bbb136d94b067aaa5ba7cec3cdfd8ec6a24536",
+    "contracts/final/kafka-envelope.v1.schema.json": "1f4baac3252e087dc35ed67bffc991f921bf757ac9cbace9fe50831cff854826",
+    "contracts/final/manifest.json": "8d0531a4b84c3681ba436b5e8055328c7665a5a9c53bc69f4c828d30ac4a5998",
+    "contracts/final/rca-response.v1.schema.json": "00d141e4c57ebb58b1120a9fc1729c06f7c66a4aff2367c730c9dba31440995c",
+    "contracts/final/release-risk-response.v1.schema.json": "e78398fb081606278468c29d3d1e164c17c4b512c00f042766258aea1a472666",
+    "contracts/final/review-response.v1.schema.json": "0f688c0a22d928266cc953a87b0eee71349f35a80dfb3b3e5c2a773298ca3b64",
+    "contracts/final/timeline-entry.v1.schema.json": "09d10b56c8b705fc9bc1c1c357d622182a16daf150e1ee625d57796c76c977d6",
+    "contracts/final/websocket-envelope.v1.schema.json": "85b48fb013e10c8814e4913fc080e24cfd7aa76153ef9d3cdeaff7d00c6e70fc",
+    "contracts/openapi/gateway.yaml": "3634f0e746fe5590c527c82ff860d2184d819c9e738607e54803e6a63183d989",
+    "contracts/structured-output/evidence_extraction.v1.0.0.schema.json": "7d2290b808e056222f719f49c847eb495364e89acfee20d758de398231611dcd",
+    "contracts/structured-output/manifest.json": "c748dc01b8504f4198d287e9b6067096c58f5599e82433f32c2bac9a31cd7952",
+    "contracts/structured-output/structured_decision.v1.0.0.schema.json": "da777999f14a5415aebb6786b9930d647597461776fbbfdf6db422d92ff0f2c5"
+  },
+  "packages": {
+    "@verideploy/gateway": {
+      "owner": "@verideploy/platform",
+      "path": "apps/gateway",
+      "version": "0.86.0"
+    },
+    "@verideploy/tsconfig": {
+      "owner": "@verideploy/platform",
+      "path": "packages/tsconfig",
+      "version": "0.86.0"
+    },
+    "@verideploy/web": {
+      "owner": "@verideploy/frontend",
+      "path": "apps/web",
+      "version": "0.86.0"
+    }
+  },
+  "python_version": "0.86.0",
+  "release_version": "0.86.0",
+  "schema_version": 1,
+  "turbo_sha256": "c022a85180c5acc228ca2efed36ef2f76127cb0f73292e7d880a6b3a602cbdd7",
+  "workspace_sha256": "08d75840c97ab0e72d1d9b5b84a17e47a2e06cb159a5fbec5ee0a6a56682dad7"
+}

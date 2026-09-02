@@ -1,0 +1,10 @@
+import { BadRequestException, Controller, Get, Headers, MessageEvent, Param, Query, Res, Sse } from "@nestjs/common";
+import { Response } from "express";
+import { concat, from, map, Observable, of, timer, switchMap } from "rxjs";
+import { AgentExecutionService } from "./agent-execution.service";
+function req(v:string|undefined,n:string){if(!v)throw new BadRequestException(`${n} header is required`);return v;}
+@Controller("agent-execution") export class AgentExecutionController{constructor(private readonly service:AgentExecutionService){}
+@Get(":runId") async view(@Param("runId") runId:string,@Headers("x-tenant-id") tenant?:string,@Headers("x-correlation-id") correlation?:string,@Res() res?:Response){const r:any=await this.service.view(runId,req(tenant,"x-tenant-id"),req(correlation,"x-correlation-id"));return res!.status(r.statusCode??200).json(r.body??r);}
+@Get(":runId/events") events(@Param("runId") runId:string,@Headers("x-tenant-id") tenant?:string,@Headers("x-correlation-id") correlation?:string,@Query("after_sequence") raw?:string){const after=raw===undefined?0:Number(raw);if(!Number.isInteger(after)||after<0)throw new BadRequestException("after_sequence must be non-negative");return this.service.events(runId,req(tenant,"x-tenant-id"),req(correlation,"x-correlation-id"),after);}
+@Sse(":runId/stream") stream(@Param("runId") runId:string,@Headers("x-tenant-id") tenant?:string,@Headers("x-correlation-id") correlation?:string,@Headers("last-event-id") last?:string):Observable<MessageEvent>{const t=req(tenant,"x-tenant-id"),c=req(correlation,"x-correlation-id");let after=Number.isFinite(Number(last))?Number(last):0;return concat(of({type:"connected",data:{run_id:runId,after_sequence:after}} as MessageEvent),timer(0,1000).pipe(switchMap(()=>from(this.service.events(runId,t,c,after))),map((response:any)=>response.body??response),map((events:any[])=>{const fresh=events.filter(e=>Number(e.sequence_number)>after);if(fresh.length)after=Math.max(...fresh.map(e=>Number(e.sequence_number)));return {type:"events",data:fresh,id:String(after)} as MessageEvent;})));}
+}

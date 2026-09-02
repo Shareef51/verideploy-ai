@@ -1,0 +1,237 @@
+{
+  "cases": 9,
+  "failed": 0,
+  "gate_passed": true,
+  "passed": 9,
+  "policy_sha256": "ed09edb0ed46bb39e63255f8829212c7a888cbe20121d9f8ffe79698a2449a0a",
+  "policy_version": "1.0.0",
+  "results": [
+    {
+      "actual": "deny",
+      "controls": [
+        "INP-002"
+      ],
+      "expected": "deny",
+      "id": "prompt-001",
+      "passed": true
+    },
+    {
+      "actual": "deny",
+      "controls": [
+        "INP-002"
+      ],
+      "expected": "deny",
+      "id": "socket-001",
+      "passed": true
+    },
+    {
+      "actual": "deny",
+      "controls": [
+        "INP-002"
+      ],
+      "expected": "deny",
+      "id": "event-001",
+      "passed": true
+    },
+    {
+      "actual": "warn",
+      "controls": [
+        "RET-002"
+      ],
+      "expected": "warn",
+      "id": "doc-001",
+      "passed": true
+    },
+    {
+      "actual": "deny",
+      "controls": [
+        "RET-001"
+      ],
+      "expected": "deny",
+      "id": "tenant-doc-001",
+      "passed": true
+    },
+    {
+      "actual": "deny",
+      "controls": [
+        "TOL-001",
+        "TOL-004",
+        "TOL-005"
+      ],
+      "expected": "deny",
+      "id": "mcp-001",
+      "passed": true
+    },
+    {
+      "actual": "abstain",
+      "controls": [
+        "OUT-001"
+      ],
+      "expected": "abstain",
+      "id": "output-001",
+      "passed": true
+    },
+    {
+      "actual": "deny",
+      "controls": [
+        "OPS-001"
+      ],
+      "expected": "deny",
+      "id": "ops-001",
+      "passed": true
+    },
+    {
+      "actual": "allow",
+      "controls": [],
+      "expected": "allow",
+      "id": "safe-001",
+      "passed": true
+    }
+  ],
+  "telemetry": {
+    "counts": {
+      "input|INP-002|deny": 3,
+      "operational|OPS-001|deny": 1,
+      "output|OUT-001|abstain": 1,
+      "retrieval|RET-001|deny": 1,
+      "retrieval|RET-002|warn": 1,
+      "tool|TOL-001|deny": 1,
+      "tool|TOL-004|deny": 1,
+      "tool|TOL-005|deny": 1
+    },
+    "recent": [
+      {
+        "action": "deny",
+        "control_id": "INP-002",
+        "correlation_id": "prompt-001",
+        "layer": "input",
+        "metadata": {
+          "channel": "http"
+        },
+        "policy_version": "1.0.0",
+        "reason": "prompt injection pattern detected",
+        "span_id": "span-prompt-001",
+        "trace_id": "trace-prompt-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "INP-002",
+        "correlation_id": "socket-001",
+        "layer": "input",
+        "metadata": {
+          "channel": "websocket"
+        },
+        "policy_version": "1.0.0",
+        "reason": "prompt injection pattern detected",
+        "span_id": "span-socket-001",
+        "trace_id": "trace-socket-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "INP-002",
+        "correlation_id": "event-001",
+        "layer": "input",
+        "metadata": {
+          "channel": "kafka"
+        },
+        "policy_version": "1.0.0",
+        "reason": "prompt injection pattern detected",
+        "span_id": "span-event-001",
+        "trace_id": "trace-event-001"
+      },
+      {
+        "action": "warn",
+        "control_id": "RET-002",
+        "correlation_id": "doc-001",
+        "layer": "retrieval",
+        "metadata": {
+          "evidence_id": "doc-1"
+        },
+        "policy_version": "1.0.0",
+        "reason": "instruction-like retrieved content quarantined",
+        "span_id": "span-doc-001",
+        "trace_id": "trace-doc-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "RET-001",
+        "correlation_id": "tenant-doc-001",
+        "layer": "retrieval",
+        "metadata": {
+          "evidence_id": "doc-2"
+        },
+        "policy_version": "1.0.0",
+        "reason": "cross-tenant retrieval result",
+        "span_id": "span-tenant-doc-001",
+        "trace_id": "trace-tenant-doc-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "TOL-001",
+        "correlation_id": "mcp-001",
+        "layer": "tool",
+        "metadata": {
+          "role": "viewer",
+          "tool": "rollback.execute"
+        },
+        "policy_version": "1.0.0",
+        "reason": "role not authorized for tool",
+        "span_id": "span-mcp-001",
+        "trace_id": "trace-mcp-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "TOL-004",
+        "correlation_id": "mcp-001",
+        "layer": "tool",
+        "metadata": {
+          "tool": "rollback.execute"
+        },
+        "policy_version": "1.0.0",
+        "reason": "consequential action must start in dry-run",
+        "span_id": "span-mcp-001",
+        "trace_id": "trace-mcp-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "TOL-005",
+        "correlation_id": "mcp-001",
+        "layer": "tool",
+        "metadata": {
+          "tool": "rollback.execute"
+        },
+        "policy_version": "1.0.0",
+        "reason": "human approval required",
+        "span_id": "span-mcp-001",
+        "trace_id": "trace-mcp-001"
+      },
+      {
+        "action": "abstain",
+        "control_id": "OUT-001",
+        "correlation_id": "output-001",
+        "layer": "output",
+        "metadata": {
+          "claim_id": "c1"
+        },
+        "policy_version": "1.0.0",
+        "reason": "unsupported material claim",
+        "span_id": "span-output-001",
+        "trace_id": "trace-output-001"
+      },
+      {
+        "action": "deny",
+        "control_id": "OPS-001",
+        "correlation_id": "ops-001",
+        "layer": "operational",
+        "metadata": {
+          "operation": "agent-run",
+          "retries": 7
+        },
+        "policy_version": "1.0.0",
+        "reason": "retry ceiling exceeded",
+        "span_id": "span-ops-001",
+        "trace_id": "trace-ops-001"
+      }
+    ]
+  }
+}

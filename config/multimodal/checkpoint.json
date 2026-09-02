@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "release_version": "0.78.0",
+  "limits": {
+    "max_image_megapixels": 40,
+    "max_pdf_pages": 400,
+    "max_audio_minutes": 180,
+    "max_video_minutes": 120,
+    "max_timeline_events": 1000,
+    "max_evidence_items": 256,
+    "max_parallel_modalities": 4
+  },
+  "required_modalities": [
+    "image",
+    "pdf",
+    "audio",
+    "video"
+  ],
+  "minimum_traceability": 1.0,
+  "minimum_redaction_correctness": 1.0,
+  "minimum_surviving_evidence_ratio": 0.5,
+  "partial_failure_policy": "degrade-with-explicit-lineage",
+  "storage_policy": {
+    "content_digest": "sha256",
+    "tenant_scoped_keys": true,
+    "persist_redacted_derivatives_only": true
+  }
+}

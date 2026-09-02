@@ -1,0 +1,11 @@
+import { z } from "zod";
+const Company=z.object({company_id:z.string().uuid(),tenant_id:z.string().uuid(),name:z.string(),slug:z.string()});
+const Team=z.object({team_id:z.string().uuid(),tenant_id:z.string().uuid(),company_id:z.string().uuid(),name:z.string(),slug:z.string(),mission:z.string()});
+const Owner=z.object({owner_id:z.string().uuid(),tenant_id:z.string().uuid(),team_id:z.string().uuid(),display_name:z.string(),role:z.string(),oncall_alias:z.string()});
+const Environment=z.object({environment_id:z.string().uuid(),tenant_id:z.string().uuid(),name:z.string(),region:z.string(),criticality:z.string()});
+const Service=z.object({service_id:z.string().uuid(),tenant_id:z.string().uuid(),team_id:z.string().uuid(),name:z.string(),slug:z.string(),domain:z.string(),tier:z.string(),runtime:z.string(),repository:z.string(),description:z.string()});
+const Dependency=z.object({dependency_id:z.string().uuid(),tenant_id:z.string().uuid(),source_service_id:z.string().uuid(),target_service_id:z.string().uuid(),kind:z.string(),criticality:z.string(),description:z.string()});
+const Slo=z.object({slo_id:z.string().uuid(),tenant_id:z.string().uuid(),service_id:z.string().uuid(),environment_id:z.string().uuid(),metric:z.string(),target:z.number(),window_days:z.number().int()});
+const Deployment=z.object({deployment_id:z.string().uuid(),tenant_id:z.string().uuid(),service_id:z.string().uuid(),environment_id:z.string().uuid(),version:z.string(),commit_sha:z.string(),deployed_at:z.string(),cluster:z.string(),namespace:z.string(),replicas:z.number().int()});
+export const TopologySnapshotSchema=z.object({schema_version:z.string(),seed_version:z.string(),generated_at:z.string(),seed_sha256:z.string(),company:Company,teams:z.array(Team),owners:z.array(Owner),environments:z.array(Environment),services:z.array(Service),dependencies:z.array(Dependency),slos:z.array(Slo),deployments:z.array(Deployment)});
+export type TopologySnapshot=z.infer<typeof TopologySnapshotSchema>;

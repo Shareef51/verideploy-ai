@@ -1,0 +1,112 @@
+{
+  "$defs": {
+    "FinalEventPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "citation_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citation Ids",
+          "type": "array"
+        },
+        "data": {
+          "additionalProperties": true,
+          "title": "Data",
+          "type": "object"
+        },
+        "resource_id": {
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_type": {
+          "enum": [
+            "release_risk",
+            "incident_rca",
+            "review",
+            "timeline",
+            "evidence"
+          ],
+          "title": "Resource Type",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resource_type",
+        "resource_id",
+        "status"
+      ],
+      "title": "FinalEventPayload",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.verideploy.ai/final/websocket-envelope.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "aggregate_id": {
+      "title": "Aggregate Id",
+      "type": "string"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "high_watermark": {
+      "minimum": 1,
+      "title": "High Watermark",
+      "type": "integer"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/$defs/FinalEventPayload"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sequence_number": {
+      "minimum": 1,
+      "title": "Sequence Number",
+      "type": "integer"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "event_type",
+    "tenant_id",
+    "aggregate_id",
+    "correlation_id",
+    "sequence_number",
+    "high_watermark",
+    "occurred_at",
+    "payload"
+  ],
+  "title": "WebSocketEventEnvelope",
+  "type": "object"
+}

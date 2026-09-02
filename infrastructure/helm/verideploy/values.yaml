@@ -1,0 +1,97 @@
+global:
+  environment: production
+  imagePullPolicy: IfNotPresent
+  imagePullSecrets: []
+  runtimeSecretName: verideploy-runtime
+  topologyKeyZone: topology.kubernetes.io/zone
+  topologyKeyHost: kubernetes.io/hostname
+  terminationGracePeriodSeconds: 45
+
+images:
+  web: {repository: ghcr.io/example/verideploy-web, tag: latest}
+  gateway: {repository: ghcr.io/example/verideploy-gateway, tag: latest}
+  ai: {repository: ghcr.io/example/verideploy-ai, tag: latest}
+  worker: {repository: ghcr.io/example/verideploy-worker, tag: latest}
+
+workloads:
+  web:
+    replicas: 3
+    port: 3000
+    resources:
+      requests: {cpu: 200m, memory: 256Mi}
+      limits: {cpu: "1", memory: 768Mi}
+    hpa: {enabled: true, minReplicas: 3, maxReplicas: 12, cpu: 65, memory: 75}
+    pdb: {minAvailable: 2}
+    probes:
+      startup: {path: /, initialDelaySeconds: 2, periodSeconds: 5, failureThreshold: 30}
+      readiness: {path: /, periodSeconds: 10, failureThreshold: 3}
+      liveness: {path: /, periodSeconds: 15, failureThreshold: 3}
+  gateway:
+    replicas: 3
+    port: 4000
+    resources:
+      requests: {cpu: 300m, memory: 384Mi}
+      limits: {cpu: "1500m", memory: 1Gi}
+    hpa: {enabled: true, minReplicas: 3, maxReplicas: 15, cpu: 65, memory: 75}
+    pdb: {minAvailable: 2}
+    probes:
+      startup: {path: /health/live, initialDelaySeconds: 2, periodSeconds: 5, failureThreshold: 30}
+      readiness: {path: /health/ready, periodSeconds: 10, failureThreshold: 3}
+      liveness: {path: /health/live, periodSeconds: 15, failureThreshold: 3}
+  ai-service:
+    replicas: 3
+    port: 8000
+    resources:
+      requests: {cpu: 500m, memory: 768Mi}
+      limits: {cpu: "2", memory: 2Gi}
+    hpa: {enabled: true, minReplicas: 3, maxReplicas: 20, cpu: 70, memory: 80}
+    pdb: {minAvailable: 2}
+    probes:
+      startup: {path: /health/live, initialDelaySeconds: 3, periodSeconds: 5, failureThreshold: 36}
+      readiness: {path: /health/ready, periodSeconds: 10, failureThreshold: 3}
+      liveness: {path: /health/live, periodSeconds: 20, failureThreshold: 3}
+  worker:
+    replicas: 3
+    resources:
+      requests: {cpu: 500m, memory: 768Mi}
+      limits: {cpu: "2", memory: 2Gi}
+    hpa: {enabled: true, minReplicas: 3, maxReplicas: 30, cpu: 70, memory: 80}
+    pdb: {minAvailable: 2}
+
+canary:
+  enabled: false
+  gateway:
+    replicas: 1
+    imageTag: latest
+    maxTrafficPercent: 10
+
+migration:
+  enabled: true
+  backoffLimit: 2
+  activeDeadlineSeconds: 600
+
+dependencies:
+  postgres: {host: postgres, port: 5432}
+  redis: {host: redis, port: 6379}
+  kafka: {host: kafka, port: 9092}
+  objectStore: {host: minio, port: 9000}
+
+networkPolicy:
+  enabled: true
+  allowDns: true
+  externalHttpsEgress: true
+
+externalSecrets:
+  enabled: false
+  refreshInterval: 1h
+  secretStoreRef: ""
+  secretStoreKind: ClusterSecretStore
+  remoteKey: ""
+
+environmentConfig:
+  APP_ENV: production
+  CONFIGURATION_MANAGEMENT_ENFORCED: "true"
+  AI_CONTROL_BACKEND: redis
+  CACHE_BACKEND: redis
+  INTERNAL_SERVICE_AUTH_REQUIRED: "true"
+  DEMO_MODE: "false"

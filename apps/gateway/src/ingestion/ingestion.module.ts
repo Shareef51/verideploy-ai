@@ -1,0 +1,2 @@
+import { Module } from "@nestjs/common"; import { IngestionController } from "./ingestion.controller"; import { IngestionService } from "./ingestion.service"; import { IngestionKafkaBridge } from "./ingestion.kafka"; import { ObjectStorage } from "./object-storage";
+@Module({controllers:[IngestionController],providers:[IngestionService,IngestionKafkaBridge,ObjectStorage], exports:[IngestionService] }) export class IngestionModule {}

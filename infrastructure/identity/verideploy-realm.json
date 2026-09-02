@@ -1,0 +1,41 @@
+{
+  "realm": "verideploy",
+  "enabled": true,
+  "displayName": "VeriDeploy Local Identity",
+  "registrationAllowed": false,
+  "loginWithEmailAllowed": true,
+  "clients": [
+    {
+      "clientId": "verideploy-web",
+      "name": "VeriDeploy Web Local",
+      "enabled": true,
+      "publicClient": true,
+      "standardFlowEnabled": true,
+      "directAccessGrantsEnabled": false,
+      "redirectUris": ["http://localhost:3000/api/auth/callback"],
+      "webOrigins": ["http://localhost:3000"],
+      "attributes": {"pkce.code.challenge.method": "S256"}
+    }
+  ],
+  "roles": {
+    "realm": [
+      {"name": "viewer"},
+      {"name": "operator"},
+      {"name": "reviewer"},
+      {"name": "auditor"},
+      {"name": "security_admin"}
+    ]
+  },
+  "users": [
+    {
+      "username": "synthetic-reviewer",
+      "enabled": true,
+      "emailVerified": true,
+      "firstName": "Synthetic",
+      "lastName": "Reviewer",
+      "email": "synthetic-reviewer@example.invalid",
+      "realmRoles": ["viewer", "reviewer"],
+      "attributes": {"tenant_id": ["tenant-demo"]}
+    }
+  ]
+}

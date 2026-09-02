@@ -1,0 +1,14 @@
+{{- range $name, $cfg := .Values.workloads }}
+apiVersion: policy/v1
+kind: PodDisruptionBudget
+metadata:
+  name: verideploy-{{ $name }}
+spec:
+  minAvailable: {{ $cfg.pdb.minAvailable }}
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: verideploy
+      app.kubernetes.io/component: {{ $name }}
+      verideploy.ai/track: stable
+---
+{{- end }}

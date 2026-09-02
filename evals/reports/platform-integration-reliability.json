@@ -1,0 +1,82 @@
+{
+  "compose_services": [
+    "ai-service",
+    "audio-transcription-worker",
+    "db-migrate",
+    "gateway",
+    "grafana",
+    "ingestion-worker",
+    "investigation-worker",
+    "kafka",
+    "kafka-init",
+    "keycloak",
+    "loki",
+    "minio",
+    "minio-init",
+    "otel-collector",
+    "postgres",
+    "postmortem-worker",
+    "prometheus",
+    "redis",
+    "release-risk-worker",
+    "tempo",
+    "video-evidence-worker",
+    "web"
+  ],
+  "errors": [
+    "gateway health version drift"
+  ],
+  "gate": "fail",
+  "simulation": {
+    "baseline_ready": true,
+    "critical": {
+      "identity": {
+        "fails_closed": true,
+        "recovers_after_restore": true,
+        "restart_does_not_mask_failure": true
+      },
+      "kafka": {
+        "fails_closed": true,
+        "recovers_after_restore": true,
+        "restart_does_not_mask_failure": true
+      },
+      "object_store": {
+        "fails_closed": true,
+        "recovers_after_restore": true,
+        "restart_does_not_mask_failure": true
+      },
+      "postgres": {
+        "fails_closed": true,
+        "recovers_after_restore": true,
+        "restart_does_not_mask_failure": true
+      },
+      "redis": {
+        "fails_closed": true,
+        "recovers_after_restore": true,
+        "restart_does_not_mask_failure": true
+      }
+    },
+    "optional": {
+      "grafana": {
+        "degrades_not_fails": true,
+        "recovers_after_restore": true
+      },
+      "loki": {
+        "degrades_not_fails": true,
+        "recovers_after_restore": true
+      },
+      "otel_collector": {
+        "degrades_not_fails": true,
+        "recovers_after_restore": true
+      },
+      "prometheus": {
+        "degrades_not_fails": true,
+        "recovers_after_restore": true
+      },
+      "tempo": {
+        "degrades_not_fails": true,
+        "recovers_after_restore": true
+      }
+    }
+  }
+}

@@ -1,0 +1,66 @@
+{
+  "$id": "https://schemas.verideploy.ai/final/evidence-reference.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "citation_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Citation Ids",
+      "type": "array"
+    },
+    "confidence": {
+      "default": 1.0,
+      "maximum": 1.0,
+      "minimum": 0.0,
+      "title": "Confidence",
+      "type": "number"
+    },
+    "evidence_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Evidence Id",
+      "type": "string"
+    },
+    "kind": {
+      "maxLength": 80,
+      "minLength": 1,
+      "title": "Kind",
+      "type": "string"
+    },
+    "observed_at": {
+      "anyOf": [
+        {
+          "format": "date-time",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Observed At"
+    },
+    "provenance_id": {
+      "maxLength": 200,
+      "minLength": 1,
+      "title": "Provenance Id",
+      "type": "string"
+    },
+    "summary": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "evidence_id",
+    "kind",
+    "summary",
+    "provenance_id"
+  ],
+  "title": "EvidenceReference",
+  "type": "object"
+}

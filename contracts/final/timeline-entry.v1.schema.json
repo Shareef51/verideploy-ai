@@ -1,0 +1,50 @@
+{
+  "$id": "https://schemas.verideploy.ai/final/timeline-entry.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "causal": {
+      "default": false,
+      "title": "Causal",
+      "type": "boolean"
+    },
+    "event_id": {
+      "maxLength": 160,
+      "minLength": 1,
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_type": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Event Type",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "default": [],
+      "items": {
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "summary": {
+      "maxLength": 2000,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    }
+  },
+  "required": [
+    "event_id",
+    "occurred_at",
+    "event_type",
+    "summary"
+  ],
+  "title": "TimelineEntry",
+  "type": "object"
+}

@@ -1,0 +1,253 @@
+{
+  "release": "0.83.0",
+  "policy": {
+    "require_code_evidence": true,
+    "require_verification_evidence": true,
+    "forbid_unverified_claims": true,
+    "accepted_verification_kinds": [
+      "tests",
+      "reports",
+      "traces"
+    ]
+  },
+  "claims": [
+    {
+      "skill_id": "python",
+      "title": "Python AI/backend engineering",
+      "status": "implemented_and_measured",
+      "claim": "Demonstrated Python AI/backend engineering in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/graphs/runtime.py"
+        ],
+        "tests": [
+          "tests/orchestration/test_agentic_orchestration_checkpoint.py"
+        ],
+        "reports": [
+          "evals/reports/agentic-orchestration.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "typescript",
+      "title": "TypeScript full-stack engineering",
+      "status": "implemented_and_verified",
+      "claim": "Demonstrated TypeScript full-stack engineering in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "apps/gateway/src/main.ts"
+        ],
+        "tests": [
+          "tests/architecture/test_final_production_technology_architecture.py"
+        ],
+        "reports": [
+          "evals/reports/final-production-architecture.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "openai",
+      "title": "OpenAI model and embedding integration",
+      "status": "implemented_with_offline_test_doubles",
+      "claim": "Demonstrated OpenAI model and embedding integration in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/rag/embeddings/openai_provider.py"
+        ],
+        "tests": [
+          "tests/unit/test_rag_retrieval_modes.py"
+        ],
+        "reports": [
+          "evals/reports/llm-quality-metrics.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "rag",
+      "title": "Production RAG and retrieval engineering",
+      "status": "implemented_and_measured",
+      "claim": "Demonstrated Production RAG and retrieval engineering in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/rag/orchestration/service.py"
+        ],
+        "tests": [
+          "tests/rag/test_rag_integration_performance.py"
+        ],
+        "reports": [
+          "evals/reports/rag-performance.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "agents",
+      "title": "Agentic AI / specialist agents",
+      "status": "implemented_and_measured",
+      "claim": "Demonstrated Agentic AI / specialist agents in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/agents/supervisor.py"
+        ],
+        "tests": [
+          "tests/orchestration/test_agentic_orchestration_checkpoint.py"
+        ],
+        "reports": [
+          "evals/reports/agentic-orchestration.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "langgraph",
+      "title": "LangGraph orchestration and durability",
+      "status": "implemented_runtime_optional_locally",
+      "claim": "Demonstrated LangGraph orchestration and durability in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/graphs/runtime.py"
+        ],
+        "tests": [
+          "tests/unit/test_langgraph_state_reducers.py"
+        ],
+        "reports": [
+          "evals/reports/agentic-orchestration.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "mcp",
+      "title": "MCP governed tool integration",
+      "status": "implemented_and_security_governed",
+      "claim": "Demonstrated MCP governed tool integration in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/mcp/security.py"
+        ],
+        "tests": [
+          "tests/unit/test_mcp_gateway.py"
+        ],
+        "reports": [
+          "evals/reports/production-operations.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "multimodal",
+      "title": "Multimodal AI evidence processing",
+      "status": "implemented_and_measured",
+      "claim": "Demonstrated Multimodal AI evidence processing in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/multimodal/checkpoint/integration.py"
+        ],
+        "tests": [
+          "tests/multimodal/test_multimodal_integration_checkpoint.py"
+        ],
+        "reports": [
+          "evals/reports/multimodal-integration.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "apis",
+      "title": "Production APIs and typed contracts",
+      "status": "implemented_and_contract_tested",
+      "claim": "Demonstrated Production APIs and typed contracts in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "apps/gateway/src/main.ts"
+        ],
+        "tests": [
+          "tests/contracts/test_final_response_event_schemas.py"
+        ],
+        "reports": [
+          "evals/reports/final-response-event-schemas.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "realtime",
+      "title": "Real-time event-driven systems",
+      "status": "implemented_and_tested",
+      "claim": "Demonstrated Real-time event-driven systems in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/realtime/flow.py"
+        ],
+        "tests": [
+          "tests/realtime/test_complete_realtime_api_flow.py"
+        ],
+        "reports": [
+          "evals/reports/complete-realtime-api-flow.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "evaluation",
+      "title": "LLM evaluation and regression gates",
+      "status": "implemented_and_measured",
+      "claim": "Demonstrated LLM evaluation and regression gates in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/evaluation/runner.py"
+        ],
+        "tests": [
+          "tests/release_candidate/test_release_candidate_checkpoint.py"
+        ],
+        "reports": [
+          "evals/reports/release-candidate-benchmarks.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "llmops",
+      "title": "LLMOps data and observability platform",
+      "status": "implemented_and_operationalized",
+      "claim": "Demonstrated LLMOps data and observability platform in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/llmops/service.py"
+        ],
+        "tests": [
+          "tests/unit/test_llmops_data_platform.py"
+        ],
+        "reports": [
+          "evals/reports/release-candidate-benchmarks.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "security",
+      "title": "AI/application security and guardrails",
+      "status": "implemented_and_scanned",
+      "claim": "Demonstrated AI/application security and guardrails in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "src/verideploy/security/architecture.py"
+        ],
+        "tests": [
+          "tests/security/test_production_security_architecture.py"
+        ],
+        "reports": [
+          "evals/reports/security.json"
+        ]
+      }
+    },
+    {
+      "skill_id": "cloud_native",
+      "title": "Cloud-native platform engineering",
+      "status": "implemented_and_deployment_validated",
+      "claim": "Demonstrated Cloud-native platform engineering in VeriDeploy AI.",
+      "evidence": {
+        "code": [
+          "infrastructure/helm/verideploy/templates/workloads.yaml"
+        ],
+        "tests": [
+          "tests/platform/test_kubernetes_scalability_resilience.py"
+        ],
+        "reports": [
+          "evals/reports/production-operations.json"
+        ]
+      }
+    }
+  ]
+}

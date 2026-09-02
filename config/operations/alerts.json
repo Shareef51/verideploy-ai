@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "alerts": [
+    {"id":"gateway-slo-burn","severity":"critical","owner":"sre","signal":"gateway_availability","threshold":"error_budget_burn_14x_1h","runbook":"docs/operations/incident-response.md"},
+    {"id":"kafka-consumer-lag","severity":"critical","owner":"platform","signal":"consumer_lag","threshold":"lag>10000 for 10m","runbook":"docs/operations/kafka-operations.md"},
+    {"id":"dlq-growth","severity":"high","owner":"platform","signal":"dlq_rate","threshold":"rate>0 for 15m","runbook":"docs/operations/kafka-operations.md"},
+    {"id":"backup-age","severity":"critical","owner":"database","signal":"backup_age","threshold":"age>6h","runbook":"docs/operations/database-backup-restore.md"},
+    {"id":"restore-drill-stale","severity":"high","owner":"database","signal":"restore_drill_age","threshold":"age>90d","runbook":"docs/operations/database-backup-restore.md"},
+    {"id":"approval-backlog","severity":"high","owner":"operations","signal":"pending_approval_age","threshold":"p95>30m","runbook":"docs/operations/incident-response.md"}
+  ]
+}

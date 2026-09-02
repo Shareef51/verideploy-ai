@@ -1,0 +1,12 @@
+{
+  "index_version": "v1",
+  "embedding_model": "text-embedding-3-large",
+  "dimensions": 3072,
+  "distance": "cosine",
+  "index_type": "hnsw",
+  "hnsw": {
+    "m": 16,
+    "ef_construction": 64
+  },
+  "migration_revision": "0001_milestone12_pgvector"
+}

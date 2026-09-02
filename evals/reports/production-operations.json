@@ -1,0 +1,8 @@
+{
+  "critical_gaps": 0,
+  "domains_checked": 10,
+  "findings": [],
+  "high_gaps": 0,
+  "passed": true,
+  "release": "0.79.0"
+}

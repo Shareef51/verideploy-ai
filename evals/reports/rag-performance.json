@@ -1,0 +1,25 @@
+{
+  "cache": {
+    "hit_ratio": 0.875,
+    "hits": 42.0,
+    "misses": 6.0
+  },
+  "clean_index_fingerprint": "9fce60e2ac0b4089a66df8292786b6ff525b59c1d908e3d4447ee4ec33826795",
+  "failures": [],
+  "gate": "pass",
+  "latency_ms": {
+    "cold_p95": 0.0924,
+    "warm_p95": 0.001
+  },
+  "metrics": {
+    "citation_completeness": 1.0,
+    "dense_recall_at_5": 1.0,
+    "hybrid_mrr": 1.0,
+    "hybrid_recall_at_5": 1.0,
+    "ingestion_chunk_integrity": 1.0,
+    "keyword_recall_at_5": 1.0,
+    "metadata_filter_correctness": 1.0,
+    "tenant_isolation": 1.0,
+    "visual_ndcg_at_4": 1.0
+  }
+}

@@ -1,0 +1,19 @@
+sequenceDiagram
+  participant B as Browser/Next.js
+  participant G as NestJS Gateway
+  participant K as Kafka
+  participant W as Python Worker
+  participant L as LangGraph
+  participant O as OpenAI/MCP/RAG
+  participant P as PostgreSQL/Redis/Object Storage
+  B->>G: Authenticated release-risk / RCA request
+  G->>K: Durable command with tenant/correlation IDs
+  K->>W: Consume ordered command
+  W->>L: Start/resume durable workflow
+  L->>O: Retrieval, model inference, governed tools
+  O-->>L: Evidence + citations + tool results
+  L->>P: Persist state/checkpoints/evidence/audit
+  W->>K: Ordered progress/final events
+  K-->>G: Event consumer / Redis fan-out
+  G-->>B: WebSocket/SSE updates
+  B->>G: Reconcile authoritative state after reconnect

@@ -1,0 +1,15 @@
+{
+  "version": "1.0.0",
+  "input": {"max_bytes": 1000000},
+  "retrieval": {"quarantine_untrusted_instructions": true, "enforce_tenant_scope": true},
+  "tool": {
+    "allowed_roles": {
+      "github.read": ["viewer", "analyst", "operator", "admin"],
+      "rollback.execute": ["operator", "admin"]
+    },
+    "consequential_requires_approval": true,
+    "consequential_requires_dry_run": true
+  },
+  "output": {"require_material_claim_citations": true, "redact_sensitive_fields": true},
+  "operational": {"max_retries": 3, "max_request_cost_usd": 5.0, "max_concurrency": 32, "requests_per_minute": 120}
+}

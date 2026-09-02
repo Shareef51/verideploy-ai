@@ -1,0 +1,274 @@
+{
+  "schema_version": 1,
+  "release": "0.86.0",
+  "title": "VeriDeploy AI final production technology architecture",
+  "layers": [
+    {
+      "id": "client",
+      "name": "Operator Browser / Next.js",
+      "technology": "Next.js",
+      "runtime": "apps/web",
+      "public": true
+    },
+    {
+      "id": "gateway",
+      "name": "Public API / Realtime Gateway",
+      "technology": "NestJS",
+      "runtime": "apps/gateway",
+      "public": true
+    },
+    {
+      "id": "kafka",
+      "name": "Durable Event Backbone",
+      "technology": "Kafka",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "ai",
+      "name": "Private AI Service",
+      "technology": "Python/FastAPI",
+      "runtime": "services/ai",
+      "public": false
+    },
+    {
+      "id": "langgraph",
+      "name": "Agentic Workflow Runtime",
+      "technology": "LangGraph",
+      "runtime": "src/verideploy/graphs",
+      "public": false
+    },
+    {
+      "id": "openai",
+      "name": "Model and Embedding Provider",
+      "technology": "OpenAI",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "mcp",
+      "name": "Governed Tool Gateway",
+      "technology": "MCP",
+      "runtime": "src/verideploy/mcp",
+      "public": false
+    },
+    {
+      "id": "workers",
+      "name": "Async Workers",
+      "technology": "Python",
+      "runtime": "workers",
+      "public": false
+    },
+    {
+      "id": "postgres",
+      "name": "System of Record + Vector Index",
+      "technology": "PostgreSQL/pgvector",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "redis",
+      "name": "Cache / Coordination / Realtime Fan-out",
+      "technology": "Redis",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "object",
+      "name": "Multimodal Evidence Storage",
+      "technology": "S3-compatible object storage / MinIO",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "identity",
+      "name": "OIDC Identity Provider",
+      "technology": "OIDC/PKCE",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "otel",
+      "name": "Telemetry Pipeline",
+      "technology": "OpenTelemetry",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "observability",
+      "name": "Metrics / Traces / Logs",
+      "technology": "Prometheus/Grafana/Tempo/Loki",
+      "runtime": "external",
+      "public": false
+    },
+    {
+      "id": "kubernetes",
+      "name": "Production Orchestrator",
+      "technology": "Kubernetes/Helm",
+      "runtime": "infrastructure/helm/verideploy",
+      "public": false
+    }
+  ],
+  "flows": [
+    {
+      "id": "auth",
+      "from": "client",
+      "to": "identity",
+      "protocol": "OIDC Authorization Code + PKCE",
+      "purpose": "authenticate operator"
+    },
+    {
+      "id": "api",
+      "from": "client",
+      "to": "gateway",
+      "protocol": "HTTPS",
+      "purpose": "all public API traffic"
+    },
+    {
+      "id": "realtime",
+      "from": "gateway",
+      "to": "client",
+      "protocol": "WebSocket/SSE",
+      "purpose": "live workflow reconciliation"
+    },
+    {
+      "id": "gateway-ai",
+      "from": "gateway",
+      "to": "ai",
+      "protocol": "private HTTPS/service identity",
+      "purpose": "private AI API boundary"
+    },
+    {
+      "id": "commands",
+      "from": "gateway",
+      "to": "kafka",
+      "protocol": "Kafka",
+      "purpose": "durable commands/events"
+    },
+    {
+      "id": "worker-consume",
+      "from": "kafka",
+      "to": "workers",
+      "protocol": "Kafka",
+      "purpose": "async workflow execution"
+    },
+    {
+      "id": "worker-events",
+      "from": "workers",
+      "to": "kafka",
+      "protocol": "Kafka",
+      "purpose": "ordered workflow events"
+    },
+    {
+      "id": "ai-graph",
+      "from": "ai",
+      "to": "langgraph",
+      "protocol": "in-process Python",
+      "purpose": "agent orchestration"
+    },
+    {
+      "id": "graph-llm",
+      "from": "langgraph",
+      "to": "openai",
+      "protocol": "HTTPS",
+      "purpose": "model inference/embeddings"
+    },
+    {
+      "id": "graph-tools",
+      "from": "langgraph",
+      "to": "mcp",
+      "protocol": "MCP",
+      "purpose": "governed tool execution"
+    },
+    {
+      "id": "state",
+      "from": "ai",
+      "to": "postgres",
+      "protocol": "PostgreSQL",
+      "purpose": "state, audit, evidence metadata, vectors"
+    },
+    {
+      "id": "worker-state",
+      "from": "workers",
+      "to": "postgres",
+      "protocol": "PostgreSQL",
+      "purpose": "durable checkpoints/outbox/inbox"
+    },
+    {
+      "id": "cache",
+      "from": "ai",
+      "to": "redis",
+      "protocol": "Redis",
+      "purpose": "tenant-safe caches/coordination"
+    },
+    {
+      "id": "fanout",
+      "from": "kafka",
+      "to": "redis",
+      "protocol": "consumer bridge",
+      "purpose": "cross-gateway realtime fan-out"
+    },
+    {
+      "id": "evidence",
+      "from": "workers",
+      "to": "object",
+      "protocol": "S3 API",
+      "purpose": "raw/derived multimodal evidence"
+    },
+    {
+      "id": "telemetry-ai",
+      "from": "ai",
+      "to": "otel",
+      "protocol": "OTLP",
+      "purpose": "traces/metrics/logs"
+    },
+    {
+      "id": "telemetry-gw",
+      "from": "gateway",
+      "to": "otel",
+      "protocol": "OTLP",
+      "purpose": "traces/metrics/logs"
+    },
+    {
+      "id": "telemetry-worker",
+      "from": "workers",
+      "to": "otel",
+      "protocol": "OTLP",
+      "purpose": "traces/metrics/logs"
+    },
+    {
+      "id": "otel-backends",
+      "from": "otel",
+      "to": "observability",
+      "protocol": "OTLP/Prometheus",
+      "purpose": "operational visibility"
+    }
+  ],
+  "security_invariants": [
+    "Browser never calls the private Python AI service directly.",
+    "NestJS is the only public application API boundary.",
+    "All tenant-scoped state/retrieval/cache/tool access preserves tenant identity.",
+    "Consequential MCP/tool actions require approval and default to dry-run.",
+    "OIDC/PKCE authenticates operators; service identity protects internal calls.",
+    "Retrieved and multimodal content is untrusted data, never executable instruction."
+  ],
+  "production_workloads": [
+    "web",
+    "gateway",
+    "ai-service",
+    "worker"
+  ],
+  "production_dependencies": [
+    "PostgreSQL/pgvector",
+    "Redis",
+    "Kafka",
+    "object storage",
+    "OIDC identity",
+    "OpenTelemetry"
+  ],
+  "diagram_sources": [
+    "docs/architecture/final-production-technology-architecture.md",
+    "docs/architecture/topology.mmd",
+    "docs/architecture/data-flow.mmd"
+  ]
+}

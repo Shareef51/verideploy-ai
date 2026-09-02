@@ -1,0 +1,42 @@
+{
+  "version": "1.0.0",
+  "oidc": {
+    "pkce_required": true,
+    "allowed_algorithms": ["RS256"],
+    "required_claims": ["iss", "aud", "sub", "exp", "iat", "tenant_id", "roles"],
+    "clock_skew_seconds": 60,
+    "access_token_max_age_seconds": 3600
+  },
+  "authorization": {
+    "default_effect": "deny",
+    "roles": {
+      "viewer": ["release.read", "incident.read", "evidence.read", "evaluation.read"],
+      "developer": ["release.read", "incident.read", "incident.create", "evidence.read", "evaluation.read"],
+      "release_reviewer": ["release.read", "approval.read", "approval.decide"],
+      "security_admin": ["security.read", "evaluation.read", "evaluation.override"]
+    },
+    "tenant_claim": "tenant_id",
+    "attributes": ["environment", "service", "team"]
+  },
+  "browser": {
+    "cors_allowed_origins": ["http://localhost:3000"],
+    "csrf_same_origin_required": true,
+    "csp": "default-src 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; form-action 'self'; img-src 'self' data: blob:; connect-src 'self' http://localhost:4000 ws://localhost:4000; script-src 'self'; style-src 'self' 'unsafe-inline'",
+    "hsts_max_age_seconds": 31536000
+  },
+  "ssrf": {
+    "allowed_schemes": ["https"],
+    "allowed_hosts": ["api.github.com", "api.openai.com", "api.smith.langchain.com"],
+    "allow_private_network": false,
+    "max_redirects": 0
+  },
+  "service_identity": {
+    "signed_requests_required_in_staging_production": true,
+    "max_clock_skew_seconds": 60,
+    "trusted_services": ["verideploy-gateway", "verideploy-investigation-worker", "verideploy-multimodal-worker"]
+  },
+  "transport": {"minimum_tls_version": "1.2", "production_plain_http_allowed": false},
+  "secrets": {"production_provider_required": true, "allowed_reference_schemes": ["aws-sm://", "azure-kv://", "gcp-sm://", "vault://"]},
+  "encryption": {"at_rest_required": true, "kms_required_in_production": true, "database_tls_required_in_production": true, "object_store_sse_required_in_production": true},
+  "dependencies": {"critical_vulnerabilities_allowed": 0, "high_vulnerabilities_allowed": 0, "lockfiles_required": true}
+}

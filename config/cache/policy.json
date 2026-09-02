@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "key_version": "v1",
+  "lock_ttl_seconds": 15,
+  "lock_wait_seconds": 2.0,
+  "layers": {
+    "integration": {"ttl_seconds": 60, "stale_seconds": 120, "encrypt": false},
+    "retrieval": {"ttl_seconds": 120, "stale_seconds": 180, "encrypt": false},
+    "model_output": {"ttl_seconds": 300, "stale_seconds": 60, "encrypt": true, "model_safe_only": true},
+    "permission": {"ttl_seconds": 30, "stale_seconds": 0, "encrypt": true},
+    "session": {"ttl_seconds": 900, "stale_seconds": 0, "encrypt": true}
+  }
+}

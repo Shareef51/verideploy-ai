@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://verideploy.local/contracts/investigation-command.v1.json",
+  "title": "InvestigationCommandV1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["investigation_id","tenant_id","requested_by","correlation_id","idempotency_key","query","workflow_type"],
+  "properties": {
+    "investigation_id": {"type":"string","format":"uuid"},
+    "tenant_id": {"type":"string","format":"uuid"},
+    "requested_by": {"type":"string","format":"uuid"},
+    "correlation_id": {"type":"string","format":"uuid"},
+    "idempotency_key": {"type":"string","minLength":8,"maxLength":128},
+    "query": {"type":"string","minLength":10,"maxLength":8000},
+    "workflow_type": {"const":"incident_investigation"},
+    "incident_id": {"type":["string","null"],"maxLength":120},
+    "requested_at": {"type":"string","format":"date-time"}
+  }
+}

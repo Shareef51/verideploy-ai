@@ -1,0 +1,116 @@
+name: ci
+on:
+  push:
+  pull_request:
+permissions:
+  contents: read
+jobs:
+  python:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/validate_monorepo.py
+      - run: PYTHONPATH=. python scripts/validate_supply_chain.py --report evals/reports/supply-chain.json
+      - uses: astral-sh/setup-uv@v6
+        with: {python-version: '3.12'}
+      - run: uv sync --all-groups
+      - run: uv run ruff check .
+      - run: uv run mypy src services workers
+      - run: uv run pytest -q --cov=src/verideploy --cov-report=term-missing --cov-report=json:artifacts/coverage/python.json --cov-fail-under=85
+      - run: PYTHONPATH=src uv run python scripts/validate_testing.py --coverage-json artifacts/coverage/python.json --report evals/reports/testing-strategy.json
+      - run: PYTHONPATH=src uv run python -m verideploy.evaluation.cli smoke --environment ci --fail-on-regression --store artifacts/evaluation/ci-results.sqlite3 --report evals/reports/ci-smoke.json
+      - run: PYTHONPATH=src uv run python scripts/validate_dataset.py --report evals/reports/quality.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_retrieval_metrics.py --repeats 5 --report evals/reports/retrieval-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_rag_metrics.py --report evals/reports/rag-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_agent_metrics.py --report evals/reports/agent-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_llm_quality_metrics.py --report evals/reports/llm-quality-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_safety_metrics.py --report evals/reports/safety-hallucination-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_multimodal_metrics.py --report evals/reports/visual-multimodal-metrics.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_regression_gates.py --report evals/reports/regression-gates.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_guardrails.py --report evals/reports/guardrails.json
+      - run: PYTHONPATH=src uv run python scripts/security_scan.py --report evals/reports/security.json
+      - run: PYTHONPATH=src uv run python scripts/benchmark_audit_trail.py
+      - run: PYTHONPATH=src uv run python scripts/benchmark_multi_layer_cache.py --report evals/reports/multi-layer-cache.json
+      - run: PYTHONPATH=src python scripts/benchmark_kafka_architecture.py --report evals/reports/kafka-event-architecture.json
+      - run: PYTHONPATH=src python scripts/validate_kubernetes.py --report evals/reports/kubernetes-resilience.json
+      - run: PYTHONPATH=src uv run python scripts/validate_event_contracts.py
+      - run: PYTHONPATH=src uv run python scripts/validate_platform.py
+      - name: RAG integration and performance checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_rag.py --report evals/reports/rag-performance.json
+      - name: agentic orchestration checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_orchestration.py
+      - name: multimodal integration checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_multimodal.py
+      - name: production operations checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_operations.py
+      - name: evaluation and release-candidate checkpoint
+        run: PYTHONPATH=src uv run python scripts/validate_release_candidate.py
+      - name: scope and architecture integrity gate
+        run: PYTHONPATH=src uv run python scripts/validate_scope_integrity.py
+      - name: final production architecture gate
+        run: PYTHONPATH=src uv run python scripts/validate_production_topology.py
+      - name: AI-engineering JD evidence gate
+        run: PYTHONPATH=src uv run python scripts/validate_jd_mapping.py
+      - name: resume impact and interview evidence gate
+        run: PYTHONPATH=src uv run python scripts/validate_resume_interview.py
+      - name: recruiter README and explanation package gate
+        run: PYTHONPATH=src uv run python scripts/validate_recruiter_package.py
+      - name: production release and final handoff gate
+        run: PYTHONPATH=src uv run python scripts/validate_release.py
+      - run: docker compose -f docker-compose.yml config --quiet
+      - run: uv run python scripts/validate_contracts.py
+  node:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python scripts/validate_monorepo.py
+      - uses: pnpm/action-setup@v4
+        with: {version: 10.16.0}
+      - uses: actions/setup-node@v4
+        with: {node-version: 22}
+      # Dependency Artifact Supply Chain Management will add supply-chain lock material; until then resolution remains networked.
+      - run: pnpm install --no-frozen-lockfile
+      - run: pnpm lint
+      - run: pnpm typecheck
+      - run: pnpm test
+      - run: pnpm build
+      - run: pnpm --filter @verideploy/web exec playwright install --with-deps chromium
+      - run: pnpm --filter @verideploy/web test:e2e
+        env:
+          FRONTEND_SESSION_SECRET: ci-session-secret-at-least-32-bytes
+          FRONTEND_DEV_AUTH_BYPASS: "false"
+
+
+  python-shards:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: [0, 1, 2, 3]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with: {python-version: '3.12'}
+      - run: uv sync --all-groups
+      - name: production demo gate
+        run: PYTHONPATH=src uv run python scripts/validate_demos.py
+      - name: multimodal killer demo gate
+        run: PYTHONPATH=src uv run python scripts/validate_multimodal_demo.py
+      - name: Run deterministic pytest shard
+        run: |
+          PYTHONPATH=src uv run python scripts/run_pytest_shard.py --shard ${{ matrix.shard }} --shards 4
+
+
+  kubernetes:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: azure/setup-helm@v4
+        with: {version: v3.16.4}
+      - run: helm lint infrastructure/helm/verideploy -f infrastructure/helm/verideploy/values-production.yaml
+      - run: helm template verideploy infrastructure/helm/verideploy -f infrastructure/helm/verideploy/values-production.yaml > /tmp/verideploy-production.yaml
+      - run: test -s /tmp/verideploy-production.yaml
+
+      - name: configuration gate
+        run: uv run python scripts/validate_configuration.py
+

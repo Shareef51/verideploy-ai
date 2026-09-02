@@ -1,0 +1,1 @@
+import { Module } from "@nestjs/common"; import { BoundaryModule } from "../boundary/boundary.module"; import { LLMOpsController } from "./llmops.controller"; import { LLMOpsService } from "./llmops.service"; @Module({imports:[BoundaryModule],controllers:[LLMOpsController],providers:[LLMOpsService]}) export class LLMOpsModule {}

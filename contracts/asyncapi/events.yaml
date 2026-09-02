@@ -1,0 +1,228 @@
+asyncapi: 3.0.0
+info:
+  title: VeriDeploy AI Event Contract
+  version: 0.65.0
+defaultContentType: application/json
+channels:
+  platformHealth:
+    address: verideploy.platform.health.v1
+    messages:
+      healthEvent:
+        $ref: '#/components/messages/HealthEvent'
+  releaseRiskCommands:
+    address: verideploy.commands.release-risk.v1
+    messages:
+      releaseRiskCommand:
+        $ref: '#/components/messages/ReleaseRiskCommand'
+  releaseRiskEvents:
+    address: verideploy.events.release-risk.v1
+    messages:
+      releaseRiskEvent:
+        $ref: '#/components/messages/ReleaseRiskEvent'
+  investigationCommands:
+    address: verideploy.commands.investigation.v1
+    messages:
+      investigationCommand:
+        $ref: '#/components/messages/InvestigationCommand'
+  investigationCancelCommands:
+    address: verideploy.commands.investigation-cancel.v1
+    messages:
+      investigationCancelCommand:
+        $ref: '#/components/messages/InvestigationCancelCommand'
+  investigationEvents:
+    address: verideploy.events.investigation.v1
+    messages:
+      investigationEvent:
+        $ref: '#/components/messages/InvestigationEvent'
+  ingestionCommands:
+    address: verideploy.commands.ingestion.v1
+    messages:
+      ingestionCommand:
+        $ref: '#/components/messages/IngestionCommand'
+  ingestionEvents:
+    address: verideploy.events.ingestion.v1
+    messages:
+      ingestionEvent:
+        $ref: '#/components/messages/IngestionEvent'
+  postmortemCommands:
+    address: verideploy.commands.postmortem.v1
+    messages:
+      postmortemCommand:
+        $ref: '#/components/messages/PostmortemCommand'
+  postmortemEvents:
+    address: verideploy.events.postmortem.v1
+    messages:
+      postmortemEvent:
+        $ref: '#/components/messages/PostmortemEvent'
+  audioTranscriptionCommands:
+    address: verideploy.commands.audio-transcription.v1
+    messages:
+      audioTranscriptionCommand:
+        $ref: '#/components/messages/AudioTranscriptionCommand'
+  audioTranscriptionEvents:
+    address: verideploy.events.audio-transcription.v1
+    messages:
+      audioTranscriptionEvent:
+        $ref: '#/components/messages/AudioTranscriptionEvent'
+  videoEvidenceCommands:
+    address: verideploy.commands.video-evidence.v1
+    messages:
+      videoEvidenceCommand:
+        $ref: '#/components/messages/VideoEvidenceCommand'
+  videoEvidenceEvents:
+    address: verideploy.events.video-evidence.v1
+    messages:
+      videoEvidenceEvent:
+        $ref: '#/components/messages/VideoEvidenceEvent'
+  platformRetry:
+    address: verideploy.retry.platform.v1
+    messages:
+      retryEvent:
+        $ref: '#/components/messages/PlatformRetry'
+  platformDlq:
+    address: verideploy.dlq.platform.v1
+    messages:
+      dlqEvent:
+        $ref: '#/components/messages/PlatformDlq'
+  replayEvents:
+    address: verideploy.events.replay.v1
+    messages:
+      replayEvent:
+        $ref: '#/components/messages/ReplayControl'
+  finalPlatformEvents:
+    address: verideploy.events.final.v1
+    messages:
+      finalPlatformEvent:
+        $ref: '#/components/messages/FinalPlatformEvent'
+operations:
+  consumeReleaseRiskCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/releaseRiskCommands'
+  publishReleaseRiskEvent:
+    action: send
+    channel:
+      $ref: '#/channels/releaseRiskEvents'
+  consumeInvestigationCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/investigationCommands'
+  consumeInvestigationCancelCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/investigationCancelCommands'
+  publishInvestigationEvent:
+    action: send
+    channel:
+      $ref: '#/channels/investigationEvents'
+  consumeIngestionCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/ingestionCommands'
+  publishIngestionEvent:
+    action: send
+    channel:
+      $ref: '#/channels/ingestionEvents'
+  consumePostmortemCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/postmortemCommands'
+  publishPostmortemEvent:
+    action: send
+    channel:
+      $ref: '#/channels/postmortemEvents'
+  consumeAudioTranscriptionCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/audioTranscriptionCommands'
+  publishAudioTranscriptionEvent:
+    action: send
+    channel:
+      $ref: '#/channels/audioTranscriptionEvents'
+  consumeVideoEvidenceCommand:
+    action: receive
+    channel:
+      $ref: '#/channels/videoEvidenceCommands'
+  publishVideoEvidenceEvent:
+    action: send
+    channel:
+      $ref: '#/channels/videoEvidenceEvents'
+  publishFinalPlatformEvent:
+    action: send
+    channel:
+      $ref: '#/channels/finalPlatformEvents'
+components:
+  messages:
+    HealthEvent:
+      payload:
+        type: object
+        required:
+        - event_id
+        - event_type
+        - schema_version
+        - occurred_at
+        - producer
+        properties:
+          event_id:
+            type: string
+            format: uuid
+          event_type:
+            const: platform.health
+          schema_version:
+            const: '1.0'
+          occurred_at:
+            type: string
+            format: date-time
+          producer:
+            type: string
+    ReleaseRiskCommand:
+      payload:
+        $ref: ../events/release-risk-command.v1.json
+    ReleaseRiskEvent:
+      payload:
+        $ref: ../events/release-risk-event.v1.json
+    InvestigationCommand:
+      payload:
+        $ref: ../events/investigation-command.v1.json
+    InvestigationCancelCommand:
+      payload:
+        $ref: ../events/investigation-cancel-command.v1.json
+    InvestigationEvent:
+      payload:
+        $ref: ../events/investigation-event.v1.json
+    IngestionCommand:
+      payload:
+        $ref: ../events/ingestion-command.v1.json
+    IngestionEvent:
+      payload:
+        $ref: ../events/ingestion-event.v1.json
+    PostmortemCommand:
+      payload:
+        $ref: ../events/postmortem-command.v1.json
+    PostmortemEvent:
+      payload:
+        $ref: ../events/postmortem-event.v1.json
+    AudioTranscriptionCommand:
+      payload:
+        $ref: ../events/audio-transcription-command-v1.schema.json
+    AudioTranscriptionEvent:
+      payload:
+        $ref: ../events/audio-transcription-event-v1.schema.json
+    VideoEvidenceCommand:
+      payload:
+        $ref: ../events/video-evidence-command-v1.schema.json
+    VideoEvidenceEvent:
+      payload:
+        $ref: ../events/video-evidence-event-v1.schema.json
+    PlatformRetry:
+      payload:
+        $ref: ../events/platform-retry-v1.schema.json
+    PlatformDlq:
+      payload:
+        $ref: ../events/platform-dlq-v1.schema.json
+    ReplayControl:
+      payload:
+        $ref: ../events/replay-control-v1.schema.json
+    FinalPlatformEvent:
+      payload:
+        $ref: ../final/kafka-envelope.v1.schema.json

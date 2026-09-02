@@ -1,0 +1,7 @@
+apiVersion: v2
+name: verideploy
+version: 0.86.0
+appVersion: 0.86.0
+description: Production Helm chart for VeriDeploy AI
+keywords: [verideploy, ai, langgraph, rag, kafka]
+type: application

@@ -1,0 +1,18 @@
+{
+  "schema_version": 1,
+  "release_version": "0.68.0",
+  "dependency_policy": {
+    "node_lockfile": "pnpm-lock.yaml",
+    "python_lockfile": "uv.lock",
+    "frozen_release_installs": true,
+    "direct_node_versions_exact": true,
+    "transitive_locks_required_for_release": true
+  },
+  "sbom": {"formats": ["cyclonedx-json", "spdx-json"], "required": true},
+  "vulnerabilities": {"block_severities": ["CRITICAL", "HIGH"], "exceptions_file": "config/supply-chain/exceptions.json"},
+  "licenses": {"deny": ["AGPL-3.0-only", "SSPL-1.0", "BUSL-1.1"], "unknown_requires_exception": true},
+  "artifacts": {"sha256_required": true, "provenance_required": true, "signature_required_for_release": true},
+  "containers": {"digest_pin_required_for_release": true, "mutable_tags_forbidden_in_release": true},
+  "provenance": {"required_fields": ["git_commit", "ci_provider", "ci_run_id", "workflow", "source_repository"]},
+  "upgrade_policy": {"cadence_days": 30, "critical_security_sla_hours": 24, "high_security_sla_hours": 72}
+}

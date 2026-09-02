@@ -1,0 +1,4 @@
+import { z } from "zod";
+const Locator=z.object({kind:z.enum(["text","page","timecode","code"]),page_number:z.number().optional(),start_ms:z.number().optional(),end_ms:z.number().optional(),path:z.string().optional(),start_line:z.number().optional(),end_line:z.number().optional(),chunk_ordinal:z.number().optional()});
+export const CitationPreviewSchema=z.object({citation:z.object({citation_id:z.string().uuid(),title:z.string(),source_key:z.string(),source_version:z.string(),evidence_sha256:z.string(),locator:Locator,service:z.string().nullable().optional(),environment:z.string().nullable().optional(),team:z.string().nullable().optional(),document_kind:z.string().nullable().optional()}),excerpt:z.string(),accessible:z.boolean()});
+export type CitationPreview=z.infer<typeof CitationPreviewSchema>;

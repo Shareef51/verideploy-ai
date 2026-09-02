@@ -1,0 +1,931 @@
+{
+  "contract_version": "1.0",
+  "schemas": {
+    "api-error.v1": {
+      "defs": {
+        "ApiErrorItem": {
+          "properties": {
+            "code": {
+              "type": "string"
+            },
+            "field": {
+              "anyOf": [
+                "{\"type\": \"null\"}",
+                "{\"type\": \"string\"}"
+              ]
+            },
+            "message": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "type": "object"
+        }
+      },
+      "root": {
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "correlation_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "details": {
+            "type": "array"
+          },
+          "error_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          },
+          "retry_after_seconds": {
+            "anyOf": [
+              "{\"type\": \"integer\"}",
+              "{\"type\": \"null\"}"
+            ]
+          },
+          "retryable": {
+            "type": "boolean"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "type": "string"
+          }
+        },
+        "required": [
+          "code",
+          "correlation_id",
+          "message"
+        ],
+        "type": "object"
+      }
+    },
+    "citation-reference.v1": {
+      "defs": {},
+      "root": {
+        "properties": {
+          "citation_id": {
+            "type": "string"
+          },
+          "claim_ids": {
+            "type": "array"
+          },
+          "evidence_id": {
+            "type": "string"
+          },
+          "locator": {
+            "type": "string"
+          },
+          "source_type": {
+            "enum": [
+              "audio",
+              "code",
+              "document",
+              "image",
+              "log",
+              "metric",
+              "release",
+              "trace",
+              "video"
+            ],
+            "type": "string"
+          }
+        },
+        "required": [
+          "citation_id",
+          "evidence_id",
+          "locator",
+          "source_type"
+        ],
+        "type": "object"
+      }
+    },
+    "evidence-reference.v1": {
+      "defs": {},
+      "root": {
+        "properties": {
+          "citation_ids": {
+            "type": "array"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "evidence_id": {
+            "type": "string"
+          },
+          "kind": {
+            "type": "string"
+          },
+          "observed_at": {
+            "anyOf": [
+              "{\"format\": \"date-time\", \"type\": \"string\"}",
+              "{\"type\": \"null\"}"
+            ]
+          },
+          "provenance_id": {
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "evidence_id",
+          "kind",
+          "provenance_id",
+          "summary"
+        ],
+        "type": "object"
+      }
+    },
+    "kafka-envelope.v1": {
+      "defs": {
+        "FinalEventPayload": {
+          "properties": {
+            "citation_ids": {
+              "type": "array"
+            },
+            "data": {
+              "type": "object"
+            },
+            "resource_id": {
+              "type": "string"
+            },
+            "resource_type": {
+              "enum": [
+                "evidence",
+                "incident_rca",
+                "release_risk",
+                "review",
+                "timeline"
+              ],
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "resource_id",
+            "resource_type",
+            "status"
+          ],
+          "type": "object"
+        }
+      },
+      "root": {
+        "properties": {
+          "aggregate_id": {
+            "type": "string"
+          },
+          "causation_id": {
+            "anyOf": [
+              "{\"format\": \"uuid\", \"type\": \"string\"}",
+              "{\"type\": \"null\"}"
+            ]
+          },
+          "correlation_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "event_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "ordering_key": {
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/$defs/FinalEventPayload"
+          },
+          "producer": {
+            "type": "string"
+          },
+          "retry_count": {
+            "type": "integer"
+          },
+          "schema_family": {
+            "const": "verideploy.final-event",
+            "type": "string"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "type": "string"
+          },
+          "sequence_number": {
+            "type": "integer"
+          },
+          "tenant_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "trace_id": {
+            "anyOf": [
+              "{\"type\": \"null\"}",
+              "{\"type\": \"string\"}"
+            ]
+          }
+        },
+        "required": [
+          "aggregate_id",
+          "correlation_id",
+          "event_id",
+          "event_type",
+          "ordering_key",
+          "payload",
+          "producer",
+          "sequence_number",
+          "tenant_id"
+        ],
+        "type": "object"
+      }
+    },
+    "rca-response.v1": {
+      "defs": {
+        "CitationReference": {
+          "properties": {
+            "citation_id": {
+              "type": "string"
+            },
+            "claim_ids": {
+              "type": "array"
+            },
+            "evidence_id": {
+              "type": "string"
+            },
+            "locator": {
+              "type": "string"
+            },
+            "source_type": {
+              "enum": [
+                "audio",
+                "code",
+                "document",
+                "image",
+                "log",
+                "metric",
+                "release",
+                "trace",
+                "video"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "citation_id",
+            "evidence_id",
+            "locator",
+            "source_type"
+          ],
+          "type": "object"
+        },
+        "EvidenceReference": {
+          "properties": {
+            "citation_ids": {
+              "type": "array"
+            },
+            "confidence": {
+              "type": "number"
+            },
+            "evidence_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "observed_at": {
+              "anyOf": [
+                "{\"format\": \"date-time\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "provenance_id": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidence_id",
+            "kind",
+            "provenance_id",
+            "summary"
+          ],
+          "type": "object"
+        },
+        "ReviewResponse": {
+          "properties": {
+            "decided_at": {
+              "anyOf": [
+                "{\"format\": \"date-time\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "decision_reason": {
+              "anyOf": [
+                "{\"type\": \"null\"}",
+                "{\"type\": \"string\"}"
+              ]
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "review_id": {
+              "anyOf": [
+                "{\"format\": \"uuid\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "reviewer_id": {
+              "anyOf": [
+                "{\"format\": \"uuid\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "signature_id": {
+              "anyOf": [
+                "{\"type\": \"null\"}",
+                "{\"type\": \"string\"}"
+              ]
+            },
+            "status": {
+              "$ref": "#/$defs/ReviewStatus"
+            }
+          },
+          "required": [
+            "required",
+            "status"
+          ],
+          "type": "object"
+        },
+        "ReviewStatus": {
+          "enum": [
+            "APPROVED",
+            "CHANGES_REQUESTED",
+            "EXPIRED",
+            "NOT_REQUIRED",
+            "PENDING",
+            "REJECTED"
+          ],
+          "properties": {},
+          "required": [],
+          "type": "string"
+        },
+        "RootCauseAssessment": {
+          "properties": {
+            "alternative_causes": {
+              "type": "array"
+            },
+            "confidence": {
+              "type": "number"
+            },
+            "root_cause": {
+              "type": "string"
+            },
+            "supporting_evidence_ids": {
+              "type": "array"
+            },
+            "uncertainty": {
+              "anyOf": [
+                "{\"type\": \"null\"}",
+                "{\"type\": \"string\"}"
+              ]
+            }
+          },
+          "required": [
+            "confidence",
+            "root_cause",
+            "supporting_evidence_ids"
+          ],
+          "type": "object"
+        },
+        "TimelineEntry": {
+          "properties": {
+            "causal": {
+              "type": "boolean"
+            },
+            "event_id": {
+              "type": "string"
+            },
+            "event_type": {
+              "type": "string"
+            },
+            "evidence_ids": {
+              "type": "array"
+            },
+            "occurred_at": {
+              "format": "date-time",
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "event_id",
+            "event_type",
+            "occurred_at",
+            "summary"
+          ],
+          "type": "object"
+        }
+      },
+      "root": {
+        "properties": {
+          "citations": {
+            "type": "array"
+          },
+          "completed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "correlation_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "evidence": {
+            "type": "array"
+          },
+          "incident_id": {
+            "anyOf": [
+              "{\"type\": \"null\"}",
+              "{\"type\": \"string\"}"
+            ]
+          },
+          "investigation_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "rca": {
+            "$ref": "#/$defs/RootCauseAssessment"
+          },
+          "review": {
+            "$ref": "#/$defs/ReviewResponse"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "type": "string"
+          },
+          "status": {
+            "const": "COMPLETED",
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "tenant_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "timeline": {
+            "type": "array"
+          }
+        },
+        "required": [
+          "citations",
+          "completed_at",
+          "correlation_id",
+          "evidence",
+          "investigation_id",
+          "rca",
+          "review",
+          "summary",
+          "tenant_id",
+          "timeline"
+        ],
+        "type": "object"
+      }
+    },
+    "release-risk-response.v1": {
+      "defs": {
+        "CitationReference": {
+          "properties": {
+            "citation_id": {
+              "type": "string"
+            },
+            "claim_ids": {
+              "type": "array"
+            },
+            "evidence_id": {
+              "type": "string"
+            },
+            "locator": {
+              "type": "string"
+            },
+            "source_type": {
+              "enum": [
+                "audio",
+                "code",
+                "document",
+                "image",
+                "log",
+                "metric",
+                "release",
+                "trace",
+                "video"
+              ],
+              "type": "string"
+            }
+          },
+          "required": [
+            "citation_id",
+            "evidence_id",
+            "locator",
+            "source_type"
+          ],
+          "type": "object"
+        },
+        "EvidenceReference": {
+          "properties": {
+            "citation_ids": {
+              "type": "array"
+            },
+            "confidence": {
+              "type": "number"
+            },
+            "evidence_id": {
+              "type": "string"
+            },
+            "kind": {
+              "type": "string"
+            },
+            "observed_at": {
+              "anyOf": [
+                "{\"format\": \"date-time\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "provenance_id": {
+              "type": "string"
+            },
+            "summary": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "evidence_id",
+            "kind",
+            "provenance_id",
+            "summary"
+          ],
+          "type": "object"
+        },
+        "ReviewResponse": {
+          "properties": {
+            "decided_at": {
+              "anyOf": [
+                "{\"format\": \"date-time\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "decision_reason": {
+              "anyOf": [
+                "{\"type\": \"null\"}",
+                "{\"type\": \"string\"}"
+              ]
+            },
+            "required": {
+              "type": "boolean"
+            },
+            "review_id": {
+              "anyOf": [
+                "{\"format\": \"uuid\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "reviewer_id": {
+              "anyOf": [
+                "{\"format\": \"uuid\", \"type\": \"string\"}",
+                "{\"type\": \"null\"}"
+              ]
+            },
+            "signature_id": {
+              "anyOf": [
+                "{\"type\": \"null\"}",
+                "{\"type\": \"string\"}"
+              ]
+            },
+            "status": {
+              "$ref": "#/$defs/ReviewStatus"
+            }
+          },
+          "required": [
+            "required",
+            "status"
+          ],
+          "type": "object"
+        },
+        "ReviewStatus": {
+          "enum": [
+            "APPROVED",
+            "CHANGES_REQUESTED",
+            "EXPIRED",
+            "NOT_REQUIRED",
+            "PENDING",
+            "REJECTED"
+          ],
+          "properties": {},
+          "required": [],
+          "type": "string"
+        },
+        "RiskBand": {
+          "enum": [
+            "CRITICAL",
+            "HIGH",
+            "LOW",
+            "MEDIUM"
+          ],
+          "properties": {},
+          "required": [],
+          "type": "string"
+        },
+        "RiskDecision": {
+          "enum": [
+            "BLOCK",
+            "DELAY",
+            "PROCEED",
+            "PROCEED_WITH_GUARDRAILS"
+          ],
+          "properties": {},
+          "required": [],
+          "type": "string"
+        }
+      },
+      "root": {
+        "properties": {
+          "assessment_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "citations": {
+            "type": "array"
+          },
+          "completed_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number"
+          },
+          "correlation_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "decision": {
+            "$ref": "#/$defs/RiskDecision"
+          },
+          "evidence": {
+            "type": "array"
+          },
+          "recommended_actions": {
+            "type": "array"
+          },
+          "release_id": {
+            "type": "string"
+          },
+          "review": {
+            "$ref": "#/$defs/ReviewResponse"
+          },
+          "risk_band": {
+            "$ref": "#/$defs/RiskBand"
+          },
+          "risk_factors": {
+            "type": "array"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "type": "string"
+          },
+          "score": {
+            "type": "integer"
+          },
+          "status": {
+            "const": "COMPLETED",
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          },
+          "tenant_id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "assessment_id",
+          "citations",
+          "completed_at",
+          "confidence",
+          "correlation_id",
+          "decision",
+          "evidence",
+          "recommended_actions",
+          "release_id",
+          "review",
+          "risk_band",
+          "risk_factors",
+          "score",
+          "summary",
+          "tenant_id"
+        ],
+        "type": "object"
+      }
+    },
+    "review-response.v1": {
+      "defs": {
+        "ReviewStatus": {
+          "enum": [
+            "APPROVED",
+            "CHANGES_REQUESTED",
+            "EXPIRED",
+            "NOT_REQUIRED",
+            "PENDING",
+            "REJECTED"
+          ],
+          "properties": {},
+          "required": [],
+          "type": "string"
+        }
+      },
+      "root": {
+        "properties": {
+          "decided_at": {
+            "anyOf": [
+              "{\"format\": \"date-time\", \"type\": \"string\"}",
+              "{\"type\": \"null\"}"
+            ]
+          },
+          "decision_reason": {
+            "anyOf": [
+              "{\"type\": \"null\"}",
+              "{\"type\": \"string\"}"
+            ]
+          },
+          "required": {
+            "type": "boolean"
+          },
+          "review_id": {
+            "anyOf": [
+              "{\"format\": \"uuid\", \"type\": \"string\"}",
+              "{\"type\": \"null\"}"
+            ]
+          },
+          "reviewer_id": {
+            "anyOf": [
+              "{\"format\": \"uuid\", \"type\": \"string\"}",
+              "{\"type\": \"null\"}"
+            ]
+          },
+          "signature_id": {
+            "anyOf": [
+              "{\"type\": \"null\"}",
+              "{\"type\": \"string\"}"
+            ]
+          },
+          "status": {
+            "$ref": "#/$defs/ReviewStatus"
+          }
+        },
+        "required": [
+          "required",
+          "status"
+        ],
+        "type": "object"
+      }
+    },
+    "timeline-entry.v1": {
+      "defs": {},
+      "root": {
+        "properties": {
+          "causal": {
+            "type": "boolean"
+          },
+          "event_id": {
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "evidence_ids": {
+            "type": "array"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "summary": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "event_id",
+          "event_type",
+          "occurred_at",
+          "summary"
+        ],
+        "type": "object"
+      }
+    },
+    "websocket-envelope.v1": {
+      "defs": {
+        "FinalEventPayload": {
+          "properties": {
+            "citation_ids": {
+              "type": "array"
+            },
+            "data": {
+              "type": "object"
+            },
+            "resource_id": {
+              "type": "string"
+            },
+            "resource_type": {
+              "enum": [
+                "evidence",
+                "incident_rca",
+                "release_risk",
+                "review",
+                "timeline"
+              ],
+              "type": "string"
+            },
+            "status": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "resource_id",
+            "resource_type",
+            "status"
+          ],
+          "type": "object"
+        }
+      },
+      "root": {
+        "properties": {
+          "aggregate_id": {
+            "type": "string"
+          },
+          "correlation_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "event_id": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "event_type": {
+            "type": "string"
+          },
+          "high_watermark": {
+            "type": "integer"
+          },
+          "occurred_at": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "payload": {
+            "$ref": "#/$defs/FinalEventPayload"
+          },
+          "schema_version": {
+            "const": "1.0",
+            "type": "string"
+          },
+          "sequence_number": {
+            "type": "integer"
+          },
+          "tenant_id": {
+            "format": "uuid",
+            "type": "string"
+          }
+        },
+        "required": [
+          "aggregate_id",
+          "correlation_id",
+          "event_id",
+          "event_type",
+          "high_watermark",
+          "occurred_at",
+          "payload",
+          "sequence_number",
+          "tenant_id"
+        ],
+        "type": "object"
+      }
+    }
+  }
+}

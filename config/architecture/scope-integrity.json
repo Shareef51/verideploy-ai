@@ -1,0 +1,70 @@
+{
+  "schema_version": 1,
+  "release": "0.82.0",
+  "product_scope": "Evidence-driven release assurance and incident intelligence; no generic chat runtime.",
+  "forbidden_runtime_patterns": [
+    "demo-reviewer",
+    "GATEWAY_APPROVAL_REVIEWER_ID",
+    "GATEWAY_APPROVAL_REVIEWER_ROLES"
+  ],
+  "forbidden_runtime_paths": [
+    "src/verideploy/services"
+  ],
+  "allowed_write_policy": {
+    "consequential_actions_require_approval": true,
+    "dry_run_default": true,
+    "external_writes_disabled_by_default": true
+  },
+  "components": [
+    {
+      "path": "apps/web",
+      "purpose": "Authenticated operator UI through NestJS only",
+      "adr": "ADR-0029-authenticated-nextjs-gateway-only-frontend.md"
+    },
+    {
+      "path": "apps/gateway",
+      "purpose": "Only public API, auth, validation, realtime fan-out",
+      "adr": "ADR-0028-nestjs-is-the-public-api-boundary.md"
+    },
+    {
+      "path": "services/ai",
+      "purpose": "Private AI/RAG/agent service boundary",
+      "adr": "ADR-0002-ai-provider-boundary.md"
+    },
+    {
+      "path": "workers/investigation",
+      "purpose": "Durable release-risk and incident workers",
+      "adr": "ADR-0029-lease-backed-long-running-workflow-durability.md"
+    },
+    {
+      "path": "workers/ingestion",
+      "purpose": "Asynchronous multimodal ingestion",
+      "adr": "ADR-0008-multimodal-evidence-fusion.md"
+    },
+    {
+      "path": "workers/multimodal",
+      "purpose": "Bounded image/audio/video evidence extraction",
+      "adr": "ADR-0005-visual-evidence-boundary.md"
+    },
+    {
+      "path": "src/verideploy/rag",
+      "purpose": "Permission-safe retrieval and citation pipeline",
+      "adr": "ADR-0025-stable-permission-safe-citations.md"
+    },
+    {
+      "path": "src/verideploy/agents",
+      "purpose": "Specialist evidence agents only",
+      "adr": "ADR-0010-agent-contract-governance.md"
+    },
+    {
+      "path": "src/verideploy/graphs",
+      "purpose": "Durable LangGraph workflow orchestration",
+      "adr": "ADR-0008-langgraph-checkpoint-runtime.md"
+    },
+    {
+      "path": "src/verideploy/mcp",
+      "purpose": "Governed tool gateway with approval controls",
+      "adr": "ADR-0009-mcp-gateway-security-boundary.md"
+    }
+  ]
+}

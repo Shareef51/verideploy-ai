@@ -1,0 +1,8 @@
+SYNTHETIC DATA ONLY
+2026-08-19T10:00:00Z deploy checkout-v2.19.0 completed
+2026-08-19T10:02:00Z checkout p95 latency 420ms -> 1480ms
+2026-08-19T10:02:10Z db_pool_wait_ms p95 12ms -> 870ms
+2026-08-19T10:02:20Z active_db_connections 76 -> 158
+2026-08-19T10:02:30Z error_rate 0.4% -> 3.8%
+2026-08-19T10:04:00Z payment_downstream p95 remains 190ms
+Inference target: checkout DB pool contention is more likely than downstream payment latency.

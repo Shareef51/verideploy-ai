@@ -1,0 +1,107 @@
+{
+  "schema_version": 1,
+  "release_version": "0.77.0",
+  "retry_budget": 2,
+  "minimum_path_correctness": 1.0,
+  "minimum_routing_accuracy": 1.0,
+  "minimum_planning_quality": 1.0,
+  "minimum_tool_selection": 1.0,
+  "minimum_task_completion": 1.0,
+  "minimum_escalation_accuracy": 1.0,
+  "minimum_failure_trace_linkage": 1.0,
+  "scenarios": [
+    {
+      "case_id": "release-risk-parallel",
+      "category": "release_risk",
+      "route": "release_risk",
+      "plan": [
+        "github",
+        "rag",
+        "runtime",
+        "visual",
+        "fan_in",
+        "critic",
+        "decision"
+      ],
+      "tools": [
+        "github.read",
+        "rag.retrieve",
+        "runtime.read",
+        "visual.read"
+      ],
+      "path": [
+        "supervisor",
+        "planner",
+        "fan_out",
+        "github",
+        "rag",
+        "runtime",
+        "visual",
+        "fan_in",
+        "critic",
+        "decision"
+      ],
+      "requires_approval": false
+    },
+    {
+      "case_id": "incident-rca-retry-recovery",
+      "category": "incident_rca",
+      "route": "incident_rca",
+      "plan": [
+        "runtime",
+        "rag",
+        "visual",
+        "fan_in",
+        "rca",
+        "critic",
+        "approval"
+      ],
+      "tools": [
+        "runtime.read",
+        "rag.retrieve",
+        "visual.read"
+      ],
+      "path": [
+        "supervisor",
+        "planner",
+        "fan_out",
+        "runtime",
+        "rag",
+        "visual",
+        "fan_in",
+        "rca",
+        "critic",
+        "approval"
+      ],
+      "requires_approval": true
+    },
+    {
+      "case_id": "critic-correction",
+      "category": "critic_loop",
+      "route": "incident_rca",
+      "plan": [
+        "rag",
+        "rca",
+        "critic",
+        "rag_followup",
+        "critic",
+        "approval"
+      ],
+      "tools": [
+        "rag.retrieve",
+        "critic.followup"
+      ],
+      "path": [
+        "supervisor",
+        "planner",
+        "rag",
+        "rca",
+        "critic",
+        "rag_followup",
+        "critic",
+        "approval"
+      ],
+      "requires_approval": true
+    }
+  ]
+}

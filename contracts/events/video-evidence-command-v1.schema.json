@@ -1,0 +1,95 @@
+{
+  "additionalProperties": false,
+  "properties": {
+    "bucket": {
+      "maxLength": 63,
+      "minLength": 3,
+      "title": "Bucket",
+      "type": "string"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "declared_mime_type": {
+      "maxLength": 120,
+      "minLength": 3,
+      "title": "Declared Mime Type",
+      "type": "string"
+    },
+    "ingestion_job_id": {
+      "format": "uuid",
+      "title": "Ingestion Job Id",
+      "type": "string"
+    },
+    "language": {
+      "anyOf": [
+        {
+          "maxLength": 20,
+          "minLength": 2,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Language"
+    },
+    "object_key": {
+      "maxLength": 1024,
+      "minLength": 3,
+      "title": "Object Key",
+      "type": "string"
+    },
+    "object_version": {
+      "anyOf": [
+        {
+          "maxLength": 256,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Object Version"
+    },
+    "original_filename": {
+      "maxLength": 255,
+      "minLength": 1,
+      "title": "Original Filename",
+      "type": "string"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "transcription_model": {
+      "anyOf": [
+        {
+          "maxLength": 200,
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Transcription Model"
+    }
+  },
+  "required": [
+    "tenant_id",
+    "ingestion_job_id",
+    "correlation_id",
+    "original_filename",
+    "declared_mime_type",
+    "bucket",
+    "object_key"
+  ],
+  "title": "VideoEvidenceJobCommand",
+  "type": "object"
+}

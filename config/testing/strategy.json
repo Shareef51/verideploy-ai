@@ -1,0 +1,60 @@
+{
+  "schema_version": 1,
+  "release_version": "0.72.0",
+  "coverage": {
+    "global_min_percent": 85,
+    "critical_modules_min_percent": 90
+  },
+  "suites": {
+    "unit": [
+      "tests/unit"
+    ],
+    "integration": [
+      "tests/integration"
+    ],
+    "contract": [
+      "tests/contract",
+      "tests/contracts"
+    ],
+    "component": [
+      "tests/platform",
+      "tests/configuration"
+    ],
+    "graph": [
+      "tests/unit/test_langgraph_state_reducers.py",
+      "tests/unit/test_dynamic_parallelism.py"
+    ],
+    "agent": [
+      "tests/agent"
+    ],
+    "rag": [
+      "tests/rag"
+    ],
+    "security": [
+      "tests/security",
+      "tests/guardrails"
+    ],
+    "chaos": [
+      "tests/chaos"
+    ],
+    "playwright": [
+      "apps/web/tests/e2e"
+    ],
+    "load": [
+      "tests/load"
+    ]
+  },
+  "critical_modules": [
+    "src/verideploy/realtime/flow.py",
+    "src/verideploy/events/core.py",
+    "src/verideploy/security/architecture.py",
+    "src/verideploy/guardrails/core.py"
+  ],
+  "ci_shards": 4,
+  "mutation_cases": [
+    "reconciliation_gap_detection",
+    "ordered_inbox_deduplication",
+    "retry_to_dlq",
+    "terminal_flow_citation_requirement"
+  ]
+}

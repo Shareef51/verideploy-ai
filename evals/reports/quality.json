@@ -1,0 +1,17 @@
+{
+  "case_count": 500,
+  "category_counts": {
+    "citation": 60,
+    "document_qa": 60,
+    "hallucination": 60,
+    "rca": 80,
+    "release_risk": 80,
+    "retrieval": 100,
+    "visual": 60
+  },
+  "dataset_path": "evals\\datasets\\verideploy-500\\v1.jsonl",
+  "issues": [],
+  "passed": true,
+  "unique_case_ids": 500,
+  "unique_content_fingerprints": 500
+}

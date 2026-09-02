@@ -1,0 +1,67 @@
+{
+  "build_tasks": [
+    "lint",
+    "typecheck",
+    "test",
+    "build"
+  ],
+  "dependency_policy": {
+    "frozen_installs": true,
+    "node_exact_versions": true,
+    "node_lock_required_in_ci": true,
+    "python_lock_required_in_ci": true
+  },
+  "generated_contract_sources": [
+    "contracts/openapi/gateway.yaml",
+    "contracts/asyncapi/events.yaml",
+    "contracts/events",
+    "contracts/structured-output",
+    "contracts/final",
+    "contracts/compatibility"
+  ],
+  "python_roots": [
+    "src/verideploy",
+    "services",
+    "workers"
+  ],
+  "release_version": "0.86.0",
+  "required_files": [
+    ".github/CODEOWNERS",
+    "config/release/version.json",
+    "config/monorepo/integrity.json",
+    "scripts/ci/affected.py",
+    "scripts/validate_monorepo.py",
+    "config/supply-chain/policy.json",
+    "config/supply-chain/exceptions.json",
+    "config/supply-chain/base-images.json",
+    "scripts/validate_supply_chain.py",
+    "scripts/generate_contracts.py",
+    "scripts/validate_event_contracts.py",
+    "contracts/final/manifest.json",
+    "contracts/compatibility/final-response-event-schemas-baseline.json",
+    "generated/clients/python/verideploy_contracts.py",
+    "generated/clients/typescript/contracts.ts",
+    "config/testing/strategy.json",
+    "scripts/validate_testing.py",
+    "scripts/run_pytest_shard.py",
+    "docs/architecture/complete-testing-strategy.md"
+  ],
+  "schema_version": 1,
+  "workspace_packages": {
+    "@verideploy/gateway": {
+      "kind": "application",
+      "owner": "@verideploy/platform",
+      "path": "apps/gateway"
+    },
+    "@verideploy/tsconfig": {
+      "kind": "tooling",
+      "owner": "@verideploy/platform",
+      "path": "packages/tsconfig"
+    },
+    "@verideploy/web": {
+      "kind": "application",
+      "owner": "@verideploy/frontend",
+      "path": "apps/web"
+    }
+  }
+}

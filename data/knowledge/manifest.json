@@ -1,0 +1,210 @@
+{
+  "schema_version": "1.0",
+  "corpus_name": "verideploy-engineering-knowledge",
+  "corpus_version": "1.0.0",
+  "generated_at": "2026-08-17T00:00:00Z",
+  "tenant_id": "00000000-0000-5000-8000-000000000027",
+  "documents": [
+    {
+      "document_id": "10000000-0000-5000-8000-000000000001",
+      "path": "documents/architecture-platform.md",
+      "title": "VeriDeploy Synthetic Platform Architecture",
+      "category": "architecture",
+      "retrieval_kind": "architecture",
+      "labels": [
+        "architecture",
+        "platform",
+        "release-assurance"
+      ],
+      "service": "platform",
+      "environment": "production",
+      "content_sha256": "35b1f9eed0e815beeef68d905cc5bed8f83a1de8b3ce700ee32ad064545a3028",
+      "provenance_uri": "synthetic://verideploy/knowledge/architecture/platform",
+      "retention_class": "historical",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-001",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000002",
+      "path": "documents/runbook-db-pool.md",
+      "title": "Checkout Database Pool Saturation Runbook",
+      "category": "runbook",
+      "retrieval_kind": "runbook",
+      "labels": [
+        "runbook",
+        "database",
+        "checkout"
+      ],
+      "service": "checkout-api",
+      "environment": "production",
+      "content_sha256": "8e653f65ff7083d5f68aa65e95a6af9e54f2be6eda9939886e12d972b5221f35",
+      "provenance_uri": "synthetic://verideploy/knowledge/runbooks/checkout-db-pool",
+      "retention_class": "operating",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-002",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000003",
+      "path": "documents/postmortem-pool-exhaustion.md",
+      "title": "Synthetic Postmortem: Checkout Connection Pool Exhaustion",
+      "category": "postmortem",
+      "retrieval_kind": "historical_incident",
+      "labels": [
+        "postmortem",
+        "incident",
+        "checkout",
+        "database"
+      ],
+      "service": "checkout-api",
+      "environment": "production",
+      "content_sha256": "f1bb1eb50b4240e30df25b36b05e636ff5e3568a6d4421504ad7fb04e59b76ec",
+      "provenance_uri": "synthetic://verideploy/knowledge/postmortems/inc-syn-0042",
+      "retention_class": "audit",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-003",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000004",
+      "path": "documents/deployment-checkout.md",
+      "title": "Synthetic Deployment Record: Checkout API rc3",
+      "category": "deployment",
+      "retrieval_kind": "general",
+      "labels": [
+        "deployment",
+        "checkout",
+        "release"
+      ],
+      "service": "checkout-api",
+      "environment": "production",
+      "content_sha256": "31ef13862e6b786d7f30db170f750dfe52bbb8bca40dde74dab6ffa2f452effa",
+      "provenance_uri": "synthetic://verideploy/knowledge/deployments/rel-2026-08-17-rc3",
+      "retention_class": "audit",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-004",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000005",
+      "path": "documents/security-controls.md",
+      "title": "Synthetic Security Controls for Release Investigation",
+      "category": "security",
+      "retrieval_kind": "general",
+      "labels": [
+        "security",
+        "governance",
+        "mcp"
+      ],
+      "service": "platform",
+      "environment": "production",
+      "content_sha256": "6e3818056b1ebbf75e2bc3799ccdd6d2d9859d9a177b9da51ed2b986e2791656",
+      "provenance_uri": "synthetic://verideploy/knowledge/security/control-plane",
+      "retention_class": "historical",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-005",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000006",
+      "path": "documents/database-operations.md",
+      "title": "Synthetic PostgreSQL Operations Guide",
+      "category": "database",
+      "retrieval_kind": "general",
+      "labels": [
+        "database",
+        "postgresql",
+        "operations"
+      ],
+      "service": "postgres-primary",
+      "environment": "production",
+      "content_sha256": "51d03ad37f4c806c55469efe5be5feab44a18b15f8c00519fe4aa3bf9cc8d432",
+      "provenance_uri": "synthetic://verideploy/knowledge/database/postgresql-operations",
+      "retention_class": "operating",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-006",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000007",
+      "path": "documents/kubernetes-checkout.md",
+      "title": "Synthetic Kubernetes Operations: Checkout API",
+      "category": "kubernetes",
+      "retrieval_kind": "general",
+      "labels": [
+        "kubernetes",
+        "checkout",
+        "operations"
+      ],
+      "service": "checkout-api",
+      "environment": "production",
+      "content_sha256": "6358541ef6db8a7a2e82444e1d3a82d134bd1a7c204f9a341ba10fd25c47b408",
+      "provenance_uri": "synthetic://verideploy/knowledge/kubernetes/checkout-api",
+      "retention_class": "operating",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-007",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    },
+    {
+      "document_id": "10000000-0000-5000-8000-000000000008",
+      "path": "documents/service-checkout-api.md",
+      "title": "Synthetic Service Profile: checkout-api",
+      "category": "service",
+      "retrieval_kind": "general",
+      "labels": [
+        "service",
+        "checkout",
+        "topology"
+      ],
+      "service": "checkout-api",
+      "environment": "production",
+      "content_sha256": "f9e6b5f0b345b4fec4bb13322725f30b2d612fbf95f3dbb38b12baf64467237f",
+      "provenance_uri": "synthetic://verideploy/knowledge/services/checkout-api",
+      "retention_class": "historical",
+      "lineage": {
+        "source_system": "verideploy-synthetic-corpus",
+        "source_record_id": "KB-SYN-008",
+        "generator": "curated-corpus",
+        "generator_version": "1.0.0",
+        "synthetic": true,
+        "parent_document_id": null
+      }
+    }
+  ]
+}

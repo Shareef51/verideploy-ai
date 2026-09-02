@@ -1,0 +1,127 @@
+{
+  "clean": {
+    "degraded": [],
+    "evidence_ids": [
+      "ev-image-large",
+      "ev-pdf-large",
+      "ev-audio-large",
+      "ev-video-large"
+    ],
+    "ready": 4,
+    "status": "READY",
+    "surviving_ratio": 1.0,
+    "timeline_events": 740,
+    "total": 4,
+    "traceability": 1.0
+  },
+  "clean_results": [
+    {
+      "degradation_reason": null,
+      "evidence_id": "ev-image-large",
+      "modality": "image",
+      "redacted_text": "Grafana screenshot owner [REDACTED_EMAIL] token [REDACTED_SECRET]",
+      "sha256": "e533086dfa7841b89c316dd58c2f5578a6c3f2d5bb43d6a578cacf8504e8f668",
+      "status": "READY",
+      "storage_key": "tenant/tenant/multimodal/image/ev-image-large/e533086dfa7841b8",
+      "timeline_events": 40,
+      "trace_id": "7e79a4ea7931dc6b2b4ad5d338792bf3"
+    },
+    {
+      "degradation_reason": null,
+      "evidence_id": "ev-pdf-large",
+      "modality": "pdf",
+      "redacted_text": "Architecture PDF references checkout and postgres",
+      "sha256": "f7bdcec92f67ed6537db5830ee7ca270b6179061dc688ee18db1d14581629e6e",
+      "status": "READY",
+      "storage_key": "tenant/tenant/multimodal/pdf/ev-pdf-large/f7bdcec92f67ed65",
+      "timeline_events": 400,
+      "trace_id": "d64ab6665912d6dc359b7b2a0f2e012b"
+    },
+    {
+      "degradation_reason": null,
+      "evidence_id": "ev-audio-large",
+      "modality": "audio",
+      "redacted_text": "Incident bridge audio transcript",
+      "sha256": "77b382818ded83e3599d9af0e995afc8ce93f511b64ce9634beb6408a39510ca",
+      "status": "READY",
+      "storage_key": "tenant/tenant/multimodal/audio/ev-audio-large/77b382818ded83e3",
+      "timeline_events": 180,
+      "trace_id": "0b3aed088f86d3f166a0bec6fd1a242c"
+    },
+    {
+      "degradation_reason": null,
+      "evidence_id": "ev-video-large",
+      "modality": "video",
+      "redacted_text": "Incident recording aligned with runtime spike",
+      "sha256": "eb3e7ca963b7fdd2519e3d6236a62de3bd7e472e518a1456c1591ff899835bae",
+      "status": "READY",
+      "storage_key": "tenant/tenant/multimodal/video/ev-video-large/eb3e7ca963b7fdd2",
+      "timeline_events": 120,
+      "trace_id": "b8758bc5dce374400646d51d3ab27acf"
+    }
+  ],
+  "partial": {
+    "degraded": [
+      "ev-pdf-large",
+      "ev-video-large"
+    ],
+    "evidence_ids": [
+      "ev-image-large",
+      "ev-audio-large"
+    ],
+    "ready": 2,
+    "status": "PARTIAL",
+    "surviving_ratio": 0.5,
+    "timeline_events": 220,
+    "total": 4,
+    "traceability": 1.0
+  },
+  "partial_results": [
+    {
+      "degradation_reason": null,
+      "evidence_id": "ev-image-large",
+      "modality": "image",
+      "redacted_text": "Grafana screenshot owner [REDACTED_EMAIL] token [REDACTED_SECRET]",
+      "sha256": "e533086dfa7841b89c316dd58c2f5578a6c3f2d5bb43d6a578cacf8504e8f668",
+      "status": "READY",
+      "storage_key": "tenant/tenant/multimodal/image/ev-image-large/e533086dfa7841b8",
+      "timeline_events": 40,
+      "trace_id": "7e79a4ea7931dc6b2b4ad5d338792bf3"
+    },
+    {
+      "degradation_reason": "partial_failure:page_render",
+      "evidence_id": "ev-pdf-large",
+      "modality": "pdf",
+      "redacted_text": null,
+      "sha256": null,
+      "status": "DEGRADED",
+      "storage_key": null,
+      "timeline_events": 0,
+      "trace_id": "d64ab6665912d6dc359b7b2a0f2e012b"
+    },
+    {
+      "degradation_reason": null,
+      "evidence_id": "ev-audio-large",
+      "modality": "audio",
+      "redacted_text": "Incident bridge audio transcript",
+      "sha256": "77b382818ded83e3599d9af0e995afc8ce93f511b64ce9634beb6408a39510ca",
+      "status": "READY",
+      "storage_key": "tenant/tenant/multimodal/audio/ev-audio-large/77b382818ded83e3",
+      "timeline_events": 180,
+      "trace_id": "0b3aed088f86d3f166a0bec6fd1a242c"
+    },
+    {
+      "degradation_reason": "partial_failure:frame_extract",
+      "evidence_id": "ev-video-large",
+      "modality": "video",
+      "redacted_text": null,
+      "sha256": null,
+      "status": "DEGRADED",
+      "storage_key": null,
+      "timeline_events": 0,
+      "trace_id": "b8758bc5dce374400646d51d3ab27acf"
+    }
+  ],
+  "passed": true,
+  "redaction_correctness": 1.0
+}

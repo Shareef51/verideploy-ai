@@ -1,0 +1,9 @@
+SYNTHETIC DATA ONLY
+Pull Request: verideploy/nexuspay-checkout #2190
+Release: checkout-v2.19.0
+Commit: 9f71a83d1c2b4e5f6a7b8c9d0e1f2a3b4c5d6e7f
+Changes:
+- services/checkout/db/pool.ts raises connection pool max from 80 to 160.
+- migrations/219_add_checkout_idx.sql adds an index concurrently.
+- feature flag checkout_parallel_authorization enabled for 100% traffic.
+Reviewer note: rollback is available but requires explicit human approval.

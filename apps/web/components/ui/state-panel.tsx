@@ -1,0 +1,1 @@
+export function StatePanel({ title, description, role="status" }: { title:string; description:string; role?:"status"|"alert" }) { return <section className="ui-state" role={role} aria-live={role==="alert"?"assertive":"polite"}><h2>{title}</h2><p>{description}</p></section>; }

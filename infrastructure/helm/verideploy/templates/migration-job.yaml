@@ -1,0 +1,33 @@
+{{- if .Values.migration.enabled }}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: verideploy-migrate-{{ .Release.Revision }}
+  annotations:
+    helm.sh/hook: pre-install,pre-upgrade
+    helm.sh/hook-weight: "-10"
+    helm.sh/hook-delete-policy: before-hook-creation,hook-succeeded
+spec:
+  backoffLimit: {{ .Values.migration.backoffLimit }}
+  activeDeadlineSeconds: {{ .Values.migration.activeDeadlineSeconds }}
+  template:
+    metadata: {labels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: migration}}
+    spec:
+      restartPolicy: Never
+      serviceAccountName: default
+      automountServiceAccountToken: false
+      containers:
+        - name: migrate
+          image: "{{ .Values.images.ai.repository }}:{{ .Values.images.ai.tag }}"
+          command: ["alembic", "upgrade", "head"]
+          envFrom:
+            - secretRef: {name: {{ .Values.global.runtimeSecretName }}}
+          resources:
+            requests: {cpu: 100m, memory: 128Mi}
+            limits: {cpu: 500m, memory: 512Mi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            runAsNonRoot: true
+            readOnlyRootFilesystem: true
+            capabilities: {drop: ["ALL"]}
+{{- end }}

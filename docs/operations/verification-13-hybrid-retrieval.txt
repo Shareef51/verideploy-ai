@@ -1,0 +1,37 @@
+Hybrid Retrieval Verification
+
+Date: 2026-08-17
+Repository version: 0.13.0
+
+Executed successfully in this environment
+
+- Cumulative pytest: 124 passed, 3 skipped.
+- Hybrid Retrieval focused unit/API/migration tests passed.
+- Fixed labeled seed benchmark passed its gate: hybrid Recall@5=1.0 and MRR=1.0, meeting the best keyword and dense channel scores.
+- Python compileall passed for src, services, workers, scripts, and tests.
+- Cumulative contract validation passed.
+- Alembic offline upgrade SQL generation passed through revision 0002_milestone13_hybrid_retrieval.
+- Alembic offline downgrade SQL generation passed for 0002 -> 0001.
+- Generated Hybrid Retrieval DDL contains stored tsvector, GIN search index, and ENABLE/FORCE RLS tenant policies.
+- FastAPI liveness/readiness smoke passed and both report version 0.13.0.
+- JSON and selected YAML configuration/contract parsing passed.
+- 36 TypeScript/TSX source files syntax-transpiled successfully.
+- Production-path TODO/FIXME/fake-success/placeholder scan passed.
+- Static OpenAI-style key/private-key pattern scan passed.
+
+Skipped / not claimed as passed
+
+- 3 PostgreSQL integration tests were skipped because TEST_POSTGRES_URL is not configured:
+ - 2 inherited PostgreSQL pgvector Foundation live migration/RLS/HNSW tests.
+ - 1 Hybrid Retrieval live PostgreSQL FTS + pgvector + GIN-plan + tenant-isolation test.
+- Docker Engine is unavailable, so Docker Compose/PostgreSQL/Kafka runtime startup was not executed.
+- Full dependency-aware pnpm builds/tests were not executed; TypeScript syntax transpilation was used instead.
+- Ruff and MyPy executables are unavailable in this runtime.
+- No paid OpenAI embedding call was made; default verification remains network/credit safe.
+
+Provisioned-environment gate
+
+1. make migrate
+2. TEST_POSTGRES_URL=<isolated-postgres-url> pytest -q tests/integration/test_postgres_pgvector.py tests/integration/test_postgres_hybrid_retrieval.py
+3. make retrieval-benchmark
+4. make lint && make typecheck && make test

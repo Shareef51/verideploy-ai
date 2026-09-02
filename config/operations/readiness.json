@@ -1,0 +1,17 @@
+{
+  "schema_version": 1,
+  "release": "0.79.0",
+  "critical_gap_budget": 0,
+  "domains": {
+    "rbac_security": {"owner":"security","critical":true,"evidence":["config/security/policy.json","scripts/security_scan.py"]},
+    "mcp": {"owner":"ai-platform","critical":true,"evidence":["docs/architecture/mcp-secure-gateway.md","config/guardrails/policy.json"]},
+    "guardrails": {"owner":"ai-platform","critical":true,"evidence":["config/guardrails/policy.json","scripts/benchmark_guardrails.py"]},
+    "audit": {"owner":"security","critical":true,"evidence":["config/audit/policy.json","scripts/benchmark_audit_trail.py"]},
+    "slos_alerts": {"owner":"sre","critical":true,"evidence":["docs/architecture/slo.md","config/operations/alerts.json"]},
+    "kafka_operations": {"owner":"platform","critical":true,"evidence":["config/kafka/topics.json","docs/operations/kafka-operations.md"]},
+    "scaling_deployment": {"owner":"platform","critical":true,"evidence":["infrastructure/helm/verideploy/templates/autoscaling.yaml","scripts/deploy/canary.sh","scripts/deploy/pod_failure_drill.sh"]},
+    "backup_restore": {"owner":"database","critical":true,"evidence":["docs/operations/database-backup-restore.md","scripts/verify_database_restore.py","docs/operations/postgresql-ha-backup-pitr.md"]},
+    "incident_response": {"owner":"sre","critical":true,"evidence":["docs/operations/runbook.md","docs/operations/incident-response.md"]},
+    "observability": {"owner":"sre","critical":false,"evidence":["infrastructure/observability/otel-collector.yaml","infrastructure/observability/prometheus.yml"]}
+  }
+}

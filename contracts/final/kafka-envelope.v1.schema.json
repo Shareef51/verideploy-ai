@@ -1,0 +1,152 @@
+{
+  "$defs": {
+    "FinalEventPayload": {
+      "additionalProperties": false,
+      "properties": {
+        "citation_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citation Ids",
+          "type": "array"
+        },
+        "data": {
+          "additionalProperties": true,
+          "title": "Data",
+          "type": "object"
+        },
+        "resource_id": {
+          "title": "Resource Id",
+          "type": "string"
+        },
+        "resource_type": {
+          "enum": [
+            "release_risk",
+            "incident_rca",
+            "review",
+            "timeline",
+            "evidence"
+          ],
+          "title": "Resource Type",
+          "type": "string"
+        },
+        "status": {
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "resource_type",
+        "resource_id",
+        "status"
+      ],
+      "title": "FinalEventPayload",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.verideploy.ai/final/kafka-envelope.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "aggregate_id": {
+      "title": "Aggregate Id",
+      "type": "string"
+    },
+    "causation_id": {
+      "anyOf": [
+        {
+          "format": "uuid",
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Causation Id"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "event_id": {
+      "format": "uuid",
+      "title": "Event Id",
+      "type": "string"
+    },
+    "event_type": {
+      "title": "Event Type",
+      "type": "string"
+    },
+    "occurred_at": {
+      "format": "date-time",
+      "title": "Occurred At",
+      "type": "string"
+    },
+    "ordering_key": {
+      "title": "Ordering Key",
+      "type": "string"
+    },
+    "payload": {
+      "$ref": "#/$defs/FinalEventPayload"
+    },
+    "producer": {
+      "title": "Producer",
+      "type": "string"
+    },
+    "retry_count": {
+      "default": 0,
+      "minimum": 0,
+      "title": "Retry Count",
+      "type": "integer"
+    },
+    "schema_family": {
+      "const": "verideploy.final-event",
+      "default": "verideploy.final-event",
+      "title": "Schema Family",
+      "type": "string"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "sequence_number": {
+      "minimum": 1,
+      "title": "Sequence Number",
+      "type": "integer"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "trace_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Trace Id"
+    }
+  },
+  "required": [
+    "event_id",
+    "event_type",
+    "tenant_id",
+    "aggregate_id",
+    "ordering_key",
+    "sequence_number",
+    "correlation_id",
+    "producer",
+    "payload"
+  ],
+  "title": "KafkaEventEnvelope",
+  "type": "object"
+}

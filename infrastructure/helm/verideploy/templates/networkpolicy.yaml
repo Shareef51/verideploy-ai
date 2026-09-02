@@ -1,0 +1,94 @@
+{{- if .Values.networkPolicy.enabled }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-default-deny}
+spec:
+  podSelector: {matchLabels: {app.kubernetes.io/name: verideploy}}
+  policyTypes: [Ingress, Egress]
+---
+{{- if .Values.networkPolicy.allowDns }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-dns-egress}
+spec:
+  podSelector: {matchLabels: {app.kubernetes.io/name: verideploy}}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - namespaceSelector: {matchLabels: {kubernetes.io/metadata.name: kube-system}}
+      ports: [{protocol: UDP, port: 53}, {protocol: TCP, port: 53}]
+---
+{{- end }}
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-web-egress}
+spec:
+  podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: web}}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: gateway}}
+      ports: [{protocol: TCP, port: {{ .Values.workloads.gateway.port }}}]
+    {{- if .Values.networkPolicy.externalHttpsEgress }}
+    - ports: [{protocol: TCP, port: 443}]
+    {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-gateway-ingress}
+spec:
+  podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: gateway}}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: web}}
+      ports: [{protocol: TCP, port: {{ .Values.workloads.gateway.port }}}]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-gateway-egress}
+spec:
+  podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: gateway}}
+  policyTypes: [Egress]
+  egress:
+    - to:
+        - podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: ai-service}}
+      ports: [{protocol: TCP, port: {{ .Values.workloads.ai-service.port }}}]
+    - ports:
+        - {protocol: TCP, port: {{ .Values.dependencies.redis.port }}}
+        - {protocol: TCP, port: {{ .Values.dependencies.kafka.port }}}
+        - {protocol: TCP, port: {{ .Values.dependencies.objectStore.port }}}
+    {{- if .Values.networkPolicy.externalHttpsEgress }}
+    - ports: [{protocol: TCP, port: 443}]
+    {{- end }}
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-ai-ingress}
+spec:
+  podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: ai-service}}
+  policyTypes: [Ingress]
+  ingress:
+    - from:
+        - podSelector: {matchLabels: {app.kubernetes.io/name: verideploy, app.kubernetes.io/component: gateway}}
+      ports: [{protocol: TCP, port: {{ .Values.workloads.ai-service.port }}}]
+---
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata: {name: verideploy-ai-worker-egress}
+spec:
+  podSelector:
+    matchExpressions:
+      - {key: app.kubernetes.io/name, operator: In, values: [verideploy]}
+      - {key: app.kubernetes.io/component, operator: In, values: [ai-service, worker, migration]}
+  policyTypes: [Egress]
+  egress:
+    - ports:
+        - {protocol: TCP, port: {{ .Values.dependencies.postgres.port }}}
+        - {protocol: TCP, port: {{ .Values.dependencies.redis.port }}}
+        - {protocol: TCP, port: {{ .Values.dependencies.kafka.port }}}
+        - {protocol: TCP, port: {{ .Values.dependencies.objectStore.port }}}
+    {{- if .Values.networkPolicy.externalHttpsEgress }}
+    - ports: [{protocol: TCP, port: 443}]
+    {{- end }}
+{{- end }}

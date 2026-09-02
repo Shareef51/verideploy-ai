@@ -1,0 +1,7 @@
+SYNTHETIC DATA ONLY
+Checkout latency runbook
+1. Compare deploy timestamp with p95/p99 latency inflection.
+2. Verify DB pool wait, active connections, lock waits and saturation.
+3. Inspect downstream payment authorization latency.
+4. Rollback or disable checkout_parallel_authorization only after release_reviewer approval.
+5. Preserve evidence IDs, citations and audit trail for every consequential decision.

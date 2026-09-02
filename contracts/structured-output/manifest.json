@@ -1,0 +1,14 @@
+{
+  "schemas": [
+    {
+      "name": "evidence_extraction",
+      "version": "1.0.0",
+      "file": "evidence_extraction.v1.0.0.schema.json"
+    },
+    {
+      "name": "structured_decision",
+      "version": "1.0.0",
+      "file": "structured_decision.v1.0.0.schema.json"
+    }
+  ]
+}

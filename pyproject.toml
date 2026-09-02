@@ -1,0 +1,61 @@
+[project]
+name = "verideploy-ai"
+version = "0.86.0"
+description = "VeriDeploy AI real-time release assurance and incident investigation platform"
+requires-python = ">=3.12"
+dependencies = [
+  "fastapi>=0.115,<1",
+  "pydantic>=2.10,<3",
+  "pydantic-settings>=2.7,<3",
+  "uvicorn[standard]>=0.34,<1",
+  "httpx>=0.28,<1",
+  "sqlalchemy>=2.0,<3",
+  "alembic>=1.18,<2",
+  "pgvector>=0.4,<1",
+  "psycopg[binary]>=3.2,<4",
+  "aiokafka>=0.12,<1",
+  "boto3>=1.35,<2",
+  "openai>=1.75,<3",
+  "redis>=5,<7",
+  "cryptography>=45,<47",
+  "pillow>=11,<13",
+  "pymupdf>=1.26,<2",
+  "numpy>=2,<3",
+  "langgraph>=0.6,<2",
+  "langgraph-checkpoint-postgres>=2,<4",
+  "mcp>=2,<3",
+  "langsmith>=0.3,<1",
+  "opentelemetry-api>=1.44,<2",
+  "opentelemetry-sdk>=1.44,<2",
+  "opentelemetry-exporter-otlp-proto-grpc>=1.44,<2",
+  "opentelemetry-instrumentation-fastapi>=0.65b0,<1",
+  "opentelemetry-instrumentation-httpx>=0.65b0,<1",
+  "opentelemetry-instrumentation-sqlalchemy>=0.65b0,<1",
+  "opentelemetry-instrumentation-redis>=0.65b0,<1",
+  "opentelemetry-instrumentation-system-metrics>=0.65b0,<1",
+]
+
+[project.optional-dependencies]
+visual = ["transformers>=5.12,<6", "torch>=2.7,<3", "accelerate>=1,<2"]
+
+[dependency-groups]
+dev = ["pytest>=8,<10", "pytest-asyncio>=0.25,<2", "pytest-cov>=6,<8", "ruff>=0.9,<1", "mypy>=1.14,<2"]
+
+[tool.pytest.ini_options]
+pythonpath=[".","src"]
+testpaths=["tests"]
+addopts="-ra"
+
+[tool.ruff]
+target-version="py312"
+line-length=100
+exclude=[".venv"]
+[tool.ruff.lint]
+select=["E","F","I","UP","B","SIM"]
+
+[tool.mypy]
+python_version="3.12"
+strict=true
+mypy_path="src"
+packages=["verideploy"]
+exclude="tests"

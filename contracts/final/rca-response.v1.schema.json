@@ -1,0 +1,411 @@
+{
+  "$defs": {
+    "CitationReference": {
+      "additionalProperties": false,
+      "properties": {
+        "citation_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Citation Id",
+          "type": "string"
+        },
+        "claim_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Claim Ids",
+          "type": "array"
+        },
+        "evidence_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "locator": {
+          "maxLength": 500,
+          "minLength": 1,
+          "title": "Locator",
+          "type": "string"
+        },
+        "source_type": {
+          "enum": [
+            "document",
+            "log",
+            "metric",
+            "trace",
+            "image",
+            "audio",
+            "video",
+            "code",
+            "release"
+          ],
+          "title": "Source Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "citation_id",
+        "evidence_id",
+        "source_type",
+        "locator"
+      ],
+      "title": "CitationReference",
+      "type": "object"
+    },
+    "EvidenceReference": {
+      "additionalProperties": false,
+      "properties": {
+        "citation_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Citation Ids",
+          "type": "array"
+        },
+        "confidence": {
+          "default": 1.0,
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "evidence_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Evidence Id",
+          "type": "string"
+        },
+        "kind": {
+          "maxLength": 80,
+          "minLength": 1,
+          "title": "Kind",
+          "type": "string"
+        },
+        "observed_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Observed At"
+        },
+        "provenance_id": {
+          "maxLength": 200,
+          "minLength": 1,
+          "title": "Provenance Id",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "evidence_id",
+        "kind",
+        "summary",
+        "provenance_id"
+      ],
+      "title": "EvidenceReference",
+      "type": "object"
+    },
+    "ReviewResponse": {
+      "additionalProperties": false,
+      "properties": {
+        "decided_at": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decided At"
+        },
+        "decision_reason": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Decision Reason"
+        },
+        "required": {
+          "title": "Required",
+          "type": "boolean"
+        },
+        "review_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Review Id"
+        },
+        "reviewer_id": {
+          "anyOf": [
+            {
+              "format": "uuid",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reviewer Id"
+        },
+        "signature_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Signature Id"
+        },
+        "status": {
+          "$ref": "#/$defs/ReviewStatus"
+        }
+      },
+      "required": [
+        "status",
+        "required"
+      ],
+      "title": "ReviewResponse",
+      "type": "object"
+    },
+    "ReviewStatus": {
+      "enum": [
+        "NOT_REQUIRED",
+        "PENDING",
+        "APPROVED",
+        "REJECTED",
+        "CHANGES_REQUESTED",
+        "EXPIRED"
+      ],
+      "title": "ReviewStatus",
+      "type": "string"
+    },
+    "RootCauseAssessment": {
+      "additionalProperties": false,
+      "properties": {
+        "alternative_causes": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Alternative Causes",
+          "type": "array"
+        },
+        "confidence": {
+          "maximum": 1.0,
+          "minimum": 0.0,
+          "title": "Confidence",
+          "type": "number"
+        },
+        "root_cause": {
+          "maxLength": 4000,
+          "minLength": 1,
+          "title": "Root Cause",
+          "type": "string"
+        },
+        "supporting_evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Supporting Evidence Ids",
+          "type": "array"
+        },
+        "uncertainty": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Uncertainty"
+        }
+      },
+      "required": [
+        "root_cause",
+        "confidence",
+        "supporting_evidence_ids"
+      ],
+      "title": "RootCauseAssessment",
+      "type": "object"
+    },
+    "TimelineEntry": {
+      "additionalProperties": false,
+      "properties": {
+        "causal": {
+          "default": false,
+          "title": "Causal",
+          "type": "boolean"
+        },
+        "event_id": {
+          "maxLength": 160,
+          "minLength": 1,
+          "title": "Event Id",
+          "type": "string"
+        },
+        "event_type": {
+          "maxLength": 120,
+          "minLength": 1,
+          "title": "Event Type",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "default": [],
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "summary": {
+          "maxLength": 2000,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "occurred_at",
+        "event_type",
+        "summary"
+      ],
+      "title": "TimelineEntry",
+      "type": "object"
+    }
+  },
+  "$id": "https://schemas.verideploy.ai/final/rca-response.v1.json",
+  "additionalProperties": false,
+  "properties": {
+    "citations": {
+      "items": {
+        "$ref": "#/$defs/CitationReference"
+      },
+      "title": "Citations",
+      "type": "array"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "correlation_id": {
+      "format": "uuid",
+      "title": "Correlation Id",
+      "type": "string"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/EvidenceReference"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "incident_id": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Incident Id"
+    },
+    "investigation_id": {
+      "format": "uuid",
+      "title": "Investigation Id",
+      "type": "string"
+    },
+    "rca": {
+      "$ref": "#/$defs/RootCauseAssessment"
+    },
+    "review": {
+      "$ref": "#/$defs/ReviewResponse"
+    },
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "COMPLETED",
+      "default": "COMPLETED",
+      "title": "Status",
+      "type": "string"
+    },
+    "summary": {
+      "maxLength": 4000,
+      "minLength": 1,
+      "title": "Summary",
+      "type": "string"
+    },
+    "tenant_id": {
+      "format": "uuid",
+      "title": "Tenant Id",
+      "type": "string"
+    },
+    "timeline": {
+      "items": {
+        "$ref": "#/$defs/TimelineEntry"
+      },
+      "title": "Timeline",
+      "type": "array"
+    }
+  },
+  "required": [
+    "investigation_id",
+    "tenant_id",
+    "correlation_id",
+    "summary",
+    "rca",
+    "timeline",
+    "evidence",
+    "citations",
+    "review",
+    "completed_at"
+  ],
+  "title": "RcaFinalResponse",
+  "type": "object"
+}

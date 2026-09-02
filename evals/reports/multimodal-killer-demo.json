@@ -1,0 +1,20 @@
+{
+  "citation_count": 7,
+  "critic_status": "SUPPORTED_WITH_ALTERNATIVE_CHECK",
+  "estimated_cost_usd": 0.084,
+  "evidence_count": 7,
+  "gate": "pass",
+  "graph_nodes": [
+    "evidence_ingestion",
+    "multimodal_extraction",
+    "retrieval_and_correlation",
+    "incident_rca",
+    "rca_critic",
+    "decision_policy",
+    "human_review_gate"
+  ],
+  "issues": [],
+  "latency_budget_ms": 2500,
+  "review_status": "pending",
+  "synthetic": true
+}

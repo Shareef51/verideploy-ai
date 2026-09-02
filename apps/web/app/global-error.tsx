@@ -1,0 +1,2 @@
+"use client";
+export default function GlobalError({ reset }: { error: Error & { digest?: string }; reset: () => void }) { return <html lang="en"><body><main className="auth-page"><section className="auth-card" role="alert"><p className="eyebrow">Frontend recovery boundary</p><h1>VeriDeploy could not render this request</h1><p>The application shell failed before the route-level boundary could recover.</p><button className="ui-button" onClick={reset}>Retry</button></section></main></body></html>; }

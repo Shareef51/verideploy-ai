@@ -1,0 +1,11 @@
+[
+ {"id":"tenant-cross-boundary","kind":"authorization","expect":"deny"},
+ {"id":"missing-role","kind":"authorization","expect":"deny"},
+ {"id":"abac-environment-mismatch","kind":"authorization","expect":"deny"},
+ {"id":"ssrf-loopback","kind":"ssrf","url":"https://127.0.0.1/admin","expect":"deny"},
+ {"id":"ssrf-metadata","kind":"ssrf","url":"http://169.254.169.254/latest/meta-data","expect":"deny"},
+ {"id":"ssrf-unapproved-host","kind":"ssrf","url":"https://evil.example/x","expect":"deny"},
+ {"id":"prod-plaintext-secret","kind":"secret","expect":"deny"},
+ {"id":"prod-no-kms","kind":"encryption","expect":"deny"},
+ {"id":"legitimate-view","kind":"authorization","expect":"allow"}
+]

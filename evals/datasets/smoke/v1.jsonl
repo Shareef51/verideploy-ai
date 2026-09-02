@@ -1,0 +1,2 @@
+{"case_id":"smoke-release-001","category":"release_risk","input":{"operation":"release_risk","release_id":"rel-synthetic-51"},"expected":{"decision":"review","risk_level":"medium"},"metadata":{"required_output_fields":["decision","risk_level"],"synthetic":true}}
+{"case_id":"smoke-incident-001","category":"incident_rca","input":{"operation":"incident_rca","incident_id":"inc-synthetic-51"},"expected":{"status":"investigate","cause":"connection_pool_pressure"},"metadata":{"required_output_fields":["status","cause"],"synthetic":true}}

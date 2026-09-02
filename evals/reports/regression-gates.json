@@ -1,0 +1,65 @@
+{
+  "gate": {
+    "policy_id": "default-pr-quality-v1",
+    "baseline_run_id": "baseline",
+    "candidate_run_id": "candidate",
+    "status": "pass",
+    "releasable": true,
+    "baseline_promotable": true,
+    "violations": [],
+    "statistics": [
+      {
+        "metric": "quality",
+        "paired_cases": 100,
+        "mean_delta": 0.013000000000000012,
+        "variance": 0.0,
+        "standard_error": 0.0,
+        "ci_low": 0.013000000000000012,
+        "ci_high": 0.013000000000000012,
+        "statistically_significant_regression": false
+      },
+      {
+        "metric": "safety",
+        "paired_cases": 100,
+        "mean_delta": 0.0020000000000000018,
+        "variance": 0.0,
+        "standard_error": 0.0,
+        "ci_low": 0.0020000000000000018,
+        "ci_high": 0.0020000000000000018,
+        "statistically_significant_regression": false
+      }
+    ],
+    "flaky_cases": [],
+    "flaky_fraction": 0.0,
+    "attribution": {
+      "changed_dimensions": [
+        "prompt",
+        "retriever"
+      ],
+      "model_changed": false,
+      "prompt_changed": true,
+      "retriever_changed": true,
+      "baseline": {
+        "model": "gpt-standard",
+        "prompt_id": "release-risk",
+        "prompt_version": "1",
+        "retriever": "dense"
+      },
+      "candidate": {
+        "model": "gpt-standard",
+        "prompt_id": "release-risk",
+        "prompt_version": "2",
+        "retriever": "fused"
+      }
+    },
+    "override": null
+  },
+  "baseline_promoted": "candidate",
+  "quality_budgets": "blocking_and_warning",
+  "statistical_detection": "paired_95pct_ci",
+  "flaky_handling": "variance_quarantine",
+  "change_attribution": [
+    "prompt",
+    "retriever"
+  ]
+}

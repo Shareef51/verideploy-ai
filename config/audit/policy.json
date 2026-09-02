@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "append_only": true,
+  "tamper_evidence": {"strategy": "per-tenant SHA-256 hash chain", "external_anchor_recommended": true},
+  "retention": {"standard_days": 365, "security_days": 2555, "legal_hold_prevents_purge": true},
+  "search_roles": ["viewer", "developer", "reviewer", "security_admin", "auditor"],
+  "export_roles": ["security_admin", "auditor"],
+  "export_formats": ["jsonl", "csv"],
+  "redaction": {"secret_values": true, "authorization_headers": true, "cookies": true, "tokens": true},
+  "required_fields": ["actor", "resource", "action", "result", "correlation_id", "event_hash"]
+}

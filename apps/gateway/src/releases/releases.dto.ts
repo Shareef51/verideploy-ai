@@ -1,0 +1,4 @@
+export interface ChangedFileInput { path: string; additions?: number; deletions?: number; language?: string; change_type?: "added"|"modified"|"deleted"|"renamed"; }
+export interface ReleaseRiskPolicyInput { changed_files:number; changed_services:number; failed_workflows?:number; database_migration_changed?:boolean; rollback_plan_verified?:boolean; production_incidents_last_30d?:number; high_severity_incidents_last_30d?:number; test_coverage_delta_percent?:number; security_scan_critical_findings?:number; deployment_window_risk?:number; }
+export interface CreateReleaseRiskRequest { repository:string; release_id:string; commit_sha:string; target_environment?:string; policy:ReleaseRiskPolicyInput; changed_file_details?:ChangedFileInput[]; }
+export interface ReleaseRiskEventEnvelope { event_type:"release.risk.started"|"release.risk.completed"|"release.risk.command.rejected"; schema_version:"1.0"; payload:Record<string,unknown>; }

@@ -1,0 +1,100 @@
+{
+  "schema_version": 1,
+  "critical_dependencies": [
+    "postgres",
+    "redis",
+    "kafka",
+    "object_store",
+    "identity"
+  ],
+  "optional_dependencies": [
+    "otel_collector",
+    "prometheus",
+    "grafana",
+    "loki",
+    "tempo"
+  ],
+  "services": {
+    "web": {
+      "requires": [
+        "gateway"
+      ],
+      "restartable": true
+    },
+    "gateway": {
+      "requires": [
+        "ai_service",
+        "kafka",
+        "object_store",
+        "identity"
+      ],
+      "restartable": true
+    },
+    "ai_service": {
+      "requires": [
+        "postgres",
+        "redis",
+        "kafka",
+        "object_store"
+      ],
+      "restartable": true
+    },
+    "release_risk_worker": {
+      "requires": [
+        "postgres",
+        "redis",
+        "kafka"
+      ],
+      "restartable": true
+    },
+    "ingestion_worker": {
+      "requires": [
+        "postgres",
+        "kafka",
+        "object_store"
+      ],
+      "restartable": true
+    },
+    "investigation_worker": {
+      "requires": [
+        "postgres",
+        "redis",
+        "kafka",
+        "object_store"
+      ],
+      "restartable": true
+    }
+  },
+  "failure_policy": {
+    "critical_dependency": "not_ready",
+    "optional_dependency": "degraded",
+    "recovery": "ready_after_dependency_restored",
+    "restart": "ready_after_restart_if_dependencies_healthy"
+  },
+  "local_parity": {
+    "compose_file": "docker-compose.yml",
+    "required_services": [
+      "web",
+      "gateway",
+      "ai-service",
+      "postgres",
+      "redis",
+      "kafka",
+      "minio",
+      "keycloak",
+      "otel-collector",
+      "prometheus",
+      "grafana",
+      "loki",
+      "tempo"
+    ],
+    "production_mappings": {
+      "postgres": "managed-postgresql-pgvector",
+      "redis": "managed-redis",
+      "kafka": "managed-kafka",
+      "minio": "s3-compatible-object-storage",
+      "keycloak": "external-oidc-provider",
+      "otel-collector": "otel-collector"
+    }
+  }
+}
